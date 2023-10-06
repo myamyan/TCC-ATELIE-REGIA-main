@@ -1,0 +1,70 @@
+
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('../../../public/assets/fonts/Montserrat/static/Montserrat-Regular.ttf');
+}
+
+
+
+
+
+.comp-cabecalhoadm {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #F5F1E9;
+
+    padding: 50px;
+
+    .esquerda-adm {
+
+        > img {
+
+
+            max-width: 70%;
+            max-height: 70%;
+
+        }
+
+    }
+
+
+    .direita-adm {
+
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+
+        .direita-da-direita-adm {
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+
+            margin-left: 25px;
+
+            >p{
+
+
+                margin-left: 10px;
+                margin-right: 10px;
+
+                font-family: 'montserrat';
+                font-weight: 600;
+
+            }
+
+        }
+
+    }
+
+
+}

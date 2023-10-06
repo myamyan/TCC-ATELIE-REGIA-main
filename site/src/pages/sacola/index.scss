@@ -1,0 +1,218 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.pagina-sacola {
+    padding: 0px 40px;
+
+    .pagina-sacolas {
+        display: flex;
+        flex-direction: row;
+        padding: 100px 0px;
+        justify-content: space-around;
+
+    }
+
+    .sacola-compras {
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        box-shadow: 3px 3px 3px 2px rgba(0, 0, 0, 0.2);
+        width: 600px;
+        border-radius: 10px;
+        width: 600px;
+        height: 75vh;
+
+        overflow-x: hidden;
+
+    }
+
+    .sacola-compras>h1 {
+        padding: 40px;
+        text-align: start;
+        font-size: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        margin-right: 480px;
+    }
+
+    .produtos-sacola {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        margin-bottom: 30px;
+        padding: 0px 30px 30px;
+    }
+
+    .sacola-produtos {
+        margin-left: -100px;
+
+    }
+
+    .produtosacola {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .produtosacola>p {
+        padding: 10px 15px;
+        width: 200px;
+
+    }
+
+
+
+    .images {
+        width: 150px;
+        margin-bottom: 30px;
+    }
+
+    .sacola-confirmacao {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cupom {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 40px;
+    }
+
+    .adicionar>input {
+        height: 33px;
+        border-radius: 5px;
+        border: 1px solid #211715;
+        padding: 5px;
+    }
+
+    .adicionar>button {
+        height: 34px;
+        border-radius: 5px;
+        border: 1px solid #211715;
+        font-size: 11px;
+        padding: 5px;
+        background-color: #211715;
+        color: #fff;
+        margin-left: -30px;
+
+    }
+
+    hr {
+        width: 218px;
+        height: 2px;
+    }
+
+    .sub {}
+
+    .subtotal {
+        margin-top: 40px;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+    }
+
+
+
+    .entrega {
+        margin-top: 40px;
+        margin-bottom: 50px;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .total {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    .claro {
+        border-radius: 8px;
+        border: 1px solid #846468;
+        padding: 10px 40px;
+        background-color: #fff;
+        color: #846468;
+        margin-bottom: 20px;
+    }
+
+    .escuro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 25px;
+        border: 1px solid;
+        padding: 8px 10px;
+        background-color: #B7A598;
+        color: #ffffff;
+        margin-bottom: 20px;
+        width: 130px;
+        border: none;
+        font-size: 10px;
+        box-shadow: 1px 3px 8px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .botoes {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .maismenos {
+        position: relative;
+        left: 100px;
+        display: flex;
+        flex-direction: row;
+        background-color: #B7A598;
+        height: 23px;
+        width: 75px;
+        color: #F5ECDE;
+        border-radius: 10px;
+        justify-content: space-around;
+        align-items: center;
+        margin-right: -0px;
+        box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.3);
+    }
+
+    .maismenos>button {
+        border: none;
+        background-color: #B7A598;
+        background-color: transparent;
+        color: #F5ECDE;
+        font-size: 25px;
+
+    }
+
+
+    .lixo {
+        position: relative;
+        left: 170px;
+        bottom: 65px;
+    }
+
+    .sacola-compras::-webkit-scrollbar {
+        width: 10px;
+
+    }
+
+    .sacola-compras::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    .sacola-compras::-webkit-scrollbar-thumb {
+        background-color: #1E1E1E;
+
+        border-radius: 20px;
+    }
+}
