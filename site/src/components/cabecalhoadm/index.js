@@ -1,37 +1,51 @@
+
+
 import './index.scss';
 
 
+export default function CabecalhoAdm(props) {
 
-export default function Cabecalhoadm() {
 
     return (
 
-        <div className="comp-cabecalhoadm">
+        <div className="cab-adm">
 
-            <div className="esquerda-adm">
 
-                <img src="/assets/images/zabugaaa.png" alt="" />
+            <div className="all-adm">
 
-            </div>
+                <div className="esquerda-cabadm">
 
-            <div className="direita-adm">
+                    <img src="/assets/images/zabugaaa.png" alt="" />
 
-            <img src="/assets/images/jinglebellrock.png" alt="" />
+                    <h2> {props.pag} </h2>
 
-            <div className="direita-da-direita-adm">
+                </div>
 
-                    <img src="/assets/images/pokerface.png" alt="" />
+                <div className="direita-cabadm">
 
-                    <p> ADMIN </p>
 
-                    <img src="/assets/images/fnochat.png" alt="" />
+                    <img src="/assets/images/jinglebellrock.png" alt="" />
 
-            </div>
+                    <div className='input-cabadm'>
+
+                        <button> <img src="/assets/images/backinblack.png" alt="" /> </button>
+                        <input type="text" />
+
+                    </div>
+
+                    <div className="c-cabadm">
+
+                        <img src="/assets/images/icon-usuario.png" alt="" className="icon-usuario-cabadm"/>
+                        <h3> ADMIN </h3>
+                        <img src="/assets/images/arrastaparabaixo.png" alt="" className="arrastaparabaixo-cabadm"/>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </div>
-
 
     )
 
