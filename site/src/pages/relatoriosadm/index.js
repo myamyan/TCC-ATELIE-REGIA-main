@@ -30,7 +30,7 @@ export default function RelatoriosAdm() {
 
                     <div className="resto-relatoriosadm">
 
-                        <div className="filtros">
+                        <div className="filtros-relatorioadm">
 
                             <h4> FILTRAR POR </h4>
 

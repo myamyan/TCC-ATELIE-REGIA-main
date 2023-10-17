@@ -27,7 +27,7 @@ root.render(
         <Route path='/cadastro/cliente' element={<Cadastrocliente/>}/>
         <Route path='/login/cliente' element={<LoginCliente/>}/>
         <Route path='/adm/relatorios' element={<RelatoriosAdm/>}/>
-        <Route path='/adm/consulta/produtos' element={<ConsultaProdutos/>}/>
+        <Route path='/adm/consulta/pedidos' element={<ConsultaProdutos/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,141 +1,250 @@
+
 import { con } from './connection.js';
 
-export async function inserirloginadm(produto) {
 
-    const comando=
-`insert into tb_admin (ds_email, ds_senha)
-values (?, ?);`    
 
-const [resposta] = await con.query(comando, [produto.email, produto.senha]);
-    produto.id = resposta.insertId;
 
-    return produto;
-}
-export async function inserirproduto(produto) {
+export async function CadastroProduto( produto ) {
+
     const comando = `
-      INSERT INTO tb_produto (
-        id_imagem,
-        id_categorias,
-        id_produto_tamanho,
-        id_produto_cores,
-        id_produto_tecidos,
-        nm_produto,
-        vl_preco,
-        vl_promocao,
-        bt_promocao,
-        bt_destaque,
-        bt_disponivel,
-        ds_detalhes,
-        nr_estoque
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
-  
-    const [resposta] = await con.query(comando, [
-      produto.id_imagem,
-      produto.id_categorias,
-      produto.id_produto_tamanho,
-      produto.id_produto_cores,
-      produto.id_produto_tecidos,
-      produto.nm_produto,
-      produto.vl_preco,
-      produto.vl_promocao,
-      produto.bt_promocao,
-      produto.bt_destaque,
-      produto.bt_disponivel,
-      produto.ds_detalhes,
-      produto.nr_estoque
-    ]);
-  
+
+    insert into tb_pedido ( id_produto, nm_produto, ds_detalhes, ds_designer_produto, ds_categoria_produto, dc_estoque, ds_cor_produto, ds_tecido_produto, ds_tamanho_produto, dc_valor, dc_valor_promocional, bt_promocao, bt_destaque, bt_disponivel, ds_linkimagem )
+        values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  );
+
+    `
+
+    const [resposta] = await con.query(comando, [ produto.nome, produto.detalhes, produto.designer, produto.categoria, produto.estoque, produto.cor, produto.tecido, produto.tamanho, produto.valor, produto.valorpromo, produto.promocaobool, produto.destaquebool, produto.disponivelbool,
+    produto.linkimagem ]);
+
     produto.id = resposta.insertId;
-  
+
     return produto;
-  }
-        
 
-export async function inserirclientelogin(cliente) {
-    const comando = `insert into tb_cliente (nm_cliente, ds_email, ds_senha, ds_cpf, ds_genero, ds_num_celular)
-    values (?, ?, ?, ?, ?, ?);`
 
-    const [resposta] = await con.query (comando, [cliente.nome, cliente.email, cliente.senha,cliente.cpf, cliente.genero, cliente.celular]);
-    cliente.id = resposta.insertId;
+}
 
-    return cliente;
+export async function ConsultaProduto() {
+
+    const comando = `
+
+        select * from tb_produto;
+
+    `
+
+    const [linhas] = await con.query(comando);
+    return linhas;
+
+
+}
+
+
+export async function ConsultaPorNome(nome) {
+
+    const comando = `  
     
+    select * from tb_produto 
+    
+    where nm_produto like ?
+
+    `
+
+    const [linhas] = await con.query(comando, [`%${nome}%`]);
+
+    return linhas;
+
 }
 
-export async function inserirdesigner(designer) {
-    const comando = `    
-    insert into tb_designer (nm_designer)
-        values( ?);`
 
-        const [resposta] = await con.query (comando, [designer.nome]);
-        designer.id = resposta.insertId;
+export async function FiltroPorCategoria(categoria) {
 
-        return designer;
+    const comando = `  
+    
+    select * from tb_produto 
+    
+    where ds_categoria_produto like ?
+
+    `
+
+    const [linhas] = await con.query(comando, [`%${categoria}%`]);
+
+    return linhas;
+
 }
 
 
-export async function inserircategorias(categoria) {
-    const comando = `insert into tb_categorias (nm_categoria)
-	values(?);`
+// export async function FiltroPorValor( valor ) {
 
-    const [resposta] = await con.query (comando, [categoria.nome]);
-    categoria.id = resposta.insertId;
+//     const comando = `  
 
-    return categoria;
+//     select * from tb_produto 
+
+//     where dc_valor or dc_valor_promocional between ? or ?;
+
+//     `
+
+//     const [ linhas ] = await con.query( comando, [ valor ] );
+
+//     return linhas[0];
+
+// }
+
+export async function FiltroPorTamanho(tamanho) {
+
+    const comando = `  
+    
+    select * from tb_produto 
+    
+    where ds_tamanho_produto like ?;
+
+    `
+
+    const [linhas] = await con.query(comando, [`${tamanho}`]);
+
+    return linhas;
+
 }
-  
 
-export async function inserirtecidos(tecidos) {
-    const comando = `insert into tb_produto_tecidos(ds_tipo)
-	values(?);`
 
-    const [resposta] = await con.query (comando, [tecidos.tipo]);
-    tecidos.id = resposta.insertId;
 
-    return tecidos;
+export async function FiltroPorTecido(tecido) {
+
+    const comando = `  
+    
+    select * from tb_produto 
+    
+    where ds_tecido_produto like ?;
+
+    `
+
+    const [linhas] = await con.query(comando, [`${tecido}`]);
+
+    return linhas;
+
 }
 
-export async function inserircores (cores) {
-    const comando = `insert into tb_produto_cores (ds_hexa_decimal)
-	values(?);`
+export async function FiltroPorCor(cor) {
 
-    const[resposta] = await con.query(comando, [cores.codhexa]);
-    cores.id = resposta.insertId;
+    const comando = `  
+    
+    select * from tb_produto 
+    
+    where ds_cor_produto like ?;
 
-    return cores;
+    `
+
+    const [linhas] = await con.query(comando, [`${cor}`]);
+
+    return linhas;
+
 }
 
-export async function inserirImagem(imgLink) {
-    try {
-     
-      await con.connect();
-  
-     
-      const comando = 'INSERT INTO tb_produto_imagem (img_link) VALUES (?)';
-  
-   
-      const [resposta] = await con.query(comando, [imgLink]);
-      const id_imagem = resposta.insertId;
-  
-      return { id_imagem, img_link: imgLink };
-    } catch (error) {
-      console.error('Erro ao inserir imagem:', error);
-      throw error;
-    } finally {
-      con.end();
-    }
-  }
-  
 
+export async function FiltroPorDesigner(designer) {
 
-export async function enviarImagem(id, imagem) {
-    const formData = new FormData();
-    formData.append('capa', imagem);
+    const comando = `  
+    
+    select * from tb_produto 
+    
+    where ds_designer_produto like ?;
 
-    const resposta = await api.put(`/roupa/${id}/capa`, formData, {
-        headers: {
-            "Content-Type": "multipart/form-data"
-        },
-    });
-    return resposta.status;
+    `
+
+    const [linhas] = await con.query(comando, [`${designer}`]);
+
+    return linhas;
+
 }
+
+
+export async function FiltroPorPromocao(promocao) {
+
+    const comando = `  
+    
+    select * from tb_produto 
+    
+    where bt_promocao like 1;
+
+    `
+
+    const [linhas] = await con.query(comando, [promocao]);
+
+    return linhas;
+
+}
+
+
+export async function FiltroPorDestaque(destaque) {
+
+    const comando = `  
+    
+    select * from tb_produto 
+    
+    where bt_destaque like 1;
+
+    `
+
+    const [linhas] = await con.query(comando, [destaque]);
+
+    return linhas;
+
+}
+
+
+export async function FiltroPorDisponivel(disponivel) {
+
+    const comando = `  
+    
+    select * from tb_produto 
+    
+    where bt_disponivel = 1;
+
+    `
+
+    const [linhas] = await con.query(comando, [disponivel]);
+
+    return linhas;
+
+}
+
+
+export async function AlterarProduto(id, produto) {
+
+    const comando =
+        `
+    update  tb_produto
+    set     nm_produto              = ?,
+            ds_detalhes             = ?,
+            ds_designer_produto     = ?,
+            ds_categoria_produto    = ?,
+            dc_estoque              = ?,
+            ds_cor_produto          = ?,
+            ds_tecido_produto       = ?,
+            ds_tamanho_produto      = ?,
+            dc_valor                = ?,
+            dc_valor_promocional    = ?,
+            bt_promocao             = ?,
+            bt_destaque             = ?,
+            bt_disponivel           = ?,
+            ds_linkimagem           = ?
+            
+            WHERE id_produto         = ?`
+
+    const [resposta] = await con.query( comando, [produto.nome, produto.detalhes, produto.designer, produto.categoria, produto.estoque, produto.cor, produto.tecido, produto.tamanho, produto.valor, produto.valorpromo, produto.promocaobool, produto.destaquebool, produto.disponivelbool, produto.linkimagem, id]);
+
+    return resposta.affectedRows;
+}
+
+
+
+
+
+export async function DeletarProduto( id ) {
+
+    const comando =
+        `delete from tb_produto
+                where id_produto = ? `
+
+    const [resposta] = await con.query(comando, [ id ]);
+    return resposta.affectedRows;
+}
+

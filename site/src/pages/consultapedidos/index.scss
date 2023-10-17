@@ -1,0 +1,163 @@
+@font-face {
+    font-family: 'montserrat';
+    src: url('../../../public/assets/fonts/Montserrat/static/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'monda';
+    src: url('../../../public/assets/fonts/Monda/Monda-Regular.ttf');
+}
+
+
+.pag-consultapsadm {
+
+    box-sizing: border-box;
+    margin: 0px;
+
+    .content-consultapadm {
+
+        display: flex;
+        flex-direction: column;
+
+        padding: 75px;
+
+        >a {
+
+            color: black;
+
+            text-decoration: none;
+
+            margin-bottom: 50px;
+
+            >h3 {
+
+                font-family: 'monda';
+
+            }
+
+        }
+
+
+        .corpo-consultapadm {
+
+
+            border: 2.5px #21171525 solid;
+            border-radius: 15px;
+
+            .botoes-consultapadm {
+
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: center;
+
+
+                .botao-esquerda-consultapdm{
+
+                    height: 100%;
+                    width: 50%;
+
+
+                    button{
+
+                        border: transparent;
+                        background-color: transparent;
+    
+                        font-family: 'monda';
+                        font-size: 24px;
+
+                        letter-spacing: 3px;
+    
+                    }
+    
+                    button:hover{
+    
+                        cursor: pointer;
+    
+                    }
+
+                }
+
+                .botao-esquerda-consultapdm:hover{
+
+                    border-radius: 15px 0px 0px 0px;
+
+                    background-color: #211715;
+
+                }
+
+
+                .botao-direita-consultapdm{
+
+                    height: 100%;
+                    width: 50%;
+
+
+                    button{
+
+                        border: transparent;
+                        background-color: transparent;
+    
+                        font-family: 'monda';
+                        font-size: 24px;
+
+                        letter-spacing: 3px;
+    
+                    }
+    
+                    button:hover{
+    
+                        cursor: pointer;
+    
+                    }
+
+                }
+
+                .botao-direita-consultapdm:hover{
+
+                    border-radius: 15px 0px 0px 0px;
+
+                    background-color: #211715;
+
+                }
+
+
+
+
+
+            }
+
+            .faixamarrom-relatoriosadm {
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                background-color: #211715;
+
+                width: 100%;
+
+                max-width: 100%;
+
+                padding: 25px;
+
+                border-radius: 15px 15px 0px 0px;
+
+                >h1 {
+
+                    color: #fff;
+
+                    font-family: 'montserrat';
+
+                    letter-spacing: 7px;
+
+                }
+
+            }
+
+
+
+        }
+
+    }
+}

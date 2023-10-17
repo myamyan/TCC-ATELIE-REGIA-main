@@ -213,7 +213,9 @@ export default function Homepage() {
 
           </div>
 
-
+          <Link to='/adm/relatoriosadm'> relatorios </Link>
+          <Link to='/adm/consulta/pedidos'> Consulta pedidos </Link>
+          
 
           <Rodape />
 
