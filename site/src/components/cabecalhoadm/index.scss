@@ -95,63 +95,6 @@
 
             }
 
-            .input-cabadm {
-
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-
-                >input {
-
-                    border-color: #0000001c;
-
-                    padding: 7px;
-                    padding-left: 25px;
-
-                    border-radius: 10px;
-
-                    font-family: 'montserrat';
-                    color: #484242ea;
-
-                    margin-right: 35px;
-
-
-
-                }
-
-                >button {
-
-                    display: flex;
-                    align-items: center;
-
-                    background-color: transparent;
-
-                    border-color: transparent;
-
-                    >img {
-
-                        position: absolute;
-
-                        width: 20px;
-                        height: 20px;
-
-                        max-width: 20px;
-                        max-height: 20px;
-
-                        margin-left: 5px;
-
-
-                    }
-
-                    >img:hover{
-
-                        cursor: pointer;
-
-                    }
-
-                }
-
-            }
 
             .c-cabadm {
 
@@ -291,28 +234,7 @@
 
         }
 
-
-        .direita-cabadm{
-
-
-            .input-cabadm{
-
-                margin-left: 25px;
-
-                >input{
-
-                    width: 275px !important;
-
-                    max-width: 275px !important;
-
-
-
-                }
-
-            }
-
         }
 
     }
 
-}

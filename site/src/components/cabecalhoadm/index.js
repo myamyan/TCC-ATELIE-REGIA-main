@@ -26,13 +26,6 @@ export default function CabecalhoAdm(props) {
 
                     <img src="/assets/images/jinglebellrock.png" alt="" />
 
-                    <div className='input-cabadm'>
-
-                        <button> <img src="/assets/images/backinblack.png" alt="" /> </button>
-                        <input type="text" />
-
-                    </div>
-
                     <div className="c-cabadm">
 
                         <img src="/assets/images/icon-usuario.png" alt="" className="icon-usuario-cabadm"/>

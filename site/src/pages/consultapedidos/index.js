@@ -27,7 +27,7 @@ export default function ConsultaProdutos() {
 
                     <div className="botoes-consultapadm">
 
-                        <div className="botao-esquerda-consultapdm">
+                        <div className="botao-esquerda-consultapadm">
 
                             <button> EM ANDAMENTO </button>
 
@@ -41,119 +41,131 @@ export default function ConsultaProdutos() {
 
                     </div>
 
+                    <div className='content-consultapadm'>
 
-                    <div className="filtros-cconsultapadm">
 
-                        <h4> FILTRAR POR </h4>
+                        <div className="filtros-cconsultapadm">
 
-                        <select>
+                            <h4> FILTRAR POR </h4>
 
-                            <option value="" key=""> Tudo </option>
-                            <option value="" key=""> Data: atual → antigo </option>
-                            <option value="" key=""> Data: atual ← antigo </option>
+                            <select>
 
-                        </select>
+                                <option value="" key=""> Tudo </option>
+                                <option value="" key=""> Data: atual → antigo </option>
+                                <option value="" key=""> Data: atual ← antigo </option>
 
-                    </div>
-
-                    <div className="produtos-consultados-consultapadm">
-
-                        <div className="titulos-consultapadm">
-
-                            <h4> DATA DO PEDIDO </h4>
-
-                            <h4> CATEGORIA </h4>
-
-                            <h4> ITEM </h4>
-
-                            <h4> TOTAL </h4>
-
-                            <h4> MÉTODO </h4>
-
-                            <h4> ENTREGA </h4>
-
-                            <h4> SITUAÇÃO PAGM. </h4>
+                            </select>
 
                         </div>
 
-                        <div className="results-consultapadm">
+                        <div className="produtos-consultados-consultapadm">
 
-                            <div className="result1">
+                            <div className="titulos-consultapadm">
 
-                                <p>21 Jul, 2023</p>
+                                <h4> DATA DO PEDIDO </h4>
 
-                                <p>Calçados/Botas</p>
+                                <h4> CATEGORIA </h4>
 
-                                <div>
+                                <h4> ITEM </h4>
 
-                                    <img src="/assets/images/butilmetiletilpropano.png" alt="" />
+                                <h4> TOTAL </h4>
 
-                                    <p>0345 Bota Feminina Preto - 1x</p>
+                                <h4> MÉTODO </h4>
 
-                                </div>
+                                <h4> ENTREGA </h4>
 
-                                <p>R$89,90</p>
+                                <div className="final-consultapadm">
 
-                                <p>Cartão de Débito</p>
-
-                                <p>01 Ago, 2023 (A caminho)</p>
-
-                                <p>Aprovado</p>
-
-
-                            </div>
-
-                            <div className="result2">
-
-                                <p>29 Jul, 2023</p>
-
-                                <p>Partes de baixo/Short</p>
-
-                                <div>
-
-                                    <img src="/assets/images/shortinhos.png" alt="" />
-
-                                    <p>09675 Short Jeans Marrom Terra - 1x</p>
+                                    <h4> SITUAÇÃO PAGM. </h4>
 
                                 </div>
 
-                                <p>R$105,00</p>
-
-                                <p>Cartão de Crédito (x2)</p>
-
-                                <p>-------</p>
-
-                                <p>Pendente</p>
-
-
                             </div>
 
-                            <div className="result2">
+                            <div className='linha-consultapadm'></div>
 
-                                <p>29 Jul, 2023</p>
+                            <div className="results-consultapadm">
 
-                                <p>Partes de baixo/Short</p>
+                                <div className="result1">
 
-                                <div>
+                                    <p>21 Jul, 2023</p>
 
-                                    <img src="/assets/images/shortinhos" alt="" />
+                                    <p>Calçados/Botas</p>
 
-                                    <p>09675 Short Jeans Marrom Terra - 1x</p>
+                                    <div>
+
+                                        <img src="/assets/images/butilmetiletilpropano.png" alt="" />
+
+                                        <div>
+                                        <p>0345 Bota Feminina Preto - 1x</p>
+                                        </div>
+
+                                    </div>
+
+                                    <p>R$89,90</p>
+
+                                    <p>Cartão de Débito</p>
+
+                                    <p>01 Ago, 2023 (A caminho)</p>
+
+                                    <p>Aprovado</p>
+
 
                                 </div>
 
-                                <p>R$105,00</p>
+                                <div className="result2">
 
-                                <p>Cartão de Crédito (x2)</p>
+                                    <p>29 Jul, 2023</p>
 
-                                <p>-------</p>
+                                    <p>Partes de baixo/Short</p>
 
-                                <p>Pendente</p>
+                                    <div>
+
+                                        <img src="/assets/images/shortinhos.png" alt="" />
+
+                                        <p>09675 Short Jeans Marrom Terra - 1x</p>
+
+                                    </div>
+
+                                    <p>R$105,00</p>
+
+                                    <p>Cartão de Crédito (x2)</p>
+
+                                    <p>-------</p>
+
+                                    <p>Pendente</p>
+
+
+                                </div>
+
+                                <div className="result2">
+
+                                    <p>29 Jul, 2023</p>
+
+                                    <p>Partes de baixo/Short</p>
+
+                                    <div>
+
+                                        <img src="/assets/images/shortinhos.png" alt="" />
+
+                                        <p>09675 Short Jeans Marrom Terra - 1x</p>
+
+                                    </div>
+
+                                    <p>R$105,00</p>
+
+                                    <p>Cartão de Crédito (x2)</p>
+
+                                    <p>-------</p>
+
+                                    <p>Pendente</p>
+
+
+                                </div>
+
 
 
                             </div>
-
-
 
                         </div>
 
