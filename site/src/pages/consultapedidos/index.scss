@@ -255,6 +255,36 @@
                             justify-content: center;
                             align-items: center;
 
+                            >p{
+
+                                width: 85px;
+                                max-width: 85px;
+                                
+                                margin-right: 50px;
+
+                            }
+
+                            >div{
+
+                                width: 100px;
+                                max-width: 100px;
+
+                                .sublinhado{
+
+                                    text-decoration: underline;
+
+                                }
+
+                            }
+
+                            .colorido{
+
+                                color: #40532ce7;
+
+                                margin-right: 0px;
+
+                            }
+
                         }
 
 

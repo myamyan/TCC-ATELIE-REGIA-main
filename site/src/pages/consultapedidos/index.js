@@ -50,6 +50,7 @@ export default function ConsultaProdutos() {
 
                             <select>
 
+                                <option value="" key="">Selecione um filtro</option>
                                 <option value="" key=""> Tudo </option>
                                 <option value="" key=""> Data: atual → antigo </option>
                                 <option value="" key=""> Data: atual ← antigo </option>
@@ -90,14 +91,14 @@ export default function ConsultaProdutos() {
 
                                     <p>21 Jul, 2023</p>
 
-                                    <p>Calçados/Botas</p>
+                                    <p>Calçados/ <br/> Botas</p>
 
                                     <div>
 
                                         <img src="/assets/images/butilmetiletilpropano.png" alt="" />
 
-                                        <div>
-                                        <p>0345 Bota Feminina Preto - 1x</p>
+                                        <div className="sublinhado">
+                                            <p>0345 Bota Feminina Preto - 1x</p>
                                         </div>
 
                                     </div>
@@ -108,8 +109,9 @@ export default function ConsultaProdutos() {
 
                                     <p>01 Ago, 2023 (A caminho)</p>
 
-                                    <p>Aprovado</p>
-
+                                    <div className="colorido">
+                                        <p>Aprovado</p>
+                                    </div>
 
                                 </div>
 
@@ -123,7 +125,9 @@ export default function ConsultaProdutos() {
 
                                         <img src="/assets/images/shortinhos.png" alt="" />
 
-                                        <p>09675 Short Jeans Marrom Terra - 1x</p>
+                                        <div className="sublinhado">
+                                            <p>09675 Short Jeans Marrom Terra - 1x</p>
+                                        </div>
 
                                     </div>
 
@@ -133,8 +137,9 @@ export default function ConsultaProdutos() {
 
                                     <p>-------</p>
 
-                                    <p>Pendente</p>
-
+                                    <div className="colorido">
+                                        <p>Pendente</p>
+                                    </div>
 
                                 </div>
 
