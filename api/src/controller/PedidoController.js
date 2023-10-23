@@ -1,5 +1,5 @@
 
-import { CadastroPedido } from "../repository/pedidoRepository.js";
+import { CadastroPedido,  ConsultaPedido } from "../Repository/pedidoRepository.js";
 
 
 import { Router } from "express";

@@ -151,7 +151,7 @@
                 padding: 50px;
 
 
-                .filtros-cconsultapadm {
+                .filtros-consultapadm {
 
 
                     display: flex;
@@ -195,6 +195,12 @@
                     border: 2.5px #21171525 solid;
                     border-radius: 15px;
 
+                    width: 1000px;
+                    max-width: 100%;
+
+                    overflow-y: scroll;
+
+
                     .titulos-consultapadm {
 
 
@@ -204,6 +210,8 @@
                         align-items: center;
 
                         padding-top: 20px;
+
+                        background-color: #fff;
 
                         >h4 {
 
@@ -232,6 +240,7 @@
 
                         margin-top: 15px;
 
+                        
 
                         width: 900px;
                         height: 1px;
@@ -247,20 +256,26 @@
                         
                         padding-top: 15px;
                         padding-bottom: 15px;
+                        padding-left: 100px;
+
+
+
+                        height: 300px;
+                        width: 1000px;
+                        max-width: 100%;
 
                         .result1{
 
                             display: flex;
                             flex-direction: row;
-                            justify-content: center;
                             align-items: center;
 
                             >p{
 
-                                width: 85px;
-                                max-width: 85px;
+                                width: 75px;
+                                max-width: 75px;
                                 
-                                margin-right: 50px;
+                                margin-right: 55px;
 
                             }
 
@@ -300,6 +315,11 @@
 
                     }
 
+                    .results-consultapadm ul{
+
+                        overflow: auto;
+
+                    }
 
                 }
 
@@ -307,6 +327,167 @@
             }
 
         }
+    }
+
+}
+
+@media (max-width: 720px) {
+    
+    .results-consultapadm{
+
+        overflow-x: scroll;
+
+    }
+
+}
+
+
+@media (max-width: 360px) {
+    
+    .content-consultapadm {
+
+        display: flex;
+        flex-direction: column;
+
+        padding: 75px;
+
+        >a {
+
+            color: black;
+
+            text-decoration: none;
+
+            margin-bottom: 50px;
+
+            >h3 {
+
+                font-family: 'monda';
+                font-size: 12px;
+            }
+
+        }
+
+
+        .corpo-consultapadm {
+
+            .botoes-consultapadm {
+
+                .botao-esquerda-consultapadm {
+
+                    padding: 15px;
+
+                    height: 100%;
+                    width: 50%;
+
+
+                    >button {
+
+                        font-size: 12px !important;
+
+                        letter-spacing: 1px !important;
+
+                    }
+
+
+                }
+
+                .botao-esquerda-consultapadm:hover {
+
+                    border-radius: 15px 0px 0px 0px;
+
+                    background-color: #211715;
+
+                    cursor: pointer;
+
+                    button {
+
+                        color: #fff;
+
+                    }
+
+                }
+
+
+                .botao-direita-consultapadm {
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    padding: 50px;
+
+                    height: 100%;
+                    width: 50%;
+
+
+                    button {
+
+                        font-size: 12px !important;
+
+                        letter-spacing: 1px !important;
+
+
+                    }
+
+
+                }
+
+                .botao-direita-consultapadm:hover {
+
+                    border-radius: 0px 15px 0px 0px;
+
+                    background-color: #211715;
+
+
+                    button {
+
+                        cursor: pointer;
+
+                        color: #fff;
+
+                    }
+
+                }
+
+
+            }
+        
+            .content-consultapadm{
+
+                .filtros-consultapadm {
+
+                    display: flex;
+                    flex-direction: column !important;
+
+                    >h4 {
+
+                        margin-bottom: 25px;
+
+                        font-size: 12px;
+                    }
+
+                    >select {
+
+                        background-color: #0000000c;
+
+                        border-radius: 15px;
+
+                        padding: 0px !important;
+
+                        font-size: 12px;
+
+                    }
+
+                }
+
+
+            }
+
+            
+        }
+
+
+
     }
 
 }

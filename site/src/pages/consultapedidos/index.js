@@ -10,7 +10,7 @@ import './index.scss';
 
 export default function ConsultaProdutos() {
 
-    const [pag, setPag] = useState('PRODUTOS')
+    const [pag, setPag] = useState('PEDIDOS')
 
     return (
 
@@ -44,7 +44,7 @@ export default function ConsultaProdutos() {
                     <div className='content-consultapadm'>
 
 
-                        <div className="filtros-cconsultapadm">
+                        <div className="filtros-consultapadm">
 
                             <h4> FILTRAR POR </h4>
 
@@ -91,7 +91,7 @@ export default function ConsultaProdutos() {
 
                                     <p>21 Jul, 2023</p>
 
-                                    <p>Calçados/ <br/> Botas</p>
+                                    <p>Calçados/ <br /> Botas</p>
 
                                     <div>
 
@@ -169,8 +169,62 @@ export default function ConsultaProdutos() {
                                 </div>
 
 
+                                <div className="result2">
+
+                                    <p>29 Jul, 2023</p>
+
+                                    <p>Partes de baixo/Short</p>
+
+                                    <div>
+
+                                        <img src="/assets/images/shortinhos.png" alt="" />
+
+                                        <p>09675 Short Jeans Marrom Terra - 1x</p>
+
+                                    </div>
+
+                                    <p>R$105,00</p>
+
+                                    <p>Cartão de Crédito (x2)</p>
+
+                                    <p>-------</p>
+
+                                    <p>Pendente</p>
+
+
+                                </div>
+
+
+                                <div className="result2">
+
+                                    <p>29 Jul, 2023</p>
+
+                                    <p>Partes de baixo/Short</p>
+
+                                    <div>
+
+                                        <img src="/assets/images/shortinhos.png" alt="" />
+
+                                        <p>09675 Short Jeans Marrom Terra - 1x</p>
+
+                                    </div>
+
+                                    <p>R$105,00</p>
+
+                                    <p>Cartão de Crédito (x2)</p>
+
+                                    <p>-------</p>
+
+                                    <p>Pendente</p>
+
+
+                                </div>
+
+
 
                             </div>
+
+
 
                         </div>
 
