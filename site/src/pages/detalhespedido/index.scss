@@ -1,0 +1,32 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.cima-detalhe {
+    padding: 60px;
+
+
+    .escrita-detalhe {
+        font-family: 'Krona One';
+        font-style: normal;
+        line-height: normal;
+        font-size: 10px;
+    }
+
+    .items-detalhe {
+        font-family: 'Inter';
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 1.61px;
+
+    }
+
+    .detalhe-imagem1 {
+        width: 7px;
+        height: 9px;
+    }
+}

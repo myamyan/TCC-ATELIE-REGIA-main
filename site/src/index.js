@@ -12,6 +12,7 @@ import LoginCliente from './pages/logincliente';
 import Homepage from './pages/pagina-inicio';
 import RelatoriosAdm from './pages/relatoriosadm';
 import ConsultaProdutos from './pages/consultapedidos';
+import Detalhespedido from './pages/detalhespedido';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -28,6 +29,7 @@ root.render(
         <Route path='/login/cliente' element={<LoginCliente/>}/>
         <Route path='/adm/relatorios' element={<RelatoriosAdm/>}/>
         <Route path='/adm/consulta/pedidos' element={<ConsultaProdutos/>}/>
+        <Route path='/detalhespedido' element={<Detalhespedido/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
