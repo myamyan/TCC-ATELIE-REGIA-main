@@ -4,7 +4,7 @@ export async function CadastroPedido( pedido ) {
 
     const comando = `
 
-    insert into tb_pedido ( id_cliente, id_produto, dt_datapedido, ds_metodopagamento, ds_entrega ds_status_pedido )
+    insert into tb_pedido ( id_cliente, id_produto, dt_datapedido, ds_metodopagamento, ds_entrega, ds_status_pedido )
         values( ?, ?, ? );
 
     `
