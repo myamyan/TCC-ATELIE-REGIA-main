@@ -1,0 +1,42 @@
+.all-menu {
+
+    display: flex;
+    flex-direction: column;
+
+    background: linear-gradient(to bottom, #A7907F, #B7A598);
+
+    width: 500px;
+
+    .cima-menu {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding-top: 50px;
+
+        >img {
+
+            height: 175px;
+            width: 215px;
+
+        }
+
+    }
+
+    .meio-menu{
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: start;
+
+        >Link{
+
+            font-family: '';
+
+        }
+
+    }
+
+}
