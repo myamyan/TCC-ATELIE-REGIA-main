@@ -4,8 +4,8 @@ import './index.scss';
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 
-import CabecalhoAdm from "../../components/cabecalhoadm";
-import Rodape from "../../components/rodape";
+import CabecalhoAdm from "../../../components/cabecalhoadm";
+import Rodape from "../../../components/rodape";
 
 
 export default function RelatoriosAdm() {

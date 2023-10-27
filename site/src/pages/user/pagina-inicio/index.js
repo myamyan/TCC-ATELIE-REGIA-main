@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import './index.scss';
-import Cabecalho1 from '../../components/cabecalho1/index';
+import Cabecalho1 from '../../../components/cabecalho1/index';
 
-import Rodape from '../../components/rodape';
+import Rodape from '../../../components/rodape';
 
 
 export default function Homepage() {

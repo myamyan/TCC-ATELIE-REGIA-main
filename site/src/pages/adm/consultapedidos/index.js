@@ -2,8 +2,8 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-import CabecalhoAdm from '../../components/cabecalhoadm';
-import Rodape from '../../components/rodape';
+import CabecalhoAdm from '../../../components/cabecalhoadm';
+import Rodape from '../../../components/rodape';
 
 import './index.scss';
 

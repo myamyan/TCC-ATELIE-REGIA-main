@@ -1,14 +1,9 @@
 
-import Menu from '../menu';
+
 import './index.scss';
 
 export default function Cabecalho1() {
   return (
-
-    <div className="auau-cab1">
-
-      <Menu />
-
 
       <div className="cabecalho1">
 
@@ -44,6 +39,5 @@ export default function Cabecalho1() {
 
       </div>
 
-    </div>
   );
 }

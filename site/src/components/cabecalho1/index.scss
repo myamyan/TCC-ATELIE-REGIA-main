@@ -10,19 +10,6 @@
 }
 
 
-.auau-cab1 {
-
-    display: flex;
-    flex-direction: row;
-
-
-    >menu {
-
-        position: relative;
-
-    }
-
-
     .cabecalho1 {
 
 
@@ -31,7 +18,7 @@
         justify-content: space-between;
         align-items: center;
 
-        position: absolute;
+        padding: 15px;
 
         .cab1-esquerda {
 
@@ -409,4 +396,3 @@
 
     }
 
-}
