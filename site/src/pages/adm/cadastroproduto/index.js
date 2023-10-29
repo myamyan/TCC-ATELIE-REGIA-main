@@ -1,7 +1,7 @@
 import './index.scss';
 
-import Cabecalhoadm from '../../components/cabecalhoadm';
-import Rodape from '../../components/rodape';
+import Cabecalhoadm from '../../../components/cabecalhoadm';
+import Rodape from '../../../components/rodape';
 
 export default function Cadastroproduto() {
 
