@@ -141,9 +141,27 @@ CREATE TABLE tb_cliente (
     dt_nascimento datetime,
     ds_endereco VARCHAR(200),
     ds_cpf VARCHAR(14) UNIQUE,
-    ds_genero VARCHAR(100),
+    id_genero int,
     ds_num_celular VARCHAR(20),
-    FOREIGN KEY (id_cadcliente) REFERENCES tb_cadastrocliente(id_cadcliente)
+    id_entregas int,
+    ds_cep  varchar(1000),
+    nr_numero decimal(5,0),
+    ds_complemento    varchar(1000),
+    FOREIGN KEY (id_cadcliente) REFERENCES tb_cadastrocliente(id_cadcliente),
+    FOREIGN KEY (id_genero) REFERENCES tb_generos(id_genero),
+    FOREIGN KEY (id_entregas) REFERENCES tb_entregas(id_entregas)
+);
+
+drop table tb_cliente;
+
+CREATE TABLE tb_generos (
+    id_genero INT PRIMARY KEY AUTO_INCREMENT not null,
+    nm_genero VARCHAR(50) UNIQUE
+);
+
+CREATE TABLE tb_entregas (
+    id_entregas INT PRIMARY KEY AUTO_INCREMENT not null,
+    nm_entregas VARCHAR(50) UNIQUE
 );
 
 -- Tabela de Administradores
@@ -167,12 +185,16 @@ CREATE TABLE tb_pedido (
     dt_validade DATE,
     nr_cod_seg INT,
     nr_parcelas INT,
-    id_bandeira VARCHAR(400),
-    FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente)
+    id_bandeira int,
+    ds_entrega  varchar(500),
+    FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente),
+    FOREIGN KEY (id_bandeira) REFERENCES tb_bandeira_cartao(id_bandeira)
 );
 
+drop table tb_pedido;
+
 -- Tabela bandeiras cartão
-CREATE TABLE tb_pedido_item (
+CREATE TABLE tb_bandeira_cartao (
     id_bandeira INT PRIMARY KEY AUTO_INCREMENT not null,
 	nm_bandeira varchar(1000),
     ds_imgbandeira varchar(10000)
