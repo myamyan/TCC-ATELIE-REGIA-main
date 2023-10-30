@@ -48,17 +48,19 @@ export async function verificarEmailExistente(email) {
   }
 }
 
-export async function inserirclientelogin(cliente) {
-  const comando = `insert into tb_cliente ( id_cadcliente, dt_nascimento, ds_endereco, ds_cpf, ds_genero, ds_num_celular)
-  values (?, ?, ?, ?, ?, ?);`
+export async function CadastroInformacoesPessoais(infop) {
 
-  const [resposta] = await con.query(comando, [cliente.id_cadcliente, cliente.nascimento, cliente.endereco, cliente.cpf, cliente.genero, cliente.celular]);
-  cliente.id = resposta.insertId;
+  const comando = ` 
+  
+    insert tb_cliente (id_cadcliente, dt_nascimento, ds_endereco, ds_cpf, id_genero, ds_num_celular, id_entregas)
+                values( ?, ?, ?, ?, ?, ? ,? )
 
-  return cliente;
+  `
+
+  const [resposta] = await con.query(comando, [infop.idcadastro, infop.datanasc, infop.endereco, infop.cpf, infop.genero, infop.numcel , infop.entregas ])
+  return resposta;
 
 }
-
 
 //conversar vivi
 
@@ -66,12 +68,12 @@ export async function CadastroPedido( pedido ) {
 
   const comando = `
 
-  insert into tb_pedido ( id_cliente, nr_itens, id_produto, dt_datapedido, ds_metodopagamento, ds_entrega, ds_status_pedido )
+  insert into tb_pedido ( id_cliente, nr_itens, vl_totalcompra, dt_pedido, ds_situacao, tp_pagamento, nm_cartao, nr_cartao, dt_validade, nr_cod_seg, nr_parcelas, id_bandeira, ds_entrega )
       values( ?, ?, ?, ?, ?, ?, ? );
 
   `
 
-  const [resposta] = await con.query(comando, [pedido.cliente, pedido.produto, pedido.data, pedido.metodo, pedido.entrega, pedido.status]);
+  const [resposta] = await con.query(comando, [pedido.cliente, pedido.numeroitens, pedido.vltotal, pedido.data, pedido.situacao, pedido.tppagamento, pedido.nomecartao, pedido.nrcartao, pedido.dtvalidade, pedido.nrcodseguranca, pedido.parcelas, pedido.idbandeira, pedido.entrega]);
 
   pedido.id = resposta.insertId;
 
@@ -81,31 +83,221 @@ export async function CadastroPedido( pedido ) {
 }
 
 
-export async function ConsultaPedido() {
+export async function ConsultaPedido( id ){
 
   const comando = `
-
-      select * from tb_pedido;
+  
+  select * from tb_pedido where id_cliente like ?
 
   `
 
-  const [linhas] = await con.query( comando );
+  const [resposta] = await con.query(comando, [ id ])
+
+}
+
+
+
+export async function ConsultaProduto() {
+
+  const comando = `
+
+      select * from tb_produto;
+
+  `
+
+  const [linhas] = await con.query(comando);
   return linhas;
 
 
 }
 
 
+export async function ConsultaPorNome(nome) {
 
-export async function VerProduto( nome ) {
+  const comando = `  
+  
+  select * from tb_produto 
+  
+  where nm_produto like ?
+
+  `
+
+  const [linhas] = await con.query(comando, [`%${nome}%`]);
+
+  return linhas;
+
+}
+
+
+export async function FiltroPorCategoria(categoria) {
+
+  const comando = `  
+  
+  select * from tb_p_categorias 
+  
+  where nm_categoria like ?
+
+  `
+
+  const [linhas] = await con.query(comando, [`%${categoria}%`]);
+
+  return linhas;
+
+}
+
+
+export async function FiltroPorTecido(tecido) {
+
+  const comando = `  
+  
+  select * from tb_p_tecido 
+  
+  where ds_tipo like ?;
+
+  `
+
+  const [linhas] = await con.query(comando, [`${tecido}`]);
+
+  return linhas;
+
+}
+
+export async function FiltroPorDesigner(designer) {
+
+  const comando = `  
+  
+  select * from tb_p_designer
+  
+  where nm_designer like ?;
+
+  `
+
+  const [linhas] = await con.query(comando, [`${designer}`]);
+
+  return linhas;
+
+}
+
+export async function FiltroPorCor(cor) {
+
+  const comando = `  
+  
+  select * from tb_p_cor 
+  
+  where ds_hexa_decimal like ?;
+
+  `
+
+  const [linhas] = await con.query(comando, [`${cor}`]);
+
+  return linhas;
+
+}
+
+export async function FiltroPorTamanho(tamanho) {
+
+  const comando = `  
+  
+  select * from tb_p_tamanho 
+  
+  where ds_tamanho like ?;
+
+  `
+
+  const [linhas] = await con.query(comando, [`${tamanho}`]);
+
+  return linhas;
+
+}
+
+
+
+export async function FiltroPorValor( valor ) {
+
+    const comando = `  
+
+    select * from tb_produto 
+
+    where vl_preco or vl_promocao between ? or ?;
+
+    `
+
+    const [ linhas ] = await con.query( comando, [ valor ] );
+
+    return linhas[0];
+
+}
+
+
+
+export async function FiltroPorPromocao(promocao) {
+
+  const comando = `  
+  
+  select * from tb_produto 
+  
+  where bt_promocao like 1;
+
+  `
+
+  const [linhas] = await con.query(comando, [promocao]);
+
+  return linhas;
+
+}
+
+
+export async function FiltroPorDestaque(destaque) {
+
+  const comando = `  
+  
+  select * from tb_produto 
+  
+  where bt_destaque like 1;
+
+  `
+
+  const [linhas] = await con.query(comando, [destaque]);
+
+  return linhas;
+
+}
+
+
+export async function FiltroPorDisponivel(disponivel) {
+
+  const comando = `  
+  
+  select * from tb_produto 
+  
+  where bt_disponivel = 1;
+
+  `
+
+  const [linhas] = await con.query(comando, [disponivel]);
+
+  return linhas;
+
+}
+
+//fazer controller ↓
+
+export default function CadastroInfoEntrega(pedido){
 
   const comando = `
   
-  select * from tb_produto where nm_produto like ?
+    update tb_cliente
+    set     
+    ds_endereco             = ?,
+    ds_cep                  = ?,
+    nr_numero               = ?,
+    ds_complemento          = ?,
+    id_entregas             = ?
+    
+    WHERE id_cliente        = ?
 
-  `;
+  `
 
-  const [linhas] = await con.query(comando, [`%${nome}%`]);
-  return linhas
+}  
 
-}
+

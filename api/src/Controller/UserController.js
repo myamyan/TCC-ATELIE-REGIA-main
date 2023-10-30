@@ -1,4 +1,4 @@
-import { inserircadastrousuario, inserirclientelogin, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, VerProduto   } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, FiltroPorValor, CadastroInformacoesPessoais  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
@@ -65,13 +65,13 @@ server.post('/cadastro/usuario', async (req, resp) => {
   });
 
 
-  server.post('/cadastro/usuario/informacoespessoais', async (req, resp) => {
+  server.post('/cadastro/usuario/finalizacao', async (req, resp) => {
     try {
-      const informacoesParaCadastrar = req.body;
+      const informacoesParaCompletar = req.body;
   
-      const informacoesCadastradas = await inserirclientelogin(informacoesParaCadastrar);
+      const informacoesCompletas = await CadastroInformacoesPessoais(informacoesParaCompletar);
   
-      resp.send(informacoesCadastradas);
+      resp.send(informacoesCompletas);
     } catch (err) {
       console.error('Erro na função de cadastro de informações:', err);
       resp.status(400).send({
@@ -102,13 +102,66 @@ server.post('/cadastro/usuario', async (req, resp) => {
 
 
 
-server.get('user/filtro/nome', async (req, resp) => {
+server.get('/consulta/pedido/:id', async (req, resp) => {
+
+  try {
+
+      const { id } = req.query;
+
+      const pedidoporid = await ConsultaPedido(id);
+
+      resp.send(pedidoporid);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+
+server.get('/lista/busca', async (req, resp) => {
+
+  try {
+
+      const listaprodutos = await ConsultaProduto();
+
+      resp.send(listaprodutos);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+server.get('/filtro/nome', async (req, resp) => {
 
   try {
 
       const { nome } = req.query;
 
-      const produtopornome = await VerProduto(categoria);
+      const produtopornome = await ConsultaPorNome(nome);
+
+      resp.send(produtopornome);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+server.get('/filtro/categoria', async (req, resp) => {
+
+  try {
+
+      const { categoria } = req.query;
+
+      const produtoporcategoria = await FiltroPorCategoria(categoria);
 
       resp.send(produtoporcategoria);
 
@@ -118,6 +171,155 @@ server.get('user/filtro/nome', async (req, resp) => {
       })
   }
 })
+
+
+
+server.get('/filtro/valor', async (req, resp) => {
+
+    try {
+
+        const { valor } = req.query;
+
+        const produtoporvalor = await FiltroPorValor( valor );
+
+        resp.send(produtoporvalor);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+
+server.get('/filtro/tamanho', async (req, resp) => {
+
+  try {
+
+      const { tamanho } = req.query;
+
+      const produtoportamanho = await FiltroPorTamanho(tamanho);
+
+      resp.send(produtoportamanho);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+server.get('/filtro/tecido', async (req, resp) => {
+
+  try {
+
+      const { tecido } = req.query;
+
+      const produtoportecido = await FiltroPorTecido(tecido);
+
+      resp.send(produtoportecido);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+server.get('/filtro/cor', async (req, resp) => {
+
+  try {
+
+      const { cor } = req.query;
+
+      const produtoporcor = await FiltroPorCor(cor);
+
+      resp.send(produtoporcor);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+server.get('/filtro/designer', async (req, resp) => {
+
+  try {
+
+      const { designer } = req.query;
+
+      const produtopordesigner = await FiltroPorDesigner(designer);
+
+      resp.send(produtopordesigner);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+server.get('/filtro/promocao', async (req, resp) => {
+
+  try {
+
+      const { promocao } = req.query;
+
+      const produtoporpromocao = await FiltroPorPromocao(promocao);
+
+      resp.send(produtoporpromocao);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+server.get('/filtro/destaque', async (req, resp) => {
+
+  try {
+
+      const { destaque } = req.query;
+
+      const produtopordestaque = await FiltroPorDestaque(destaque);
+
+      resp.send(produtopordestaque);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+server.get('/filtro/disponivel', async (req, resp) => {
+
+  try {
+
+      const { disponivel } = req.query;
+
+      const produtopordisponivel = await FiltroPorDisponivel(disponivel);
+
+      resp.send(produtopordisponivel);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
 
 
 
