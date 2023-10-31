@@ -1,6 +1,6 @@
 -- create database atelieregia;
 
-use atelieregia;
+-- use atelieregia;
 
 
 -- Tabela de Categorias
@@ -37,8 +37,6 @@ CREATE TABLE tb_produto_tamanho (
 CREATE TABLE tb_produto_imagem (
     id_imagem INT PRIMARY KEY AUTO_INCREMENT not null,
     img_link VARCHAR(10000)
-
-
 );
 
 -- Tabela de Produtos
@@ -54,11 +52,13 @@ CREATE TABLE tb_produto (
     ds_detalhes VARCHAR(900),
     nr_estoque INT,
     id_designer  int, 
+    id_categorias int,
     FOREIGN KEY (id_imagem) REFERENCES tb_produto_imagem(id_imagem),
     FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer)
 );
 
-drop table tb_produto;
+
+
 -- PRODUTO/IMAGEM (N:N)
 /*CREATE TABLE tb_p_imagem (
 	id_p_img int primary key auto_increment not null,
@@ -133,28 +133,7 @@ ds_senhacliente       varchar(100) UNIQUE,
 bt_termos             bool 
 );
   
-
--- Tabela de Clientes
-CREATE TABLE tb_cliente (
-    id_cliente INT PRIMARY KEY AUTO_INCREMENT not null,
-    id_cadcliente int not null,
-    dt_nascimento datetime,
-    ds_endereco VARCHAR(200),
-    ds_cpf VARCHAR(14) UNIQUE,
-    id_genero int,
-    ds_num_celular VARCHAR(20),
-    id_entregas int,
-    ds_cep  varchar(1000),
-    nr_numero decimal(5,0),
-    ds_complemento    varchar(1000),
-    FOREIGN KEY (id_cadcliente) REFERENCES tb_cadastrocliente(id_cadcliente),
-    FOREIGN KEY (id_genero) REFERENCES tb_generos(id_genero),
-    FOREIGN KEY (id_entregas) REFERENCES tb_entregas(id_entregas)
-);
-
-drop table tb_cliente;
-
-CREATE TABLE tb_generos (
+  CREATE TABLE tb_generos (
     id_genero INT PRIMARY KEY AUTO_INCREMENT not null,
     nm_genero VARCHAR(50) UNIQUE
 );
@@ -163,6 +142,32 @@ CREATE TABLE tb_entregas (
     id_entregas INT PRIMARY KEY AUTO_INCREMENT not null,
     nm_entregas VARCHAR(50) UNIQUE
 );
+
+
+-- Tabela de Clientes
+CREATE TABLE tb_cliente (
+    id_cliente INT PRIMARY KEY AUTO_INCREMENT not null,
+    id_cadcliente int not null,
+	ds_cpf VARCHAR(14) UNIQUE,
+    dt_nascimento datetime,
+	id_genero int,
+    ds_num_celular VARCHAR(20),
+
+    FOREIGN KEY (id_cadcliente) REFERENCES tb_cadastrocliente(id_cadcliente),
+    FOREIGN KEY (id_genero) REFERENCES tb_generos(id_genero)
+
+);
+
+
+
+create table tb_enderecos(
+	id_endereco                      int primary key auto_increment not null,
+    ds_endereco                      VARCHAR(200), 
+	ds_cep                           varchar(1000),
+	ds_complemento                   varchar(1000),
+	nr_numero_res                    decimal(5,0)
+);
+
 
 -- Tabela de Administradores
 CREATE TABLE tb_admin (
@@ -185,19 +190,8 @@ CREATE TABLE tb_pedido (
     dt_validade DATE,
     nr_cod_seg INT,
     nr_parcelas INT,
-    id_bandeira int,
-    ds_entrega  varchar(500),
-    FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente),
-    FOREIGN KEY (id_bandeira) REFERENCES tb_bandeira_cartao(id_bandeira)
-);
-
-drop table tb_pedido;
-
--- Tabela bandeiras cartão
-CREATE TABLE tb_bandeira_cartao (
-    id_bandeira INT PRIMARY KEY AUTO_INCREMENT not null,
-	nm_bandeira varchar(1000),
-    ds_imgbandeira varchar(10000)
+    ds_previsao_entrega  varchar(500),
+    FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente)
 );
 
 
@@ -207,11 +201,32 @@ CREATE TABLE tb_pedido_item (
     id_produto INT not null, -- Referência a tb_produto
     id_pedido INT not null, -- Referência a tb_pedido
     id_cliente INT not null,
+    id_endereco int not null,  -- tabela de enderecos
+	id_entregas int, -- tipo de entrega
     FOREIGN KEY (id_produto) REFERENCES tb_produto(id_produto),
     FOREIGN KEY (id_pedido) REFERENCES tb_pedido(id_pedido),
-    FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente)
+    FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente),
+    FOREIGN KEY (id_endereco) REFERENCES tb_enderecos(id_endereco),
+	FOREIGN KEY (id_entregas) REFERENCES tb_entregas(id_entregas)
+);
+
+create table tb_favoritos(
+
+id_favorito              int primary key auto_increment,
+id_cliente               int,
+id_produto               int,
+
+foreign key (id_cliente) references tb_cliente(id_cliente),
+foreign key (id_produto) references tb_produto(id_produto)
+
 );
 
 -- show tables from atelieregia;
 
--- drop table tb_designer;
+-- drop table tb_pedido_item;
+
+select * from tb_pedido_item 
+inner join tb_produto on tb_produto.id_produto = tb_pedido_item.id_produto
+where id_cliente like 1;
+
+drop table tb_enderecos;
