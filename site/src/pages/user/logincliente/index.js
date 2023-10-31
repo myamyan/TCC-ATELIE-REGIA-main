@@ -1,7 +1,7 @@
 import './index.scss'
 import axios from 'axios';
 
-import { verificarloginCliente } from '../../../api/logincliente';
+
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

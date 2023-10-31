@@ -11,7 +11,7 @@ import LoginCliente from './pages/user/logincliente';
 import Homepage from './pages/user/pagina-inicio';
 import RelatoriosAdm from './pages/adm/relatoriosadm';
 import ConsultaProdutos from './pages/adm/consultapedidos';
-import Detalhespedido from './pages/detalhespedido';
+import Detalhespedido from './pages/user/detalhespedido';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

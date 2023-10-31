@@ -97,7 +97,13 @@ export default function Homepage() {
 
           <div className='container4video-header'>
 
+            <video>
 
+              <source src="/assets/videos/video-home.mov" controls autoplay muted loop width="500" alt="" type="video/mov" />
+
+            </video>
+
+            <img src="/assets/images/enquadreflorido.png" />
 
 
           </div>

@@ -3,10 +3,10 @@ import { con } from './connection.js';
 
 
 export async function inserircadastrousuario(cadastro) {
-    
-  const comando= 
-  
-  `INSERT INTO tb_cadastrocliente(nm_cliente, ds_emailcliente, ds_senhacliente, bt_termos)
+
+  const comando =
+
+    `INSERT INTO tb_cadastrocliente(nm_cliente, ds_emailcliente, ds_senhacliente, bt_termos)
   values(?, ?, ?, ?) `;
 
   const [resposta] = await con.query(comando, [cadastro.nome, cadastro.email, cadastro.senha, cadastro.termos]);
@@ -32,8 +32,8 @@ export async function loginCliente(email, senha) {
 
   `
 
-    const [linhas] = await con.query(comando, [email, senha]);
-    return linhas;
+  const [linhas] = await con.query(comando, [email, senha]);
+  return linhas;
 
 }
 
@@ -52,28 +52,28 @@ export async function CadastroInformacoesPessoais(infop) {
 
   const comando = ` 
   
-    insert tb_cliente (id_cadcliente, dt_nascimento, ds_endereco, ds_cpf, id_genero, ds_num_celular, id_entregas)
-                values( ?, ?, ?, ?, ?, ? ,? )
+    insert tb_cliente ( id_cadcliente, dt_nascimento, ds_cpf, id_genero, ds_num_celular )
+                values( ?, ?, ?, ?, ? )
 
   `
 
-  const [resposta] = await con.query(comando, [infop.idcadastro, infop.datanasc, infop.endereco, infop.cpf, infop.genero, infop.numcel , infop.entregas ])
+  const [resposta] = await con.query(comando, [infop.idcadastro, infop.datanasc, infop.endereco, infop.cpf, infop.genero, infop.numcel, infop.entregas])
   return resposta;
 
 }
 
 //conversar vivi
 
-export async function CadastroPedido( pedido ) {
+export async function CadastroPedido(pedido) {
 
   const comando = `
 
-  insert into tb_pedido ( id_cliente, nr_itens, vl_totalcompra, dt_pedido, ds_situacao, tp_pagamento, nm_cartao, nr_cartao, dt_validade, nr_cod_seg, nr_parcelas, id_bandeira, ds_entrega )
-      values( ?, ?, ?, ?, ?, ?, ? );
+  insert into tb_pedido ( id_cliente, nr_itens, vl_totalcompra, dt_pedido, ds_situacao, tp_pagamento, nm_cartao, nr_cartao, dt_validade, nr_cod_seg, nr_parcelas, ds_previsao_entrega )
+      values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );
 
   `
 
-  const [resposta] = await con.query(comando, [pedido.cliente, pedido.numeroitens, pedido.vltotal, pedido.data, pedido.situacao, pedido.tppagamento, pedido.nomecartao, pedido.nrcartao, pedido.dtvalidade, pedido.nrcodseguranca, pedido.parcelas, pedido.idbandeira, pedido.entrega]);
+  const [resposta] = await con.query(comando, [pedido.cliente, pedido.numeroitens, pedido.vltotal, pedido.data, pedido.situacao, pedido.tppagamento, pedido.nomecartao, pedido.nrcartao, pedido.dtvalidade, pedido.nrcodseguranca, pedido.parcelas, pedido.entrega]);
 
   pedido.id = resposta.insertId;
 
@@ -83,7 +83,9 @@ export async function CadastroPedido( pedido ) {
 }
 
 
-export async function ConsultaPedido( id ){
+
+
+export async function ConsultaPedido(id) {
 
   const comando = `
   
@@ -91,7 +93,7 @@ export async function ConsultaPedido( id ){
 
   `
 
-  const [resposta] = await con.query(comando, [ id ])
+  const [resposta] = await con.query(comando, [id])
 
 }
 
@@ -212,9 +214,9 @@ export async function FiltroPorTamanho(tamanho) {
 
 
 
-export async function FiltroPorValor( valor ) {
+export async function FiltroPorValor(valor) {
 
-    const comando = `  
+  const comando = `  
 
     select * from tb_produto 
 
@@ -222,9 +224,9 @@ export async function FiltroPorValor( valor ) {
 
     `
 
-    const [ linhas ] = await con.query( comando, [ valor ] );
+  const [linhas] = await con.query(comando, [valor]);
 
-    return linhas[0];
+  return linhas[0];
 
 }
 
@@ -282,22 +284,86 @@ export async function FiltroPorDisponivel(disponivel) {
 
 //fazer controller ↓
 
-export default function CadastroInfoEntrega(pedido){
+export async function CadastroInfoEntrega(pedidoend) {
 
   const comando = `
   
-    update tb_cliente
-    set     
-    ds_endereco             = ?,
-    ds_cep                  = ?,
-    nr_numero               = ?,
-    ds_complemento          = ?,
-    id_entregas             = ?
-    
-    WHERE id_cliente        = ?
+      insert into tb_enderecos( ds_endereco, ds_cep, ds_complemento, nr_numero_res )
+                        values( ?, ?, ?, ? )
+
 
   `
 
-}  
+  const [linhas] = await con.query(comando, [pedidoend.endereco, pedidoend.cep, pedidoend.complemento, pedidoend.numres])
+
+  pedidoend.id = linhas.insertId;
+
+  return pedidoend;
+
+}
 
 
+export async function ItensPedido(id) {
+
+  const comando = `
+
+      select * from tb_pedido_item
+      inner join tb_produto on tb_produto.id_produto = tb_pedido_item.id_produto
+      where id_cliente like ?;
+
+`
+
+  const [linhas] = await con.query(comando, [id])
+
+  return linhas;
+
+}
+
+export async function ConsultarEnderecos(id){
+
+  const comando = ` 
+
+  select * from tb_pedido_item
+  inner join tb_enderecos on tb_enderecos.id_endereco = tb_pedido_item.id_endereco
+  where id_cliente like ?;
+
+  `
+
+  const [linhas] = await con.query(comando, [id])
+
+  return linhas;
+
+}
+
+
+export async function CadastrarFavorito(favorito){
+
+  const comando = `
+  
+              insert into tb_favoritos( id_cliente, id_produto )
+                                values( ?, ? )
+  `
+
+  const [linhas] = await con.query(comando, [favorito.cliente, favorito.produto])
+
+  favorito.id = linhas.insertId;
+
+  return favorito;
+
+}
+
+
+export async function ConsultarFavoritos(id){
+
+  const comando = `
+  
+  select * from tb_favoritos inner join tb_produto on tb_produto.id_produto = tb_faoritos.id_produto where id_cliente like ?;
+  
+  `
+
+
+  const [linhas] = await con.query(comando, [id])
+
+  return linhas;
+
+}

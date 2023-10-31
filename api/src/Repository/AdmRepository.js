@@ -6,7 +6,7 @@ export async function inserirLoginadm(loginadm) {
     const comando =
 
         `INSERT INTO tb_admin ( ds_email, ds_senha   )
-            values(?, ?) `;
+            values( ?, ? ) `;
 
     const [resposta] = await con.query(comando, [loginadm.email, loginadm.senha]);
     loginadm.id = resposta.insertId;
@@ -40,17 +40,56 @@ export async function buscaremail(email) {
 
 }
 
-export async function inserirproduto(img) {
+export async function CadastrarProduto(produto) {
 
     const comando =
-        `insert into tb_produto (id_imagem, id_categorias, id_produto_tamanho, id_produto_cores, id_produto_tecidos, nm_produto, vl_preco, vl_promocao, bt_promocao, bt_destaque, bt_disponivel, ds_detalhes, nr_estoque)
-values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);`
+        `insert into tb_produto (id_imagem, nm_produto, vl_preco, vl_promocao, bt_promocao, bt_destaque, bt_disponivel, ds_detalhes, nr_estoque, id_designer, id_categorias )
+                                values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );`
 
-    const [resposta] = await con.query(comando, [img.imagem, img.categorias, img.produto_tamanho, img.produto_cores, img.produto_tecidos, img.produto, img.preco, img.promocao, img.promocao, img.destaque, img.disponivel, img.detalhes, img.estoque]);
-    img.id = resposta.insertId;
+    const [resposta] = await con.query(comando, [produto.idimagem, produto.nome, produto.preco, produto.promocao, produto.promocaobool, produto.destaquebool, produto.disponivelbool, produto.detalhes, produto.estoque, produto.iddesigner, produto.idcategorias]);
+    produto.id = resposta.insertId;
 
-    return img;
+    return produto;
 }
+
+
+
+export async function AlterarProduto(id, produto) {
+
+    const comando =
+        `
+    update  tb_produto
+    set     id_imagem               = ?,
+            nm_produto              = ?,
+            vl_preco                = ?,
+            vl_promocao             = ?,
+            bt_promocao             = ?,
+            bt_destaque             = ?,
+            bt_disponivel           = ?,
+            ds_detalhes             = ?,
+            nr_estoque              = ?,
+            id_designer             = ?,
+            id_categorias           = ?
+            
+            WHERE id_produto        = ?`
+
+    const [resposta] = await con.query( comando, [produto.nome, produto.idimagem, produto.valor, produto.valorpromo, produto.promocaobool, produto.destaquebool, produto.disponivelbool, produto.detalhes, produto.estoque, produto.iddesigner, produto.idcategorias, id]);
+
+    return resposta.affectedRows;
+}
+
+
+
+export async function DeletarProduto( id ) {
+
+    const comando =
+        `delete from tb_produto
+                where id_produto = ? `
+
+    const [resposta] = await con.query(comando, [ id ]);
+    return resposta.affectedRows;
+}
+
 
 
 export async function inserircategorias( categoria ) {
@@ -125,65 +164,5 @@ export async function cadastrarImagem(imagem, id) {
 
 }
 
-export async function CadastroProduto( produto ) {
-
-    const comando = `
-
-    insert into tb_pedido ( nm_produto, ds_detalhes, ds_designer_produto, ds_categoria_produto, dc_estoque, ds_cor_produto, ds_tecido_produto, ds_tamanho_produto, dc_valor, dc_valor_promocional, bt_promocao, bt_destaque, bt_disponivel, ds_linkimagem )
-        values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  );
-
-    `
-
-    const [resposta] = await con.query(comando, [ produto.nome, produto.detalhes, produto.designer, produto.categoria, produto.estoque, produto.cor, produto.tecido, produto.tamanho, produto.valor, produto.valorpromo, produto.promocaobool, produto.destaquebool, produto.disponivelbool,
-    produto.linkimagem ]);
-
-    produto.id = resposta.insertId;
-
-    return produto;
-
-
-}
-
-
-
-
-export async function AlterarProduto(id, produto) {
-
-    const comando =
-        `
-    update  tb_produto
-    set     nm_produto              = ?,
-            ds_detalhes             = ?,
-            ds_designer_produto     = ?,
-            ds_categoria_produto    = ?,
-            dc_estoque              = ?,
-            ds_cor_produto          = ?,
-            ds_tecido_produto       = ?,
-            ds_tamanho_produto      = ?,
-            dc_valor                = ?,
-            dc_valor_promocional    = ?,
-            bt_promocao             = ?,
-            bt_destaque             = ?,
-            bt_disponivel           = ?,
-            ds_linkimagem           = ?
-            
-            WHERE id_produto         = ?`
-
-    const [resposta] = await con.query( comando, [produto.nome, produto.detalhes, produto.designer, produto.categoria, produto.estoque, produto.cor, produto.tecido, produto.tamanho, produto.valor, produto.valorpromo, produto.promocaobool, produto.destaquebool, produto.disponivelbool, produto.linkimagem, id]);
-
-    return resposta.affectedRows;
-}
-
-
-
-export async function DeletarProduto( id ) {
-
-    const comando =
-        `delete from tb_produto
-                where id_produto = ? `
-
-    const [resposta] = await con.query(comando, [ id ]);
-    return resposta.affectedRows;
-}
 
 
