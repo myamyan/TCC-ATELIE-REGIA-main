@@ -1,10 +1,10 @@
-import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, FiltroPorValor, CadastroInformacoesPessoais  } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, FiltroPorValor, CadastroInformacoesPessoais, CadastroInfoEntrega  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
 const server = Router();
 
-server.post('/cadastro/usuario', async (req, resp) => {
+server.post('/user/cadastro/usuario', async (req, resp) => {
     try {
       const usuarioParaCadastrar = req.body;
   
@@ -19,7 +19,7 @@ server.post('/cadastro/usuario', async (req, resp) => {
     }
   });
 
-  server.post('/login/cliente', async (req, resp) => {
+  server.post('/user/login/cliente', async (req, resp) => {
     try {
       const loginparainserir = req.body;
   
@@ -41,7 +41,7 @@ server.post('/cadastro/usuario', async (req, resp) => {
     }
   });
   
-  server.get('/login/email/:email', async (req, resp) => {
+  server.get('/user/login/email/:email', async (req, resp) => {
     try {
       const { email } = req.params;
   
@@ -65,7 +65,7 @@ server.post('/cadastro/usuario', async (req, resp) => {
   });
 
 
-  server.post('/cadastro/usuario/finalizacao', async (req, resp) => {
+  server.post('/user/cadastro/finalizacao', async (req, resp) => {
     try {
       const informacoesParaCompletar = req.body;
   
@@ -81,7 +81,7 @@ server.post('/cadastro/usuario', async (req, resp) => {
   });
 
 
-  server.post('/cadastro/pedido', async (req, resp) => {
+  server.post('/user/cadastro/pedido', async (req, resp) => {
 
     try {
 
@@ -102,7 +102,7 @@ server.post('/cadastro/usuario', async (req, resp) => {
 
 
 
-server.get('/consulta/pedido/:id', async (req, resp) => {
+server.get('/user/consulta/pedido/:id', async (req, resp) => {
 
   try {
 
@@ -121,7 +121,7 @@ server.get('/consulta/pedido/:id', async (req, resp) => {
 
 
 
-server.get('/lista/busca', async (req, resp) => {
+server.get('/user/lista/busca', async (req, resp) => {
 
   try {
 
@@ -137,7 +137,7 @@ server.get('/lista/busca', async (req, resp) => {
 })
 
 
-server.get('/filtro/nome', async (req, resp) => {
+server.get('/user/filtro/nome', async (req, resp) => {
 
   try {
 
@@ -155,7 +155,7 @@ server.get('/filtro/nome', async (req, resp) => {
 })
 
 
-server.get('/filtro/categoria', async (req, resp) => {
+server.get('/user/filtro/categoria', async (req, resp) => {
 
   try {
 
@@ -173,8 +173,81 @@ server.get('/filtro/categoria', async (req, resp) => {
 })
 
 
+server.get('/user/filtro/tecido', async (req, resp) => {
 
-server.get('/filtro/valor', async (req, resp) => {
+  try {
+
+      const { tecido } = req.query;
+
+      const produtoportecido = await FiltroPorTecido(tecido);
+
+      resp.send(produtoportecido);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+
+server.get('/user/filtro/designer', async (req, resp) => {
+
+  try {
+
+      const { designer } = req.query;
+
+      const produtopordesigner = await FiltroPorDesigner(designer);
+
+      resp.send(produtopordesigner);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+
+
+server.get('/user/filtro/cor', async (req, resp) => {
+
+  try {
+
+      const { cor } = req.query;
+
+      const produtoporcor = await FiltroPorCor(cor);
+
+      resp.send(produtoporcor);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+server.get('/user/filtro/tamanho', async (req, resp) => {
+
+  try {
+
+      const { tamanho } = req.query;
+
+      const produtoportamanho = await FiltroPorTamanho(tamanho);
+
+      resp.send(produtoportamanho);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+server.get('/user/filtro/valor', async (req, resp) => {
 
     try {
 
@@ -194,79 +267,8 @@ server.get('/filtro/valor', async (req, resp) => {
 
 
 
-server.get('/filtro/tamanho', async (req, resp) => {
 
-  try {
-
-      const { tamanho } = req.query;
-
-      const produtoportamanho = await FiltroPorTamanho(tamanho);
-
-      resp.send(produtoportamanho);
-
-  } catch (err) {
-      resp.status(400).send({
-          erro: err.message
-      })
-  }
-})
-
-
-server.get('/filtro/tecido', async (req, resp) => {
-
-  try {
-
-      const { tecido } = req.query;
-
-      const produtoportecido = await FiltroPorTecido(tecido);
-
-      resp.send(produtoportecido);
-
-  } catch (err) {
-      resp.status(400).send({
-          erro: err.message
-      })
-  }
-})
-
-
-server.get('/filtro/cor', async (req, resp) => {
-
-  try {
-
-      const { cor } = req.query;
-
-      const produtoporcor = await FiltroPorCor(cor);
-
-      resp.send(produtoporcor);
-
-  } catch (err) {
-      resp.status(400).send({
-          erro: err.message
-      })
-  }
-})
-
-
-server.get('/filtro/designer', async (req, resp) => {
-
-  try {
-
-      const { designer } = req.query;
-
-      const produtopordesigner = await FiltroPorDesigner(designer);
-
-      resp.send(produtopordesigner);
-
-  } catch (err) {
-      resp.status(400).send({
-          erro: err.message
-      })
-  }
-})
-
-
-server.get('/filtro/promocao', async (req, resp) => {
+server.get('/user/filtro/promocao', async (req, resp) => {
 
   try {
 
@@ -284,7 +286,7 @@ server.get('/filtro/promocao', async (req, resp) => {
 })
 
 
-server.get('/filtro/destaque', async (req, resp) => {
+server.get('/user/filtro/destaque', async (req, resp) => {
 
   try {
 
@@ -302,7 +304,7 @@ server.get('/filtro/destaque', async (req, resp) => {
 })
 
 
-server.get('/filtro/disponivel', async (req, resp) => {
+server.get('/user/filtro/disponivel', async (req, resp) => {
 
   try {
 
@@ -320,7 +322,38 @@ server.get('/filtro/disponivel', async (req, resp) => {
 })
 
 
+server.post('/user/cadastro/informacoes-entrega', async (req, resp) => {
+  try {
+    const infoParaCadastrar = req.body;
+
+    const infoCadastrada = await CadastroInfoEntrega(infoParaCadastrar);
+
+    resp.send(infoCadastrada);
+  } catch (err) {
+    console.error('Erro na função de cadastro de usuário:', err);
+    resp.status(400).send({
+      erro: err.message
+    });
+  }
+});
 
 
+
+server.get('/user/filtro/itens-pedido', async (req, resp) => {
+
+  try {
+
+      const { nome } = req.query;
+
+      const produtopornome = await ConsultaPorNome(nome);
+
+      resp.send(produtopornome);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
 
 export default server;

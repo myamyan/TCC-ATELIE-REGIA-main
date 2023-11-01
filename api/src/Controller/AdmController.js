@@ -1,6 +1,6 @@
 
 
-import { inserirLoginadm, verificarEmailExistente, CadastroProduto, AlterarProduto, DeletarProduto, cadastrarImagem } from '../Repository/AdmRepository.js';
+import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem } from '../Repository/AdmRepository.js';
 
 import multer from 'multer';
 import { Router } from "express"
@@ -83,7 +83,7 @@ server.post('/cadastro/produto', async (req, resp) => {
 
         const produtoParaCadastrar = req.body;
 
-        const produtoCadastrado = await CadastroProduto(produtoParaCadastrar);
+        const produtoCadastrado = await CadastrarProduto(produtoParaCadastrar);
 
         resp.send(produtoCadastrado);
 

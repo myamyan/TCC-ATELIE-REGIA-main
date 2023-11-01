@@ -97,9 +97,9 @@ export default function Homepage() {
 
           <div className='container4video-header'>
 
-            <video>
+            <video  src="/assets/videos/video-home-mp4.mp4" alt="" >
 
-              <source src="/assets/videos/video-home.mov" controls autoplay muted loop width="500" alt="" type="video/mov" />
+              <source  controls width="750" type="video/mp4" />
 
             </video>
 

@@ -53,6 +53,20 @@ export async function CadastrarProduto(produto) {
 }
 
 
+export async function BuscarProdutos(){
+
+    const comando = `
+    
+    select * from tb_produto;
+
+    `
+
+    const [linhas] = await con.query(comando);
+
+    return linhas;
+
+}
+
 
 export async function AlterarProduto(id, produto) {
 
@@ -164,5 +178,75 @@ export async function cadastrarImagem(imagem, id) {
 
 }
 
+export async function BuscarTodosPedidos(){
 
+    const comando = `
+    
+    select * from tb_pedido_item inner join tb_pedido on tb_pedido.dt_pedido = tb_pedido_item.dt_pedido;
+
+    `
+
+    const [linhas] = await con.query(comando);
+
+    return linhas;
+
+}
+
+export async function BuscarPedidosAndamento(){
+
+    const comando = `
+    
+        select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido where ds_situacao like "andamento"
+
+    `
+
+    const [linhas] = await con.query(comando);
+
+    return linhas
+
+}
+
+export async function BuscarPedidosConcluidos(){
+
+    const comando = `
+    
+        select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido where ds_situacao like "Aprovado"
+
+    `
+
+    const [linhas] = await con.query(comando);
+
+    return linhas
+
+}
+
+export async function FiltroPorMaisNovo(){
+
+
+    const comando = `
+    
+    select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido asc; 
+
+    `
+
+    const [linhas] = await con.query(comando);
+
+    return linhas;
+
+}
+
+export async function FiltroPorMaisAntigo(){
+
+
+    const comando = `
+    
+    select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido desc; 
+
+    `
+
+    const [linhas] = await con.query(comando);
+
+    return linhas;
+
+}
 
