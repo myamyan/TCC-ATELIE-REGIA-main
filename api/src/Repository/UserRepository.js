@@ -136,8 +136,8 @@ export async function FiltroPorCategoria(categoria) {
   const comando = `  
   
   select * from tb_p_categorias 
-  
-  where nm_categoria like ?
+  inner join tb_produto on tb_produto.id_produto = tb_p_categorias.id_produto 
+  where id_categorias like ?
 
   `
 
@@ -152,9 +152,9 @@ export async function FiltroPorTecido(tecido) {
 
   const comando = `  
   
-  select * from tb_p_tecido 
-  
-  where ds_tipo like ?;
+  select * from tb_p_tecidos 
+  inner join tb_produto on tb_produto.id_produto = tb_p_tecidos.id_produto
+  where id_tecido like ?;
 
   `
 
@@ -168,9 +168,9 @@ export async function FiltroPorDesigner(designer) {
 
   const comando = `  
   
-  select * from tb_p_designer
+  select * from tb_produto
   
-  where nm_designer like ?;
+  where id_designer like ?;
 
   `
 
@@ -184,9 +184,9 @@ export async function FiltroPorCor(cor) {
 
   const comando = `  
   
-  select * from tb_p_cor 
-  
-  where ds_hexa_decimal like ?;
+  select * from tb_p_cores 
+  inner join tb_produto on tb_produto.id_produto = tb_p_cores.id_produto
+  where id_cores like ?;
 
   `
 
@@ -201,8 +201,8 @@ export async function FiltroPorTamanho(tamanho) {
   const comando = `  
   
   select * from tb_p_tamanho 
-  
-  where ds_tamanho like ?;
+  inner join tb_produto on tb_produto.id_produto = tb_p_tamanho.id_produto
+  where id_tamanho like ?;
 
   `
 
@@ -214,7 +214,7 @@ export async function FiltroPorTamanho(tamanho) {
 
 
 
-export async function FiltroPorValor(valor) {
+export async function FiltroPorValor( valornormal, valorpromocional ) {
 
   const comando = `  
 
@@ -224,7 +224,7 @@ export async function FiltroPorValor(valor) {
 
     `
 
-  const [linhas] = await con.query(comando, [valor]);
+  const [linhas] = await con.query(comando, [ valornormal, valorpromocional ]);
 
   return linhas[0];
 
@@ -301,7 +301,6 @@ export async function CadastroInfoEntrega(pedidoend) {
 
 }
 
-//fazer controller ↓
 
 
 export async function ItensPedido(id) {
@@ -320,6 +319,9 @@ export async function ItensPedido(id) {
 
 }
 
+
+
+
 export async function ConsultarEnderecos(id){
 
   const comando = ` 
@@ -335,7 +337,6 @@ export async function ConsultarEnderecos(id){
   return linhas;
 
 }
-
 
 export async function CadastrarFavorito(favorito){
 

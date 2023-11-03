@@ -52,9 +52,9 @@ CREATE TABLE tb_produto (
     ds_detalhes VARCHAR(900),
     nr_estoque INT,
     id_designer  int, 
-    id_categorias int,
     FOREIGN KEY (id_imagem) REFERENCES tb_produto_imagem(id_imagem),
-    FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer)
+    FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer),
+ 
 );
 
 
@@ -166,6 +166,17 @@ create table tb_enderecos(
 	ds_cep                           varchar(1000),
 	ds_complemento                   varchar(1000),
 	nr_numero_res                    decimal(5,0)
+);
+
+
+CREATE TABLE tb_generos (
+    id_genero INT PRIMARY KEY AUTO_INCREMENT not null,
+    nm_genero VARCHAR(50) UNIQUE
+);
+
+CREATE TABLE tb_entregas (
+    id_entregas INT PRIMARY KEY AUTO_INCREMENT not null,
+    nm_entregas VARCHAR(50) UNIQUE
 );
 
 

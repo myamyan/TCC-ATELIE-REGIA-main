@@ -1,4 +1,4 @@
-import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, FiltroPorValor, CadastroInformacoesPessoais, CadastroInfoEntrega  } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, FiltroPorValor, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, ConsultarEnderecos  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
@@ -339,15 +339,15 @@ server.post('/user/cadastro/informacoes-entrega', async (req, resp) => {
 
 
 
-server.get('/user/filtro/itens-pedido', async (req, resp) => {
+server.get('/user/consulta/itens-pedido', async (req, resp) => {
 
   try {
 
-      const { nome } = req.query;
+      const { id } = req.query;
 
-      const produtopornome = await ConsultaPorNome(nome);
+      const itenspedido = await ItensPedido(id);
 
-      resp.send(produtopornome);
+      resp.send(itenspedido);
 
   } catch (err) {
       resp.status(400).send({
@@ -355,5 +355,59 @@ server.get('/user/filtro/itens-pedido', async (req, resp) => {
       })
   }
 })
+
+server.get('/user/consulta/enderecos', async (req, resp) => {
+
+  try {
+
+      const { id } = req.query;
+
+      const enderecoscliente = await ConsultarEnderecos(id);
+
+      resp.send(enderecoscliente);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+
+server.post('/user/cadastro/lista-favoritos', async (req, resp) => {
+  try {
+    const favoritoParaCadastrar = req.body;
+
+    const favoritoCadastrado = await CadastroInfoEntrega(favoritoParaCadastrar);
+
+    resp.send(favoritoCadastrado);
+  } catch (err) {
+    console.error('Opss! Houve um erro ao adicionar este produto a sua lista de favoritos, tente novamente', err);
+    resp.status(400).send({
+      erro: err.message
+    });
+  }
+});
+
+
+server.get('/user/consulta/lista-favoritos', async (req, resp) => {
+
+  try {
+
+      const { id } = req.query;
+
+      const enderecoscliente = await ConsultarEnderecos(id);
+
+      resp.send(enderecoscliente);
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
 
 export default server;

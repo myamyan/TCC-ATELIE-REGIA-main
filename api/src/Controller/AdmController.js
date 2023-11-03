@@ -1,6 +1,6 @@
 
 
-import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem } from '../Repository/AdmRepository.js';
+import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisNovo, FiltroPorMaisAntigo, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto } from '../Repository/AdmRepository.js';
 
 import multer from 'multer';
 import { Router } from "express"
@@ -9,7 +9,7 @@ const server = Router();
 const upload = multer({ dest: 'storage/imagensprodutos' });
 
 
-server.post('/login', async (req, resp) => {
+server.post('/adm/login', async (req, resp) => {
     try {
         const loginparainserir = req.body;
 
@@ -31,7 +31,7 @@ server.post('/login', async (req, resp) => {
     }
 });
 
-server.get('/login/email/:email', async (req, resp) => {
+server.get('/adm/login/email/:email', async (req, resp) => {
     try {
         const { email } = req.params;
 
@@ -55,7 +55,7 @@ server.get('/login/email/:email', async (req, resp) => {
 });
 
 
-server.post('/inserirloginadm', async (req, resp) => {
+server.post('/adm/inserirloginadm', async (req, resp) => {
     try {
         const loginadmparainserir = req.body;
 
@@ -76,7 +76,7 @@ server.post('/inserirloginadm', async (req, resp) => {
 
 
 
-server.post('/cadastro/produto', async (req, resp) => {
+server.post('/adm/cadastro/produto', async (req, resp) => {
 
     try {
 
@@ -96,7 +96,107 @@ server.post('/cadastro/produto', async (req, resp) => {
 });
 
 
-server.put('/produto/alterar/:id', async (req, resp) => {
+server.post('/adm/cadastro/categoria', async (req, resp) => {
+
+    try {
+
+
+        const categoriaParaCadastrar = req.body;
+
+        const categoriaCadastrada = await inserircategorias(categoriaParaCadastrar);
+
+        resp.send(categoriaCadastrada);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
+
+server.post('/adm/cadastro/tecidos', async (req, resp) => {
+
+    try {
+
+
+        const tecidoParaCadastrar = req.body;
+
+        const tecidoCadastrado = await inserirtecidos(tecidoParaCadastrar);
+
+        resp.send(tecidoCadastrado);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
+
+server.post('/adm/cadastro/designer', async (req, resp) => {
+
+    try {
+
+
+        const designerParaCadastrar = req.body;
+
+        const designerCadastrado = await inserirdesigner(designerParaCadastrar);
+
+        resp.send(designerCadastrado);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
+
+server.post('/adm/cadastro/cores', async (req, resp) => {
+
+    try {
+
+
+        const corParaCadastrar = req.body;
+
+        const corCadastrada = await inserircores(corParaCadastrar);
+
+        resp.send(corCadastrada);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
+
+server.post('/adm/cadastro/tamanho', async (req, resp) => {
+
+    try {
+
+
+        const tamanhoParaCadastrar = req.body;
+
+        const tamanhoCadastrado = await inserirtamanho(tamanhoParaCadastrar);
+
+        resp.send(tamanhoCadastrado);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
+
+server.put('/adm/produto/alterar/:id', async (req, resp) => {
     try {
         const { id } = req.params;
         const produto = req.body;
@@ -117,7 +217,7 @@ server.put('/produto/alterar/:id', async (req, resp) => {
 
 
 
-server.delete('/produto/deletar/:id', async (req, resp) => {
+server.delete('/adm/produto/deletar/:id', async (req, resp) => {
     try {
         const { id } = req.params;
 
@@ -133,7 +233,7 @@ server.delete('/produto/deletar/:id', async (req, resp) => {
 
 
 
-server.post('/cadastro/produto/:id/imagem', upload.single('imagem'), async (req, resp) => {
+server.post('/adm/cadastro/produto/imagem', upload.single('imagem'), async (req, resp) => {
 
     try {
 
@@ -159,8 +259,399 @@ server.post('/cadastro/produto/:id/imagem', upload.single('imagem'), async (req,
 )
 
 
+server.post('/adm/associacao/categoria-produto', async (req, resp) => {
+
+    try {
 
 
+        const categoriaParaAssociar = req.body;
+
+        const categoriaAssociada = await AssociarCategoriaProduto(categoriaParaAssociar);
+
+        resp.send(categoriaAssociada);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
+
+server.post('/adm/associacao/tamanho-produto', async (req, resp) => {
+
+    try {
+
+
+        const tamanhoParaAssociar = req.body;
+
+        const tamanhoAssociado = await AssociarTamanhoProduto(tamanhoParaAssociar);
+
+        resp.send(tamanhoAssociado);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
+
+
+server.post('/adm/associacao/cor-produto', async (req, resp) => {
+
+    try {
+
+
+        const corParaAssociar = req.body;
+
+        const corAssociada = await AssociarCorProduto(corParaAssociar);
+
+        resp.send(corAssociada);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
+
+
+server.post('/adm/associacao/tecidos-produto', async (req, resp) => {
+
+    try {
+
+
+        const tecidosParaAssociar = req.body;
+
+        const tecidoAssociado = await AssociarTecidosProduto(tecidosParaAssociar);
+
+        resp.send(tecidoAssociado);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
+
+server.get('/adm/consulta/pedidos', async (req, resp) => {
+
+    try {
+
+        const listapedidos = await BuscarTodosPedidos();
+
+        resp.send(listapedidos);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/consulta/pedidos-em-andamento', async (req, resp) => {
+
+    try {
+
+        const listaemandamento = await BuscarPedidosAndamento();
+
+        resp.send(listaemandamento);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/consulta/pedidos-concluidos', async (req, resp) => {
+
+    try {
+
+        const listaconcluidos = await BuscarPedidosConcluidos();
+
+        resp.send(listaconcluidos);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/consulta/produtos-mais-novos', async (req, resp) => {
+
+    try {
+
+        const listanovos = await FiltroPorMaisNovo();
+
+        resp.send(listanovos);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/consulta/produtos-mais-antigos', async (req, resp) => {
+
+    try {
+
+        const listaantigos = await FiltroPorMaisAntigo();
+
+        resp.send(listaantigos);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/consulta/produtos-caros', async (req, resp) => {
+
+    try {
+
+        const listacaros = await FiltroPorMaisCaro();
+
+        resp.send(listacaros);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+
+server.get('/adm/consulta/produtos-baratos', async (req, resp) => {
+
+    try {
+
+        const listabaratos = await FiltroPorMaisBarato();
+
+        resp.send(listabaratos);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/consulta/produtos', async (req, resp) => {
+
+    try {
+
+        const listaprodutos = await ConsultaGeralProdutosAdm();
+
+        resp.send(listaprodutos);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+server.get('/adm/filtro/nome', async (req, resp) => {
+
+    try {
+
+        const { nome } = req.query;
+
+        const produtopornome = await ConsultaPorNomeAdm(nome);
+
+        resp.send(produtopornome);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/filtro/categoria', async (req, resp) => {
+
+    try {
+
+        const { categoria } = req.query;
+
+        const produtoporcategoria = await FiltroPorCategoriaAdm(categoria);
+
+        resp.send(produtoporcategoria);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/filtro/tecido', async (req, resp) => {
+
+    try {
+
+        const { tecido } = req.query;
+
+        const produtoportecido = await FiltroPorTecidoAdm(tecido);
+
+        resp.send(produtoportecido);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+
+server.get('/adm/filtro/designer', async (req, resp) => {
+
+    try {
+
+        const { designer } = req.query;
+
+        const produtopordesigner = await FiltroPorDesignerAdm(designer);
+
+        resp.send(produtopordesigner);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+
+
+server.get('/adm/filtro/cor', async (req, resp) => {
+
+    try {
+
+        const { cor } = req.query;
+
+        const produtoporcor = await FiltroPorCorAdm(cor);
+
+        resp.send(produtoporcor);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+server.get('/adm/filtro/tamanho', async (req, resp) => {
+
+    try {
+
+        const { tamanho } = req.query;
+
+        const produtoportamanho = await FiltroPorTamanhoAdm(tamanho);
+
+        resp.send(produtoportamanho);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/filtro/valor', async (req, resp) => {
+
+    try {
+
+        const { valor } = req.query;
+
+        const produtoporvalor = await FiltroPorValorAdm(valor);
+
+        resp.send(produtoporvalor);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+
+
+server.get('/adm/filtro/promocao', async (req, resp) => {
+
+    try {
+
+        const { promocao } = req.query;
+
+        const produtoporpromocao = await FiltroPorPromocaoAdm(promocao);
+
+        resp.send(produtoporpromocao);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/filtro/destaque', async (req, resp) => {
+
+    try {
+
+        const { destaque } = req.query;
+
+        const produtopordestaque = await FiltroPorDestaqueAdm(destaque);
+
+        resp.send(produtopordestaque);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/filtro/disponivel', async (req, resp) => {
+
+    try {
+
+        const { disponivel } = req.query;
+
+        const produtopordisponivel = await FiltroPorDisponivelAdm(disponivel);
+
+        resp.send(produtopordisponivel);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
 
 
 export default server;
