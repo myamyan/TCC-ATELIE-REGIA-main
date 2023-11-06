@@ -1,7 +1,6 @@
--- create database atelieregia;
+create database atelieregia;
 
--- use atelieregia;
-
+use atelieregia;
 
 -- Tabela de Categorias
 CREATE TABLE tb_categorias (
@@ -9,11 +8,15 @@ CREATE TABLE tb_categorias (
     nm_categoria VARCHAR(400)
 );
 
+select * from tb_categorias;
+
 -- Tabela de Tecidos de Produto
 CREATE TABLE tb_produto_tecidos (
     id_tecido INT PRIMARY KEY AUTO_INCREMENT not null, 
     ds_tipo VARCHAR(400)
 );
+
+select * from tb_produto_tecidos;
 
 -- Tabela de Designers
 CREATE TABLE tb_designer (
@@ -21,11 +24,15 @@ CREATE TABLE tb_designer (
 	nm_designer VARCHAR(400)
 );
 
+select * from tb_designer;
+
 -- Tabela de Cores de Produto
 CREATE TABLE tb_produto_cores (
     id_cores INT PRIMARY KEY AUTO_INCREMENT not null,
     ds_hexa_decimal VARCHAR(300)
 );
+
+select * from tb_produto_cores;
 
 -- Tabela de Tamanhos de Produto
 CREATE TABLE tb_produto_tamanho (
@@ -33,11 +40,15 @@ CREATE TABLE tb_produto_tamanho (
     ds_tamanho VARCHAR(200)
 );
 
+select * from tb_produto_tamanho;
+
 -- Tabela de Imagens de Produto
 CREATE TABLE tb_produto_imagem (
     id_imagem INT PRIMARY KEY AUTO_INCREMENT not null,
     img_link VARCHAR(10000)
 );
+
+select * from tb_produto_imagem;
 
 -- Tabela de Produtos
 CREATE TABLE tb_produto (
@@ -51,13 +62,14 @@ CREATE TABLE tb_produto (
     bt_disponivel BOOLEAN,
     ds_detalhes VARCHAR(900),
     nr_estoque INT,
-    id_designer  int, 
+    id_designer  int,
     FOREIGN KEY (id_imagem) REFERENCES tb_produto_imagem(id_imagem),
-    FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer),
- 
+    FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer)
 );
 
+select * from tb_produto;
 
+-- drop table tb_produto;
 
 -- PRODUTO/IMAGEM (N:N)
 /*CREATE TABLE tb_p_imagem (
@@ -91,6 +103,7 @@ CREATE TABLE tb_p_categorias (
     
 );
 
+SELECT * FROM TB_P_CATEGORIAS;
 
 -- PRODUTO/TAMANHO (N:N)
 CREATE TABLE tb_p_tamanho (
@@ -102,6 +115,8 @@ CREATE TABLE tb_p_tamanho (
     
 );
 
+SELECT * FROM TB_P_TAMANHO;
+
 -- PRODUTO/CORES (N:N)
 CREATE TABLE tb_p_cores  (
 	id_p_cores int primary key auto_increment not null,
@@ -112,6 +127,7 @@ CREATE TABLE tb_p_cores  (
     
 );
 
+SELECT * FROM TB_P_CORES;
 
 -- PRODUTO/TECIDOS (N:N)
 CREATE TABLE tb_p_tecidos (
@@ -123,6 +139,8 @@ CREATE TABLE tb_p_tecidos (
     
 );
 
+SELECT * FROM TB_P_TECIDOS;
+
 -- Tabela de Cadastro Cliente
 create table tb_cadastrocliente(
 
@@ -133,16 +151,6 @@ ds_senhacliente       varchar(100) UNIQUE,
 bt_termos             bool 
 );
   
-  CREATE TABLE tb_generos (
-    id_genero INT PRIMARY KEY AUTO_INCREMENT not null,
-    nm_genero VARCHAR(50) UNIQUE
-);
-
-CREATE TABLE tb_entregas (
-    id_entregas INT PRIMARY KEY AUTO_INCREMENT not null,
-    nm_entregas VARCHAR(50) UNIQUE
-);
-
 
 -- Tabela de Clientes
 CREATE TABLE tb_cliente (
@@ -169,6 +177,9 @@ create table tb_enderecos(
 );
 
 
+
+-- drop table tb_cliente;
+
 CREATE TABLE tb_generos (
     id_genero INT PRIMARY KEY AUTO_INCREMENT not null,
     nm_genero VARCHAR(50) UNIQUE
@@ -178,7 +189,6 @@ CREATE TABLE tb_entregas (
     id_entregas INT PRIMARY KEY AUTO_INCREMENT not null,
     nm_entregas VARCHAR(50) UNIQUE
 );
-
 
 -- Tabela de Administradores
 CREATE TABLE tb_admin (
@@ -205,6 +215,7 @@ CREATE TABLE tb_pedido (
     FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente)
 );
 
+-- drop table tb_pedido;
 
 -- Tabela de Itens de Pedido
 CREATE TABLE tb_pedido_item (
@@ -234,10 +245,4 @@ foreign key (id_produto) references tb_produto(id_produto)
 
 -- show tables from atelieregia;
 
--- drop table tb_pedido_item;
-
-select * from tb_pedido_item 
-inner join tb_produto on tb_produto.id_produto = tb_pedido_item.id_produto
-where id_cliente like 1;
-
-drop table tb_enderecos;
+-- drop database atelieregia;
