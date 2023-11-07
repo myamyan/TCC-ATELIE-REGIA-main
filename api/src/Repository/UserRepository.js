@@ -7,7 +7,7 @@ export async function inserircadastrousuario(cadastro) {
   const comando =
 
     `INSERT INTO tb_cadastrocliente(nm_cliente, ds_emailcliente, ds_senhacliente, bt_termos)
-                            values(?, ?, ?, ?) `;
+                            values( ?, ?, ?, ? ) `;
 
   const [resposta] = await con.query(comando, [cadastro.nome, cadastro.email, cadastro.senha, cadastro.termos]);
   cadastro.id = resposta.insertId;
@@ -57,7 +57,10 @@ export async function CadastroInformacoesPessoais(infop) {
 
   `
 
-  const [resposta] = await con.query(comando, [infop.idcadastro, infop.datanasc, infop.endereco, infop.cpf, infop.genero, infop.numcel, infop.entregas])
+  const [resposta] = await con.query(comando, [infop.idcadastro, infop.datanasc, infop.cpf, infop.idgenero, infop.numcel ])
+
+  infop.id =  resposta.insertId;
+
   return resposta;
 
 }
@@ -69,11 +72,11 @@ export async function CadastroPedido(pedido) {
   const comando = `
 
   insert into tb_pedido ( id_cliente, nr_itens, vl_totalcompra, dt_pedido, ds_situacao, tp_pagamento, nm_cartao, nr_cartao, dt_validade, nr_cod_seg, nr_parcelas, ds_previsao_entrega )
-      values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );
+      values( ?, ?, ?, now(), ?, ?, ?, ?, ?, ?, ?, ? );
 
   `
 
-  const [resposta] = await con.query(comando, [pedido.cliente, pedido.numeroitens, pedido.vltotal, pedido.data, pedido.situacao, pedido.tppagamento, pedido.nomecartao, pedido.nrcartao, pedido.dtvalidade, pedido.nrcodseguranca, pedido.parcelas, pedido.entrega]);
+  const [resposta] = await con.query(comando, [pedido.idcliente, pedido.numeroitens, pedido.vltotal, pedido.data, pedido.situacao, pedido.tppagamento, pedido.nomecartao, pedido.nrcartao, pedido.dtvalidade, pedido.nrcodseguranca, pedido.parcelas, pedido.entrega]);
 
   pedido.id = resposta.insertId;
 
@@ -93,7 +96,9 @@ export async function ConsultaPedido(id) {
 
   `
 
-  const [resposta] = await con.query(comando, [id])
+  const [resposta] = await con.query(comando, [id]);
+
+  return resposta;
 
 }
 
@@ -346,7 +351,7 @@ export async function CadastrarFavorito(favorito){
                                 values( ?, ? )
   `
 
-  const [linhas] = await con.query(comando, [favorito.cliente, favorito.produto])
+  const [linhas] = await con.query(comando, [favorito.idcliente, favorito.idproduto])
 
   favorito.id = linhas.insertId;
 
@@ -359,7 +364,7 @@ export async function ConsultarFavoritos(id){
 
   const comando = `
   
-  select * from tb_favoritos inner join tb_produto on tb_produto.id_produto = tb_faoritos.id_produto where id_cliente like ?;
+  select * from tb_favoritos;
   
   `
 

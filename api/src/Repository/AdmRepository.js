@@ -81,8 +81,7 @@ export async function AlterarProduto(id, produto) {
             bt_disponivel           = ?,
             ds_detalhes             = ?,
             nr_estoque              = ?,
-            id_designer             = ?,
-            id_categorias           = ?
+            id_designer             = ?
             
             WHERE id_produto        = ?`
 

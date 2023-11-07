@@ -1,4 +1,4 @@
-import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, FiltroPorValor, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, ConsultarEnderecos  } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, FiltroPorValor, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, ConsultarEnderecos, CadastrarFavorito, ConsultarFavoritos  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
@@ -137,7 +137,7 @@ server.get('/user/lista/busca', async (req, resp) => {
 })
 
 
-server.get('/user/filtro/nome', async (req, resp) => {
+server.get('/user/filtro/nome-produto', async (req, resp) => {
 
   try {
 
@@ -379,7 +379,7 @@ server.post('/user/cadastro/lista-favoritos', async (req, resp) => {
   try {
     const favoritoParaCadastrar = req.body;
 
-    const favoritoCadastrado = await CadastroInfoEntrega(favoritoParaCadastrar);
+    const favoritoCadastrado = await CadastrarFavorito(favoritoParaCadastrar);
 
     resp.send(favoritoCadastrado);
   } catch (err) {
@@ -397,9 +397,9 @@ server.get('/user/consulta/lista-favoritos', async (req, resp) => {
 
       const { id } = req.query;
 
-      const enderecoscliente = await ConsultarEnderecos(id);
+      const listafavoritos = await ConsultarFavoritos(id);
 
-      resp.send(enderecoscliente);
+      resp.send(listafavoritos);
 
   } catch (err) {
       resp.status(400).send({
