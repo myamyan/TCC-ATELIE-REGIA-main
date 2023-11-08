@@ -7,14 +7,14 @@ export async function cadastrarCliente(nome, email, senha, termos) {
 
 
 
-        const resposta = await axios.post('http://localhost:5000/cadastro/usuario', {
+        const resposta = await axios.post('http://129.148.42.252:5038/cadastro/usuario', {
         nome: nome, 
         email: email,
         senha: senha,
         termos: termos
 
         })
-    
+
         return resposta.data;
 
 

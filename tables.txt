@@ -1,0 +1,269 @@
+-- create database atelieregia;
+
+use atelieregia;
+
+-- Tabela de Categorias
+CREATE TABLE tb_categorias (
+    id_categorias INT PRIMARY KEY AUTO_INCREMENT not null,
+    nm_categoria VARCHAR(400)
+);
+
+-- select * from tb_categorias;
+
+-- Tabela de Tecidos de Produto
+CREATE TABLE tb_produto_tecidos (
+    id_tecido INT PRIMARY KEY AUTO_INCREMENT not null, 
+    ds_tipo VARCHAR(400)
+);
+
+-- select * from tb_produto_tecidos;
+
+-- Tabela de Designers
+CREATE TABLE tb_designer (
+    id_designer INT PRIMARY KEY AUTO_INCREMENT not null,
+	nm_designer VARCHAR(400)
+);
+
+-- select * from tb_designer;
+
+-- Tabela de Cores de Produto
+CREATE TABLE tb_produto_cores (
+    id_cores INT PRIMARY KEY AUTO_INCREMENT not null,
+    ds_hexa_decimal VARCHAR(300)
+);
+
+-- select * from tb_produto_cores;
+
+-- Tabela de Tamanhos de Produto
+CREATE TABLE tb_produto_tamanho (
+    id_tamanho INT PRIMARY KEY AUTO_INCREMENT not null,
+    ds_tamanho VARCHAR(200)
+);
+
+-- select * from tb_produto_tamanho;
+
+-- Tabela de Imagens de Produto
+CREATE TABLE tb_produto_imagem (
+    id_imagem INT PRIMARY KEY AUTO_INCREMENT not null,
+    img_link VARCHAR(10000)
+);
+
+-- select * from tb_produto_imagem;
+	
+delete from tb_produto_imagem where img_link like 1;
+
+-- Tabela de Produtos
+CREATE TABLE tb_produto (
+    id_produto   int primary key auto_increment not null,
+    id_imagem int,
+    nm_produto VARCHAR(500),
+    vl_preco DECIMAL(10, 2),
+    vl_promocao DECIMAL(10, 2),
+    bt_promocao BOOLEAN,
+    bt_destaque BOOLEAN,
+    bt_disponivel BOOLEAN,
+    ds_detalhes VARCHAR(900),
+    nr_estoque INT,
+    id_designer  int,
+    FOREIGN KEY (id_imagem) REFERENCES tb_produto_imagem(id_imagem),
+    FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer)
+);
+
+-- select * from tb_produto;
+
+-- drop table tb_produto;
+
+-- PRODUTO/IMAGEM (N:N)
+/*CREATE TABLE tb_p_imagem (
+	id_p_img int primary key auto_increment not null,
+    id_produto int  not null,
+    id_imagem int   not null,
+    FOREIGN KEY (id_imagem) REFERENCES tb_produto_imagem(id_imagem),
+    FOREIGN KEY (id_produto) references tb_produto(id_produto)
+   
+    
+);*/
+
+-- PRODUTO/DESIGNER(N:N)
+/*CREATE TABLE tb_p_designer (
+	id_p_des int primary key auto_increment not null,
+    id_produto int  not null,
+    id_designer int   not null,
+    FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer),
+    FOREIGN KEY (id_produto) references tb_produto(id_produto)
+   
+);*/
+
+
+-- PRODUTO/CATEGORIAS (N:N)
+CREATE TABLE tb_p_categorias (
+	id_p_ctg int primary key auto_increment not null,
+    id_produto int,
+    id_categorias int, 
+    FOREIGN KEY (id_categorias) REFERENCES tb_categorias(id_categorias),
+    FOREIGN KEY (id_produto) references tb_produto(id_produto)
+    
+);
+
+-- SELECT * FROM TB_P_CATEGORIAS;
+
+-- PRODUTO/TAMANHO (N:N)
+CREATE TABLE tb_p_tamanho (
+	id_p_tamanho int primary key auto_increment not null,
+    id_produto int,
+    id_tamanho int, 
+	FOREIGN KEY (id_tamanho) REFERENCES tb_produto_tamanho(id_tamanho),
+    FOREIGN KEY (id_produto) references tb_produto(id_produto)
+    
+);
+
+-- SELECT * FROM TB_P_TAMANHO;
+
+-- PRODUTO/CORES (N:N)
+CREATE TABLE tb_p_cores  (
+	id_p_cores int primary key auto_increment not null,
+    id_produto int,
+    id_cores int, 
+    FOREIGN KEY (id_cores) REFERENCES tb_produto_cores(id_cores),
+    FOREIGN KEY (id_produto) references tb_produto(id_produto)
+    
+);
+
+-- SELECT * FROM TB_P_CORES;
+
+-- PRODUTO/TECIDOS (N:N)
+CREATE TABLE tb_p_tecidos (
+	id_p_tecidos int primary key auto_increment not null,
+    id_produto int,
+    id_tecido int, 
+    FOREIGN KEY (id_tecido) REFERENCES tb_produto_tecidos(id_tecido),
+    FOREIGN KEY (id_produto) references tb_produto(id_produto)
+    
+);
+
+-- SELECT * FROM TB_P_TECIDOS;
+
+-- Tabela de Cadastro Cliente
+create table tb_cadastrocliente(
+
+id_cadcliente         int primary key auto_increment not null,
+nm_cliente            varchar(500),
+ds_emailcliente       varchar(200) UNIQUE,
+ds_senhacliente       varchar(100) UNIQUE,
+bt_termos             bool 
+);
+  
+  -- select * from tb_cadastrocliente;
+  
+  select * from tb_cliente
+  inner join tb_generos on tb_generos.id_genero = tb_cliente.id_genero;
+
+-- Tabela de Clientes
+CREATE TABLE tb_cliente (
+    id_cliente INT PRIMARY KEY AUTO_INCREMENT not null,
+    id_cadcliente int not null,
+	ds_cpf VARCHAR(14) UNIQUE,
+    dt_nascimento datetime,
+	id_genero int,
+    ds_num_celular VARCHAR(20),
+
+    FOREIGN KEY (id_cadcliente) REFERENCES tb_cadastrocliente(id_cadcliente),
+    FOREIGN KEY (id_genero) REFERENCES tb_generos(id_genero)
+
+);
+
+
+
+create table tb_enderecos(
+	id_endereco                      int primary key auto_increment not null,
+    ds_endereco                      VARCHAR(200), 
+	ds_cep                           varchar(1000),
+	ds_complemento                   varchar(1000),
+	nr_numero_res                    decimal(5,0)
+);
+
+select * from tb_enderecos;
+
+-- drop table tb_cliente;
+
+
+insert into tb_generos ( nm_genero )
+				values( "Masculino" );
+                
+select * from tb_generos;
+
+CREATE TABLE tb_generos (
+    id_genero INT PRIMARY KEY AUTO_INCREMENT not null,
+    nm_genero VARCHAR(50) UNIQUE
+);
+
+CREATE TABLE tb_entregas (
+    id_entregas INT PRIMARY KEY AUTO_INCREMENT not null,
+    nm_entregas VARCHAR(50) UNIQUE
+);
+
+insert into tb_entregas( nm_entregas )
+values( "Loggi" );
+
+-- Tabela de Administradores
+CREATE TABLE tb_admin (
+    id_admin INT PRIMARY KEY AUTO_INCREMENT not null,
+    ds_email VARCHAR(500) UNIQUE,
+    ds_senha VARCHAR(100) UNIQUE
+);
+
+-- Tabela de Pedidos
+CREATE TABLE tb_pedido (
+    id_pedido INT PRIMARY KEY AUTO_INCREMENT not null,
+    id_cliente INT not null, 
+    nr_itens INT,
+    vl_totalcompra DECIMAL(10, 5),
+    dt_pedido DATE,
+    ds_situacao VARCHAR(300),
+    tp_pagamento VARCHAR(400),
+    nm_cartao VARCHAR(400),
+    nr_cartao VARCHAR(20),
+    dt_validade DATE,
+    nr_cod_seg INT,
+    nr_parcelas INT,
+    ds_previsao_entrega  varchar(500),
+    FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente)
+);
+
+-- drop table tb_pedido;
+
+-- Tabela de Itens de Pedido
+CREATE TABLE tb_pedido_item (
+    id_item INT PRIMARY KEY AUTO_INCREMENT not null,
+    id_produto INT not null, -- Referência a tb_produto
+    id_pedido INT not null, -- Referência a tb_pedido
+    id_cliente INT not null,
+    id_endereco int not null,  -- tabela de enderecos
+	id_entregas int, -- tipo de entrega
+    FOREIGN KEY (id_produto) REFERENCES tb_produto(id_produto),
+    FOREIGN KEY (id_pedido) REFERENCES tb_pedido(id_pedido),
+    FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente),
+    FOREIGN KEY (id_endereco) REFERENCES tb_enderecos(id_endereco),
+	FOREIGN KEY (id_entregas) REFERENCES tb_entregas(id_entregas)
+);
+
+create table tb_favoritos(
+
+id_favorito              int primary key auto_increment,
+id_cliente               int,
+id_produto               int,
+
+foreign key (id_cliente) references tb_cliente(id_cliente),
+foreign key (id_produto) references tb_produto(id_produto)
+
+);
+
+select * from tb_favoritos;
+
+  select * from tb_pedido_item
+  inner join tb_enderecos on tb_enderecos.id_endereco = tb_pedido_item.id_endereco
+  where id_cliente like 1;
+
+-- show tables from atelieregia;
+
+-- drop database atelieregia;

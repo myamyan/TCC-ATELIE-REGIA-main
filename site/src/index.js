@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
-import Rodape from './components/rodape';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Produto from './pages/pagina-produto';
-import Sacola from './pages/sacola';
-import Loginadm from './pages/admlogin';
-import Cadastroproduto from './pages/cadastroproduto';
-import Cadastrocliente from './pages/cadastrocliente';
-import LoginCliente from './pages/logincliente';
-import Homepage from './pages/pagina-inicio';
-import RelatoriosAdm from './pages/relatoriosadm';
-import ConsultaProdutos from './pages/consultapedidos';
-import Detalhespedido from './pages/detalhespedido';
+import Produto from './pages/user/pagina-produto';
+import Sacola from './pages/user/sacola';
+import Loginadm from './pages/adm/admlogin';
+import Cadastroproduto from './pages/adm/cadastroproduto';
+import Cadastrocliente from './pages/user/cadastrocliente';
+import LoginCliente from './pages/user/logincliente';
+import Homepage from './pages/user/pagina-inicio';
+import RelatoriosAdm from './pages/adm/relatoriosadm';
+import ConsultaProdutos from './pages/adm/consultapedidos';
+import Detalhespedido from './pages/user/detalhespedido';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
