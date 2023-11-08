@@ -1,0 +1,387 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+.tudo-cadastroproduto {
+    display: flex;
+    flex-direction: column;
+
+    .escrever {
+        padding: 30px 30px;
+    }
+
+    .escrever>a {
+        padding: 0px 28px;
+        font-size: 15px;
+    }
+
+    .escrever>h1 {
+        margin: 20px 1px 0px 28px;
+        font-size: 20px;
+    }
+
+    .input-css {
+        background-color: #f4f1e9;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 20px;
+        text-align: center;
+        display: flex;
+        border: none;
+        width: 417px;
+        height: 450px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+
+        .input-css> {
+            margin-left: 10px;
+            font-family: Montserrat;
+            font-size: 17px;
+            font-weight: 600;
+            line-height: normal;
+        }
+    }
+
+    .input-orisontal1 {
+        display: flex;
+        flex-direction: row;
+        padding: 30px 60px;
+    }
+
+    .direita-cadastroproduto-quadrado {
+        margin-right: 60px;
+    }
+
+    .escrita-quadrado {
+        .input-css {
+            outline: none;
+            font-size: 25px;
+        }
+    }
+
+    .adicionar {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .input-detalhes>h1 {
+        text-align: start;
+        font-size: 20px;
+    }
+
+    .input-nome>label {
+        margin-left: 10px;
+        font-family: Montserrat;
+        font-size: 17px;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .input-detalhes {
+        margin-top: 15px;
+    }
+
+    .input-nome1 {
+        background-color: #f4f1e9;
+        border-radius: 18px;
+        font-size: 15px;
+        margin: 9px 8px;
+        display: flex;
+        border: none;
+        padding: 15px;
+        height: 39px;
+        width: 87vh;
+        border-radius: 10px;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+        font-weight: bolder;
+        outline: none;
+    }
+
+    .input-nome2 {
+        background-color: #f4f1e9;
+        border-radius: 18px;
+        font-size: 15px;
+        margin: 9px 8px;
+        display: flex;
+        border: none;
+        padding: 15px;
+        height: 70px;
+        width: 87vh;
+        border-radius: 10px;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+        font-weight: bolder;
+        outline: none;
+    }
+
+    .input-detalhes>label {
+        margin-left: 10px;
+        font-family: Montserrat;
+        font-size: 17px;
+        font-weight: 600;
+        line-height: normal;
+
+    }
+
+    // .input-detalhes2 {
+    //     display: content;
+    //     flex-direction: column;
+    // }
+
+    .inputs2 {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+
+    }
+
+    .inputs3 {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+
+    }
+
+    .input-designer {
+        font-size: 12px;
+        margin-right: 19px;
+        width: 160px;
+    }
+
+    .input-designer>label {
+        font-family: Montserrat;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-top: 5px;
+        margin: 0px 4px;
+    }
+
+    .input-designer>select {
+        padding: 0px 10px;
+        border: none;
+        background-color: #f4f1e9;
+        height: 40px;
+        width: 160px;
+        border-radius: 15px;
+        margin-top: 6px;
+        box-shadow: 4px 3px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .input-designer>button {
+        background-color: transparent;
+        border: none;
+        margin-bottom: 40px;
+        margin-left: 10px;
+    }
+
+    .input-categoria {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        margin-right: 19px;
+        width: 160px;
+
+        >button {
+            background-color: transparent;
+            border: none;
+            margin-bottom: 40px;
+        }
+    }
+
+    .input-categoria>label {
+        font-family: Montserrat;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-top: 5px;
+        margin: 0px 4px;
+    }
+
+    .input-categoria>select {
+        padding: 0px 10px;
+        border: none;
+        background-color: #f4f1e9;
+        height: 40px;
+        border-radius: 15px;
+        margin-top: 6px;
+        box-shadow: 4px 3px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .input-estoque {
+
+        font-size: 12px;
+        margin-right: 19px;
+        width: 1px;
+
+
+        >label {
+            font-family: Montserrat;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin-top: 5px;
+            margin: 0px 5px;
+        }
+    }
+
+    .input-estoque>input {
+        padding: 0px 10px;
+        border: none;
+        background-color: #f4f1e9;
+        height: 40px;
+        width: 180px;
+        border-radius: 15px;
+        margin-top: 6px;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    .valores {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.cor {
+    font-size: 12px;
+    margin-right: 19px;
+    width: 160px;
+}
+
+.cor >label {
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 5px;
+    margin: 0px 6px;
+}
+
+.custom-select1 {
+    padding: 0px 10px;
+    border: none;
+    background-color: #f4f1e9;
+    height: 40px;
+    width: 25vh;
+    border-radius: 15px;
+    box-shadow: 4px 3px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+.cor >button {
+    background-color: transparent;
+    border: none;
+    margin-bottom: 40px;
+}
+
+.tecido {
+    font-size: 12px;
+    margin-right: 19px;
+    width: 160px;
+}
+
+.tecido >label {
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 5px;
+    margin: 0px 5px;
+}
+
+.custom-select5 {
+    padding: 0px 10px;
+    border: none;
+    background-color: #f4f1e9;
+    height: 40px;
+    width: 25vh;
+    border-radius: 15px;
+    box-shadow: 4px 3px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+.tecido>button {
+    background-color: transparent;
+    border: none;
+    margin-bottom: 40px;
+}
+
+
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 70px 100px;
+
+}
+
+.tamanho {
+    font-size: 12px;
+    margin-right: 19px;
+    width: 160px;
+
+    .button-designer {
+        background-color: transparent;
+        border: none;
+        margin-bottom: 40px;
+    }
+
+    .custom-select6 {
+        padding: 0px 10px;
+        border: none;
+        background-color: #f4f1e9;
+        height: 40px;
+        width: 19vh;
+        border-radius: 15px;
+        box-shadow: 4px 3px 5px rgba(0, 0, 0, 0.2);
+    }
+
+}
+
+.tamanho>label {
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 88px;
+    margin: 0px 5px;
+}
+
+.input4{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.valor-prduto{
+    font-size: 12px;
+    margin-right: 19px;
+    width: 160px;
+}
+
+.valor-prduto > label{
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 88px;
+    margin: 0px 5px;
+}
+
+.valor-prduto> input{
+    padding: 0px 10px;
+    border: none;
+    background-color: #f4f1e9;
+    height: 40px;
+    width: 180px;
+    border-radius: 15px;
+    margin-top: 6px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
