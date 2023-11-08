@@ -1,8 +1,5 @@
 import './index.scss';
 
-import Cabecalhoadm from '../../../components/cabecalhoadm';
-import Rodape from '../../../components/rodape';
-
 export default function Cadastroproduto() {
 
 
@@ -145,17 +142,18 @@ export default function Cadastroproduto() {
                     </div>
 
                 </div>
+      
             </div>
-            <div className="linha-produto"></div>
+
+            <hr></hr>
 
             <div className="botoes-produto">
 
-                <button> DELETAR </button>
+                <button id="branco"> DELETAR </button>
 
-                <button> SALVAR </button>
+                <button id="preto"> SALVAR </button>
 
             </div>
-
         </div>
 
 
