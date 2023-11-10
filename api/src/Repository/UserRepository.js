@@ -374,3 +374,21 @@ export async function ConsultarFavoritos(id){
   return linhas;
 
 }
+
+
+export async function CadastroFinalCompra( idProduto, idPedido, idCliente, idEndereco, idEntregas ){
+
+
+  const comando = `
+  
+      insert into tb_pedido_item ( id_produto, id_pedido, id_cliente, id_endereco, id_entregas )
+                            values( ?, ?, ?, ?, ? )
+  
+  `
+
+  const [linhas] = await con.query(comando, [ idProduto, idPedido, idCliente, idEndereco, idEntregas ]);
+
+
+  return
+
+}

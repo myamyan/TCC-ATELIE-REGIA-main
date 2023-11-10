@@ -45,6 +45,7 @@ export async function CadastrarProduto(produto) {
         `insert into tb_produto (id_imagem, nm_produto, vl_preco, vl_promocao, bt_promocao, bt_destaque, bt_disponivel, ds_detalhes, nr_estoque, id_designer )
                                 values(?, ?, ?, ?, ?, ?, ?, ?, ?, ? );`
 
+                                
     const [resposta] = await con.query(comando, [ produto.idimagem, produto.nome, produto.preco, produto.promocao, produto.promocaobool, produto.destaquebool, produto.disponivelbool, produto.detalhes, produto.estoque, produto.iddesigner ]);
     produto.id = resposta.insertId;
 
