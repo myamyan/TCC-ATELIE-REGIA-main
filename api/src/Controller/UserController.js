@@ -1,4 +1,4 @@
-import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, FiltroPorValor, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, ConsultarEnderecos, CadastrarFavorito, ConsultarFavoritos  } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, ConsultarEnderecos, CadastrarFavorito, ConsultarFavoritos  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
@@ -247,23 +247,23 @@ server.get('/user/filtro/tamanho', async (req, resp) => {
 })
 
 
-server.get('/user/filtro/valor', async (req, resp) => {
+// server.get('/user/filtro/valor', async (req, resp) => {
 
-    try {
+//     try {
 
-        const { valor } = req.query;
+//         const { valor } = req.query;
 
-        const produtoporvalor = await FiltroPorValor( valor );
+//         const produtoporvalor = await FiltroPorValor( valor );
 
-        resp.send(produtoporvalor);
+//         resp.send(produtoporvalor);
 
 
-    } catch (err) {
-        resp.status(400).send({
-            erro: err.message
-        })
-    }
-})
+//     } catch (err) {
+//         resp.status(400).send({
+//             erro: err.message
+//         })
+//     }
+// })
 
 
 

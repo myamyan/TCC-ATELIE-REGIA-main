@@ -72,11 +72,11 @@ export async function CadastroPedido(pedido) {
   const comando = `
 
   insert into tb_pedido ( id_cliente, nr_itens, vl_totalcompra, dt_pedido, ds_situacao, tp_pagamento, nm_cartao, nr_cartao, dt_validade, nr_cod_seg, nr_parcelas, ds_previsao_entrega )
-      values( ?, ?, ?, now(), ?, ?, ?, ?, ?, ?, ?, ? );
+      values( ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ? );
 
   `
 
-  const [resposta] = await con.query(comando, [pedido.idcliente, pedido.numeroitens, pedido.vltotal, pedido.data, pedido.situacao, pedido.tppagamento, pedido.nomecartao, pedido.nrcartao, pedido.dtvalidade, pedido.nrcodseguranca, pedido.parcelas, pedido.entrega]);
+  const [resposta] = await con.query(comando, [pedido.idcliente, pedido.numeroitens, pedido.vltotal, pedido.situacao, pedido.tppagamento, pedido.nomecartao, pedido.nrcartao, pedido.dtvalidade, pedido.nrcodseguranca, pedido.parcelas, pedido.entrega]);
 
   pedido.id = resposta.insertId;
 
@@ -219,21 +219,21 @@ export async function FiltroPorTamanho(tamanho) {
 
 
 
-export async function FiltroPorValor( valornormal, valorpromocional ) {
+// export async function FiltroPorValor( valornormal, valorpromocional ) {
 
-  const comando = `  
+//   const comando = `  
 
-    select * from tb_produto 
+//     select * from tb_produto 
 
-    where vl_preco or vl_promocao between ? or ?;
+//     where vl_preco or vl_promocao between ? or ?;
 
-    `
+//     `
 
-  const [linhas] = await con.query(comando, [ valornormal, valorpromocional ]);
+//   const [linhas] = await con.query(comando, [ valornormal, valorpromocional ]);
 
-  return linhas[0];
+//   return linhas[0];
 
-}
+// }
 
 
 
