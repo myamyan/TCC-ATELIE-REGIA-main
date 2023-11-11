@@ -59,10 +59,10 @@ server.post('/adm/inserirloginadm', async (req, resp) => {
     try {
         const loginadmparainserir = req.body;
 
-        const emailinserido = await inserirLoginadm(loginadmparainserir);
+        const emailinserido = await inserirLoginadm(loginadmparainserir.email);
 
         const loginadminserido = [];
-        loginadminserido.push(loginadmparainserir.email);
+        loginadminserido.push(loginadmparainserir);
 
         resp.send(loginadminserido);
     } catch (err) {
@@ -202,7 +202,7 @@ server.put('/adm/produto/alterar/:id', async (req, resp) => {
         const produto = req.body;
 
 
-        const resposta = await AlterarProduto(id, produto);
+        const resposta = await AlterarProduto(  produto, id );
 
         resp.status(204).send();
 

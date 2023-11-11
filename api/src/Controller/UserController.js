@@ -102,7 +102,7 @@ server.post('/user/cadastro/usuario', async (req, resp) => {
 
 
 
-server.get('/user/consulta/pedido/:id', async (req, resp) => {
+server.get('/user/consulta/pedido', async (req, resp) => {
 
   try {
 
@@ -159,9 +159,9 @@ server.get('/user/filtro/categoria', async (req, resp) => {
 
   try {
 
-      const { categoria } = req.query;
+      const { id } = req.query;
 
-      const produtoporcategoria = await FiltroPorCategoria(categoria);
+      const produtoporcategoria = await FiltroPorCategoria(id);
 
       resp.send(produtoporcategoria);
 
@@ -177,9 +177,9 @@ server.get('/user/filtro/tecido', async (req, resp) => {
 
   try {
 
-      const { tecido } = req.query;
+      const { id } = req.query;
 
-      const produtoportecido = await FiltroPorTecido(tecido);
+      const produtoportecido = await FiltroPorTecido(id);
 
       resp.send(produtoportecido);
 
@@ -196,9 +196,9 @@ server.get('/user/filtro/designer', async (req, resp) => {
 
   try {
 
-      const { designer } = req.query;
+      const { id } = req.query;
 
-      const produtopordesigner = await FiltroPorDesigner(designer);
+      const produtopordesigner = await FiltroPorDesigner(id);
 
       resp.send(produtopordesigner);
 
@@ -216,9 +216,9 @@ server.get('/user/filtro/cor', async (req, resp) => {
 
   try {
 
-      const { cor } = req.query;
+      const { id } = req.query;
 
-      const produtoporcor = await FiltroPorCor(cor);
+      const produtoporcor = await FiltroPorCor(id);
 
       resp.send(produtoporcor);
 
@@ -233,9 +233,9 @@ server.get('/user/filtro/tamanho', async (req, resp) => {
 
   try {
 
-      const { tamanho } = req.query;
+      const { id } = req.query;
 
-      const produtoportamanho = await FiltroPorTamanho(tamanho);
+      const produtoportamanho = await FiltroPorTamanho(id);
 
       resp.send(produtoportamanho);
 

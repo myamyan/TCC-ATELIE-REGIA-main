@@ -159,11 +159,11 @@ export default function Produto() {
               <div class="produto-pair">
                 {produtos.map(produto => 
                     <div class="produto">
-                    {/* <img
+                    <img
                       id="imagem-produto"
-                    //   src={produto.id_imagem}
+                      src={produto.img_link}
                       alt=""
-                    /> */}
+                    />
                     <h3 id="fixado">COMPRAR</h3>
                     <h1 id="nome-produto" className="nome-produto">
                       {produto.nm_produto}

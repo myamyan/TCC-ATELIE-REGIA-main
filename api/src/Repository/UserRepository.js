@@ -61,7 +61,7 @@ export async function CadastroInformacoesPessoais(infop) {
 
   infop.id =  resposta.insertId;
 
-  return resposta;
+  return infop;
 
 }
 
@@ -92,7 +92,7 @@ export async function ConsultaPedido(id) {
 
   const comando = `
   
-  select * from tb_pedido where id_cliente like ?
+  select * from tb_pedido where id_cliente like ?;
 
   `
 
@@ -136,24 +136,24 @@ export async function ConsultaPorNome(nome) {
 }
 
 
-export async function FiltroPorCategoria(categoria) {
+export async function FiltroPorCategoria(id) {
 
   const comando = `  
   
   select * from tb_p_categorias 
   inner join tb_produto on tb_produto.id_produto = tb_p_categorias.id_produto 
-  where id_categorias like ?
+  where id_categorias like ?;
 
   `
 
-  const [linhas] = await con.query(comando, [`%${categoria}%`]);
+  const [linhas] = await con.query(comando, [id]);
 
   return linhas;
 
 }
 
 
-export async function FiltroPorTecido(tecido) {
+export async function FiltroPorTecido(id) {
 
   const comando = `  
   
@@ -163,13 +163,13 @@ export async function FiltroPorTecido(tecido) {
 
   `
 
-  const [linhas] = await con.query(comando, [`${tecido}`]);
+  const [linhas] = await con.query(comando, [id]);
 
   return linhas;
 
 }
 
-export async function FiltroPorDesigner(designer) {
+export async function FiltroPorDesigner(id) {
 
   const comando = `  
   
@@ -179,13 +179,13 @@ export async function FiltroPorDesigner(designer) {
 
   `
 
-  const [linhas] = await con.query(comando, [`${designer}`]);
+  const [linhas] = await con.query(comando, [id]);
 
   return linhas;
 
 }
 
-export async function FiltroPorCor(cor) {
+export async function FiltroPorCor(id) {
 
   const comando = `  
   
@@ -195,13 +195,13 @@ export async function FiltroPorCor(cor) {
 
   `
 
-  const [linhas] = await con.query(comando, [`${cor}`]);
+  const [linhas] = await con.query(comando, [id]);
 
   return linhas;
 
 }
 
-export async function FiltroPorTamanho(tamanho) {
+export async function FiltroPorTamanho(id) {
 
   const comando = `  
   
@@ -211,7 +211,7 @@ export async function FiltroPorTamanho(tamanho) {
 
   `
 
-  const [linhas] = await con.query(comando, [`${tamanho}`]);
+  const [linhas] = await con.query(comando, [id]);
 
   return linhas;
 
@@ -307,6 +307,24 @@ export async function CadastroInfoEntrega(pedidoend) {
 }
 
 
+export async function CadastroFinalCompra( idProduto, idPedido, idCliente, idEndereco, idEntregas ){
+
+
+  const comando = `
+  
+      insert into tb_pedido_item ( id_produto, id_pedido, id_cliente, id_endereco, id_entregas )
+                            values( ?, ?, ?, ?, ? )
+  
+  `
+
+  const [linhas] = await con.query(comando, [ idProduto, idPedido, idCliente, idEndereco, idEntregas ]);
+
+
+  return
+
+}
+
+
 
 export async function ItensPedido(id) {
 
@@ -376,19 +394,3 @@ export async function ConsultarFavoritos(id){
 }
 
 
-export async function CadastroFinalCompra( idProduto, idPedido, idCliente, idEndereco, idEntregas ){
-
-
-  const comando = `
-  
-      insert into tb_pedido_item ( id_produto, id_pedido, id_cliente, id_endereco, id_entregas )
-                            values( ?, ?, ?, ?, ? )
-  
-  `
-
-  const [linhas] = await con.query(comando, [ idProduto, idPedido, idCliente, idEndereco, idEntregas ]);
-
-
-  return
-
-}

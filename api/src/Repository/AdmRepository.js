@@ -5,7 +5,7 @@ export async function inserirLoginadm(loginadm) {
 
     const comando =
 
-        `INSERT INTO tb_admin ( ds_email, ds_senha   )
+        `INSERT INTO tb_admin ( ds_email, ds_senha )
             values( ?, ? ) `;
 
     const [resposta] = await con.query(comando, [loginadm.email, loginadm.senha]);
@@ -86,7 +86,7 @@ export async function AlterarProduto(id, produto) {
             
             WHERE id_produto        = ?`
 
-    const [resposta] = await con.query(comando, [produto.nome, produto.idimagem, produto.valor, produto.valorpromo, produto.promocaobool, produto.destaquebool, produto.disponivelbool, produto.detalhes, produto.estoque, produto.iddesigner, produto.idcategorias, id]);
+    const [resposta] = await con.query(comando, [ produto.nome, produto.idimagem, produto.valor, produto.valorpromo, produto.promocaobool, produto.destaquebool, produto.disponivelbool, produto.detalhes, produto.estoque, produto.iddesigner, produto.idcategorias, id]);
 
     return resposta.affectedRows;
 }
