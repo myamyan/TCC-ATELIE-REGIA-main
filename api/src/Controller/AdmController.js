@@ -202,7 +202,7 @@ server.put('/adm/produto/alterar/:id', async (req, resp) => {
         const produto = req.body;
 
 
-        const resposta = await AlterarProduto(  produto, id );
+        const resposta = await AlterarProduto(  id, produto );
 
         resp.status(204).send();
 

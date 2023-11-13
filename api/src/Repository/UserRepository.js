@@ -57,9 +57,9 @@ export async function CadastroInformacoesPessoais(infop) {
 
   `
 
-  const [resposta] = await con.query(comando, [infop.idcadastro, infop.datanasc, infop.cpf, infop.idgenero, infop.numcel ])
+  const [resposta] = await con.query(comando, [infop.idcadastro, infop.datanasc, infop.cpf, infop.idgenero, infop.numcel])
 
-  infop.id =  resposta.insertId;
+  infop.id = resposta.insertId;
 
   return infop;
 
@@ -307,7 +307,7 @@ export async function CadastroInfoEntrega(pedidoend) {
 }
 
 
-export async function CadastroFinalCompra( idProduto, idPedido, idCliente, idEndereco, idEntregas ){
+export async function CadastroFinalCompra(id) {
 
 
   const comando = `
@@ -317,10 +317,62 @@ export async function CadastroFinalCompra( idProduto, idPedido, idCliente, idEnd
   
   `
 
-  const [linhas] = await con.query(comando, [ idProduto, idPedido, idCliente, idEndereco, idEntregas ]);
+  const [linhas] = await con.query(comando, [id.produto, id.pedido, id.cliente, id.endereco, id.entregas]);
+
+  id.id = linhas.insertId;
+
+  return id;
+
+}
+
+  export async function UpdateFinalCompraPedido(id, idF) {
+
+    const comando = `
+
+      update tb_pedido_item
+      set id_pedido  = ?
+      where id_item = ?
+
+`
+
+    const [linhas] = await con.query(comando, [idF.pedido, id]);
+
+    linhas.affectedRows;
+
+}
 
 
-  return
+export async function UpdateFinalCompraProduto(id, idF) {
+
+  const comando = `
+
+    update tb_pedido_item
+    set id_produto  = ?
+    where id_item = ?
+
+`
+
+  const [linhas] = await con.query(comando, [idF.produto, id]);
+
+  linhas.affectedRows;
+
+}
+
+
+export async function UpdateFinalCompraEntrega(id, idF) {
+
+  const comando = `
+
+    update tb_pedido_item
+    set id_endereco  = ?,
+        id_entregas = ?
+    where id_item = ?
+
+`
+
+  const [linhas] = await con.query(comando, [idF.endereco, idF.entrega, id]);
+
+  linhas.affectedRows;
 
 }
 
@@ -345,7 +397,7 @@ export async function ItensPedido(id) {
 
 
 
-export async function ConsultarEnderecos(id){
+export async function ConsultarEnderecos(id) {
 
   const comando = ` 
 
@@ -361,7 +413,7 @@ export async function ConsultarEnderecos(id){
 
 }
 
-export async function CadastrarFavorito(favorito){
+export async function CadastrarFavorito(favorito) {
 
   const comando = `
   
@@ -378,11 +430,12 @@ export async function CadastrarFavorito(favorito){
 }
 
 
-export async function ConsultarFavoritos(id){
+export async function ConsultarFavoritos(id) {
 
   const comando = `
   
-  select * from tb_favoritos;
+  select * from tb_favoritos
+  inner join tb_cliente on tb_cliente.id_cliente = tb_favoritos.id_cliente;
   
   `
 

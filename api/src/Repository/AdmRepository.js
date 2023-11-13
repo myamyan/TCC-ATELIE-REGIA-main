@@ -84,9 +84,9 @@ export async function AlterarProduto(id, produto) {
             nr_estoque              = ?,
             id_designer             = ?
             
-            WHERE id_produto        = ?`
+            where id_produto        = ?`
 
-    const [resposta] = await con.query(comando, [ produto.nome, produto.idimagem, produto.valor, produto.valorpromo, produto.promocaobool, produto.destaquebool, produto.disponivelbool, produto.detalhes, produto.estoque, produto.iddesigner, produto.idcategorias, id]);
+    const [resposta] = await con.query(comando, [  produto.idimagem, produto.nome, produto.preco, produto.promocao, produto.promocaobool, produto.destaquebool, produto.disponivelbool, produto.detalhes, produto.estoque, produto.iddesigner, id]);
 
     return resposta.affectedRows;
 }
@@ -117,7 +117,7 @@ export async function inserircategorias(categoria) {
 
 export async function inserirtecidos(tecidos) {
     const comando = `
-    insert into tb_produto_tecidos(ds_tipo)
+    insert into tb_tecidos(ds_tipo)
 	values( ? );`
 
     const [resposta] = await con.query(comando, [tecidos.tipo]);
@@ -140,7 +140,7 @@ export async function inserirdesigner(designer) {
 
 export async function inserircores(cores) {
     const comando = `
-    insert into tb_produto_cores (ds_hexa_decimal)
+    insert into tb_cores (ds_hexa_decimal)
 	values( ? );
     `
 
@@ -152,7 +152,7 @@ export async function inserircores(cores) {
 
 export async function inserirtamanho(tamanho) {
     const comando = `
-    insert into tb_produto_tamanho (ds_tamanho)
+    insert into tb_tamanho (ds_tamanho)
 	values( ? );
     `
 
@@ -257,7 +257,7 @@ export async function BuscarTodosPedidos() {
 
     const comando = `
     
-    select * from tb_pedido_item inner join tb_pedido on tb_pedido.dt_pedido = tb_pedido_item.dt_pedido;
+    select * from tb_pedido_item;
 
     `
 
@@ -271,7 +271,9 @@ export async function BuscarPedidosAndamento() {
 
     const comando = `
     
-        select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido where ds_situacao like "andamento"
+        select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido
+        where ds_situacao like "Em andamento"
+        ;
 
     `
 
@@ -306,7 +308,7 @@ export async function FiltroPorMaisNovo() {
 
     const comando = `
     
-    select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido asc; 
+    select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido ASC; 
 
     `
 
@@ -321,7 +323,7 @@ export async function FiltroPorMaisAntigo() {
 
     const comando = `
     
-    select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido desc; 
+    select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido DESC; 
 
     `
 
@@ -538,6 +540,53 @@ export async function FiltroPorDisponivelAdm(disponivel) {
     `
 
     const [linhas] = await con.query(comando, [disponivel]);
+
+    return linhas;
+
+}
+
+
+export async function FiltroGeralPedidos(){
+
+
+    const comando = `
+    
+    select * from tb_pedido_item;
+
+    `
+
+    const [linhas] = await con.query(comando);
+
+    return linhas;
+
+}
+
+export async function FiltroPedidosEmAndamento(){
+
+    const comando = `
+    
+    select * from tb_pedido_item
+    where ds_situacao like "Em andamento";
+
+    `
+
+    const [linhas] = await con.query(comando);
+
+    return linhas;
+
+}
+
+
+export async function FiltroPedidosAprovados(){
+
+    const comando = `
+    
+    select * from tb_pedido_item
+    where ds_situacao like "Aprovado";
+
+    `
+
+    const [linhas] = await con.query(comando);
 
     return linhas;
 

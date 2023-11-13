@@ -1,4 +1,4 @@
-import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, ConsultarEnderecos, CadastrarFavorito, ConsultarFavoritos  } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, ConsultarEnderecos, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
@@ -337,6 +337,94 @@ server.post('/user/cadastro/informacoes-entrega', async (req, resp) => {
   }
 });
 
+
+server.post('/user/cadastro-final', async(req, resp) =>{
+
+  try {
+
+    const infoFinalParaCadastrar = req.body;
+
+    const infoFinalCadastrada = await CadastroFinalCompra(infoFinalParaCadastrar);
+
+    resp.send(infoFinalCadastrada);
+    
+  } catch (err) {
+    resp.status(400).send({
+    erro: err.message
+  });
+  }
+
+});
+
+
+server.put('/user/cadastro-final/update/pedido/:id', async(req,resp) =>{
+
+try {
+
+  const { id } = req.params;
+  const idF = req.body;
+
+  const resposta = await UpdateFinalCompraPedido( id, idF );
+
+  resp.status(204).send()
+
+} catch (err) {
+  
+  resp.status(400).send({
+
+    erro: err.message
+
+  });
+
+}
+
+})
+
+server.put('/user/cadastro-final/update/produto/:id', async(req,resp) =>{
+
+  try {
+  
+    const { id } = req.params;
+    const idF = req.body;
+  
+    const resposta = await UpdateFinalCompraProduto( id, idF );
+  
+    resp.status(204).send()
+  
+  } catch (err) {
+    
+    resp.status(400).send({
+  
+      erro: err.message
+  
+    });
+  
+  }
+  
+  })
+
+  server.put('/user/cadastro-final/update/entrega/:id', async(req,resp) =>{
+
+    try {
+    
+      const { id } = req.params;
+      const idF = req.body;
+    
+      const resposta = await UpdateFinalCompraEntrega( id, idF );
+    
+      resp.status(204).send()
+    
+    } catch (err) {
+      
+      resp.status(400).send({
+    
+        erro: err.message
+    
+      });
+    
+    }
+    
+    })
 
 
 server.get('/user/consulta/itens-pedido', async (req, resp) => {
