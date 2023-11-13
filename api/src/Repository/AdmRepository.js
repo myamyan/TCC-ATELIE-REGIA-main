@@ -591,3 +591,101 @@ export async function FiltroPedidosAprovados(){
     return linhas;
 
 }
+
+export async function ExcluirImagem( id ){
+
+    const comando = `
+    
+        delete from tb_produto_imagem
+        where id_imagem = ?;
+
+    `
+
+    const [resposta] = await con.query(comando, [ id ]);
+
+    return resposta.affectedRows;
+
+}
+
+export async function DesassociarCategoriaProduto( id ){
+
+    const comando = `
+    
+    delete from tb_p_categorias
+    where id_produto= ?;
+
+`
+
+const [resposta] = await con.query(comando, [ id ]);
+
+return resposta.affectedRows;
+
+}
+
+
+
+export async function DesassociarTamanhoProduto( id ){
+
+    const comando = `
+    
+    delete from tb_p_tamanho
+    where id_produto= ?;
+
+`
+
+const [resposta] = await con.query(comando, [ id ]);
+
+return resposta.affectedRows;
+
+}
+
+
+export async function DesassociarCoresProduto( id ){
+
+    const comando = `
+    
+    delete from tb_p_cores
+    where id_produto= ?;
+
+`
+
+const [resposta] = await con.query(comando, [ id ]);
+
+return resposta.affectedRows;
+
+}
+
+
+
+export async function DesassociarTecidosProduto( id ){
+
+    const comando = `
+    
+    delete from tb_p_tecidos
+    where id_produto= ?;
+
+`
+
+const [resposta] = await con.query(comando, [ id ]);
+
+return resposta.affectedRows;
+
+}
+
+
+export async function ConsultarImagem( id ){
+
+
+    const comando = `
+    
+        select img_link from tb_produto 
+        inner join tb_produto_imagem on tb_produto_imagem.id_imagem = tb_produto.id_imagem
+        where id_produto = ?
+
+    `
+
+    const [ linhas ] = await con.query(comando, [ id ]);
+
+    return linhas;
+
+}

@@ -24,6 +24,9 @@ CREATE TABLE tb_designer (
 	nm_designer VARCHAR(400)
 );
 
+insert into tb_designer ( nm_designer )
+values ("Flávia Aranha");
+
 select * from tb_designer;
 
 -- Tabela de Cores de Produto
@@ -71,27 +74,6 @@ CREATE TABLE tb_produto (
 select * from tb_produto;
 
 -- drop table tb_produto;
-
--- PRODUTO/IMAGEM (N:N)
-/*CREATE TABLE tb_p_imagem (
-	id_p_img int primary key auto_increment not null,
-    id_produto int  not null,
-    id_imagem int   not null,
-    FOREIGN KEY (id_imagem) REFERENCES tb_produto_imagem(id_imagem),
-    FOREIGN KEY (id_produto) references tb_produto(id_produto)
-   
-    
-);*/
-
--- PRODUTO/DESIGNER(N:N)
-/*CREATE TABLE tb_p_designer (
-	id_p_des int primary key auto_increment not null,
-    id_produto int  not null,
-    id_designer int   not null,
-    FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer),
-    FOREIGN KEY (id_produto) references tb_produto(id_produto)
-   
-);*/
 
 
 -- PRODUTO/CATEGORIAS (N:N)
@@ -281,3 +263,4 @@ foreign key (id_produto) references tb_produto(id_produto)
 -- show tables from atelieregia;
 
 -- drop database atelieregia;
+.
