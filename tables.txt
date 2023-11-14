@@ -263,4 +263,3 @@ foreign key (id_produto) references tb_produto(id_produto)
 -- show tables from atelieregia;
 
 -- drop database atelieregia;
-.
