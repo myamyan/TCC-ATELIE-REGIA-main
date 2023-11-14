@@ -680,12 +680,29 @@ export async function ConsultarImagem( id ){
     
         select img_link from tb_produto 
         inner join tb_produto_imagem on tb_produto_imagem.id_imagem = tb_produto.id_imagem
-        where id_produto = ?
+        where id_produto = ?;
 
     `
 
     const [ linhas ] = await con.query(comando, [ id ]);
 
     return linhas;
+
+}
+
+
+export async function ExcluirPedido( id ){
+
+
+    const comando = `
+    
+        delete from tb_pedido_item 
+        where id_produto = ?;
+
+    `
+
+    const [linhas] = await con.query(comando, [ id ]);
+
+    return linhas.affectedRows;
 
 }

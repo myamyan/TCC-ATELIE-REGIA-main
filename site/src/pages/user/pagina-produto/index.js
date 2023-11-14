@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // import CarrosselDeImagens from "../../components/carrosel";
 
 import { ConsultarProdutos } from "../../../api/consultaprodutos";
+import { ConsultarImagens } from "../../../../../api/src/Repository/AdmRepository";
 
 export default function Produto() {
   //   const images = [
@@ -12,16 +13,22 @@ export default function Produto() {
   //   ];
 
   const [ produtos, setProdutos ] = useState([]);
+  const [ imagens, setImagens ] = useState([]);
 
   async function buscar() {
     let prod = await ConsultarProdutos();
 
     setProdutos(prod);
+
+    let imagem = await ConsultarImagens(id)
+
+    setImagens(imagem)
   }
 
   useEffect(() => {
 
     buscar();
+
 
   }, [])
 
@@ -163,6 +170,9 @@ export default function Produto() {
                       id="imagem-produto"
                       src={produto.img_link}
                       alt=""
+
+                      id={produto.id}
+
                     />
                     <h3 id="fixado">COMPRAR</h3>
                     <h1 id="nome-produto" className="nome-produto">
