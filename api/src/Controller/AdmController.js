@@ -1,6 +1,6 @@
 
 
-import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisNovo, FiltroPorMaisAntigo, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto, DesassociarCategoriaProduto, ExcluirImagem, DesassociarTamanhoProduto, DesassociarCoresProduto, DesassociarTecidosProduto, ConsultarImagem, ExcluirPedido } from '../Repository/AdmRepository.js';
+import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisNovo, FiltroPorMaisAntigo, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto, DesassociarCategoriaProduto, ExcluirImagem, DesassociarTamanhoProduto, DesassociarCoresProduto, DesassociarTecidosProduto, ConsultarImagem, ExcluirPedido, AssociarImagemProduto } from '../Repository/AdmRepository.js';
 
 import multer from 'multer';
 import { Router } from "express"
@@ -94,6 +94,44 @@ server.post('/adm/cadastro/produto', async (req, resp) => {
         });
     }
 });
+
+
+
+server.put('/adm/produto/alterar/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
+        const produto = req.body;
+
+
+        const resposta = await AlterarProduto(  id, produto );
+
+        resp.status(204).send();
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+
+
+})
+
+
+
+server.delete('/adm/produto/deletar/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
+
+        const resposta = await DeletarProduto(id);
+
+        resp.status(204).send();
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
 
 
 server.post('/adm/cadastro/categoria', async (req, resp) => {
@@ -196,40 +234,6 @@ server.post('/adm/cadastro/tamanho', async (req, resp) => {
 });
 
 
-server.put('/adm/produto/alterar/:id', async (req, resp) => {
-    try {
-        const { id } = req.params;
-        const produto = req.body;
-
-
-        const resposta = await AlterarProduto(  id, produto );
-
-        resp.status(204).send();
-
-    } catch (err) {
-        resp.status(400).send({
-            erro: err.message
-        })
-    }
-
-
-})
-
-
-
-server.delete('/adm/produto/deletar/:id', async (req, resp) => {
-    try {
-        const { id } = req.params;
-
-        const resposta = await DeletarProduto(id);
-
-        resp.status(204).send();
-    } catch (err) {
-        resp.status(400).send({
-            erro: err.message
-        })
-    }
-})
 
 
 
@@ -257,6 +261,27 @@ server.post('/adm/cadastro/produto/imagem', upload.single('imagem'), async (req,
     }
 }
 )
+
+
+server.post('/adm/associacao/imagem-produto', async (req, resp) => {
+
+    try {
+
+
+        const imagemParaAssociar = req.body;
+
+        const imagemAssociada = await AssociarImagemProduto(imagemParaAssociar);
+
+        resp.send(imagemAssociada);
+
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
 
 
 server.post('/adm/associacao/categoria-produto', async (req, resp) => {
@@ -389,7 +414,7 @@ server.get('/adm/consulta/pedidos-concluidos', async (req, resp) => {
 })
 
 
-server.get('/adm/consulta/produtos-mais-novos', async (req, resp) => {
+server.get('/adm/consulta/pedidos-mais-novos', async (req, resp) => {
 
     try {
 
@@ -405,7 +430,7 @@ server.get('/adm/consulta/produtos-mais-novos', async (req, resp) => {
 })
 
 
-server.get('/adm/consulta/produtos-mais-antigos', async (req, resp) => {
+server.get('/adm/consulta/pedidos-mais-antigos', async (req, resp) => {
 
     try {
 
@@ -735,7 +760,7 @@ server.delete('/adm/desassociacao/tecido-produto/:id', async (req, resp) => {
 
 
 
-server.get('/adm/busca/imagem/:id', async (req, resp) => {
+server.get('/adm/busca/imagem', async (req, resp) => {
 
     try {
 

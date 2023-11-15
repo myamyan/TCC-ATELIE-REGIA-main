@@ -1,3 +1,4 @@
+-- drop database atelieregia;
 create database atelieregia;
 use atelieregia;
 
@@ -7,7 +8,7 @@ CREATE TABLE tb_categorias (
     nm_categoria VARCHAR(400)
 );
 
-select * from tb_categorias;
+-- select * from tb_categorias;
 
 
 -- Tabela de Tecidos de Produto
@@ -16,7 +17,7 @@ CREATE TABLE tb_produto_tecidos (
     ds_tipo VARCHAR(400)
 );
 
-select * from tb_produto_tecidos;
+-- select * from tb_produto_tecidos;
 
 -- Tabela de Designers
 CREATE TABLE tb_designer (
@@ -24,10 +25,10 @@ CREATE TABLE tb_designer (
 	nm_designer VARCHAR(400)
 );
 
-insert into tb_designer ( nm_designer )
-values ("Flávia Aranha");
+-- select * from tb_designer;
 
-select * from tb_designer;
+insert into tb_designer ( nm_designer )
+values( "Flávia Aranha");
 
 -- Tabela de Cores de Produto
 CREATE TABLE tb_cores (
@@ -35,7 +36,7 @@ CREATE TABLE tb_cores (
     ds_hexa_decimal VARCHAR(300)
 );
 
-select * from tb_produto_cores;
+-- select * from tb_produto_cores;
 
 -- Tabela de Tamanhos de Produto
 CREATE TABLE tb_tamanho (
@@ -43,7 +44,7 @@ CREATE TABLE tb_tamanho (
     ds_tamanho VARCHAR(200)
 );
 
-select * from tb_produto_tamanho;
+-- select * from tb_produto_tamanho;
 
 -- Tabela de Imagens de Produto
 CREATE TABLE tb_produto_imagem (
@@ -51,12 +52,11 @@ CREATE TABLE tb_produto_imagem (
     img_link VARCHAR(10000)
 );
 
-select * from tb_produto_imagem;
+-- select * from tb_produto_imagem;
 
 -- Tabela de Produtos
 CREATE TABLE tb_produto (
     id_produto   int primary key auto_increment not null,
-    id_imagem int,
     nm_produto VARCHAR(500),
     vl_preco DECIMAL(10, 2),
     vl_promocao DECIMAL(10, 2),
@@ -67,13 +67,33 @@ CREATE TABLE tb_produto (
     nr_estoque INT,
     id_designer  int,
     
-    FOREIGN KEY (id_imagem) REFERENCES tb_produto_imagem(id_imagem),
     FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer)
 );
 
-select * from tb_produto;
+-- select * from tb_produto;
 
 -- drop table tb_produto;
+
+-- PRODUTO/IMAGEM (N:N)
+CREATE TABLE tb_p_imagem (
+	id_p_img int primary key auto_increment not null,
+    id_produto int  not null,
+    id_imagem int   not null,
+    FOREIGN KEY (id_imagem) REFERENCES tb_produto_imagem(id_imagem),
+    FOREIGN KEY (id_produto) references tb_produto(id_produto)
+   
+    
+);
+
+-- PRODUTO/DESIGNER(N:N)
+/*CREATE TABLE tb_p_designer (
+	id_p_des int primary key auto_increment not null,
+    id_produto int  not null,
+    id_designer int   not null,
+    FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer),
+    FOREIGN KEY (id_produto) references tb_produto(id_produto)
+   
+);*/
 
 
 -- PRODUTO/CATEGORIAS (N:N)
@@ -86,9 +106,9 @@ CREATE TABLE tb_p_categorias (
     
 );
 
-show tables;
+-- show tables;
 
-SELECT * FROM TB_P_CATEGORIAS;
+-- SELECT * FROM TB_P_CATEGORIAS;
 
 -- PRODUTO/TAMANHO (N:N)
 CREATE TABLE tb_p_tamanho (
@@ -100,7 +120,7 @@ CREATE TABLE tb_p_tamanho (
     
 );
 
-SELECT * FROM TB_P_TAMANHO;
+-- SELECT * FROM TB_P_TAMANHO;
 
 -- PRODUTO/CORES (N:N)
 CREATE TABLE tb_p_cores  (
@@ -112,8 +132,8 @@ CREATE TABLE tb_p_cores  (
     
 );
 
--- SELECT * FROM TB_P_CORES;
-
+ -- SELECT * FROM TB_P_CORES;
+ 
 -- PRODUTO/TECIDOS (N:N)
 CREATE TABLE tb_p_tecidos (
 	id_p_tecidos int primary key auto_increment not null,
@@ -124,6 +144,7 @@ CREATE TABLE tb_p_tecidos (
     
 );
 
+-- select * from tb_p_tecidos;
 
 
 -- SELECT * FROM TB_P_TECIDOS;
@@ -139,8 +160,40 @@ bt_termos             bool
 );
   
 
+create table tb_enderecos(
+	id_endereco                      int primary key auto_increment not null,
+    ds_endereco                      VARCHAR(200), 
+	ds_cep                           varchar(1000),
+	ds_complemento                   varchar(1000),
+	nr_numero_res                    decimal(5,0)
+);
+
+
+
+-- select * from tb_enderecos;
+
+-- drop table tb_cliente;
+
+CREATE TABLE tb_generos (
+    id_genero INT PRIMARY KEY AUTO_INCREMENT not null,
+    nm_genero VARCHAR(50) UNIQUE
+);
+
+-- select * from tb_generos;
+
+-- insert into tb_generos ( nm_genero )
+				-- values ( "Masculino" );
+
+CREATE TABLE tb_entregas (
+    id_entregas INT PRIMARY KEY AUTO_INCREMENT not null,
+    nm_entregas VARCHAR(50) UNIQUE
+);
+
+-- insert into tb_entregas ( nm_entregas )
+				-- values ( "Loggi" );
+
   
-  select * from tb_cadastrocliente;
+  -- select * from tb_cadastrocliente;
 
 -- Tabela de Clientes
 CREATE TABLE tb_cliente (
@@ -156,44 +209,12 @@ CREATE TABLE tb_cliente (
 
 );
 
-  insert into tb_cliente ( id_cadcliente, ds_cpf, dt_nascimento, id_genero, ds_num_celular )
-					values ( 1,  "979.797.979-79", "1997-10-03", 2, "sonhoo" );
+  -- insert into tb_cliente ( id_cadcliente, ds_cpf, dt_nascimento, id_genero, ds_num_celular )
+					-- values ( 1,  "979.797.979-79", "1997-10-03", 2, "sonhoo" );
 
-select * from tb_cliente
-inner join tb_cadastrocliente on tb_cadastrocliente.id_cadcliente = tb_cliente.id_cadcliente;
+-- select * from tb_cliente
+-- inner join tb_cadastrocliente on tb_cadastrocliente.id_cadcliente = tb_cliente.id_cadcliente;
 
-
-create table tb_enderecos(
-	id_endereco                      int primary key auto_increment not null,
-    ds_endereco                      VARCHAR(200), 
-	ds_cep                           varchar(1000),
-	ds_complemento                   varchar(1000),
-	nr_numero_res                    decimal(5,0)
-);
-
-
-
-select * from tb_enderecos;
-
--- drop table tb_cliente;
-
-CREATE TABLE tb_generos (
-    id_genero INT PRIMARY KEY AUTO_INCREMENT not null,
-    nm_genero VARCHAR(50) UNIQUE
-);
-
-select * from tb_generos;
-
-insert into tb_generos ( nm_genero )
-				values ( "Masculino" );
-
-CREATE TABLE tb_entregas (
-    id_entregas INT PRIMARY KEY AUTO_INCREMENT not null,
-    nm_entregas VARCHAR(50) UNIQUE
-);
-
-insert into tb_entregas ( nm_entregas )
-				values ( "Loggi" );
 
 
 -- Tabela de Administradores
@@ -224,9 +245,9 @@ CREATE TABLE tb_pedido (
 
 
 
-select * from tb_pedido;
+-- select * from tb_pedido;
 
-drop table tb_pedido;
+-- drop table tb_pedido;
 
 -- Tabela de Itens de Pedido
 CREATE TABLE tb_pedido_item (
@@ -243,11 +264,11 @@ CREATE TABLE tb_pedido_item (
 	FOREIGN KEY (id_entregas) REFERENCES tb_entregas(id_entregas)
 );
 
-select * from tb_pedido_item;
+-- select * from tb_pedido_item;
 
- select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido ASC;
+-- select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido ASC;
 
-drop table tb_pedido_item;
+-- drop table tb_pedido_item;
 
 create table tb_favoritos(
 
@@ -259,6 +280,7 @@ foreign key (id_cliente) references tb_cliente(id_cliente),
 foreign key (id_produto) references tb_produto(id_produto)
 
 );
+
 
 -- show tables from atelieregia;
 
