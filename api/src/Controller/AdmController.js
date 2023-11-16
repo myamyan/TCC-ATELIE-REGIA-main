@@ -1,6 +1,6 @@
 
 
-import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisNovo, FiltroPorMaisAntigo, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto, DesassociarCategoriaProduto, ExcluirImagem, DesassociarTamanhoProduto, DesassociarCoresProduto, DesassociarTecidosProduto, ConsultarImagem, ExcluirPedido, AssociarImagemProduto } from '../Repository/AdmRepository.js';
+import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto, DesassociarCategoriaProduto, ExcluirImagem, DesassociarTamanhoProduto, DesassociarCoresProduto, DesassociarTecidosProduto, ConsultarImagem, ExcluirPedido, AssociarImagemProduto } from '../Repository/AdmRepository.js';
 
 import multer from 'multer';
 import { Router } from "express"
@@ -414,36 +414,36 @@ server.get('/adm/consulta/pedidos-concluidos', async (req, resp) => {
 })
 
 
-server.get('/adm/consulta/pedidos-mais-novos', async (req, resp) => {
+// server.get('/adm/consulta/pedidos-mais-novos', async (req, resp) => {
 
-    try {
+//     try {
 
-        const listanovos = await FiltroPorMaisNovo();
+//         const listanovos = await FiltroPorMaisNovo();
 
-        resp.send(listanovos);
+//         resp.send(listanovos);
 
-    } catch (err) {
-        resp.status(400).send({
-            erro: err.message
-        })
-    }
-})
+//     } catch (err) {
+//         resp.status(400).send({
+//             erro: err.message
+//         })
+//     }
+// })
 
 
-server.get('/adm/consulta/pedidos-mais-antigos', async (req, resp) => {
+// server.get('/adm/consulta/pedidos-mais-antigos', async (req, resp) => {
 
-    try {
+//     try {
 
-        const listaantigos = await FiltroPorMaisAntigo();
+//         const listaantigos = await FiltroPorMaisAntigo();
 
-        resp.send(listaantigos);
+//         resp.send(listaantigos);
 
-    } catch (err) {
-        resp.status(400).send({
-            erro: err.message
-        })
-    }
-})
+//     } catch (err) {
+//         resp.status(400).send({
+//             erro: err.message
+//         })
+//     }
+// })
 
 
 server.get('/adm/consulta/produtos-caros', async (req, resp) => {

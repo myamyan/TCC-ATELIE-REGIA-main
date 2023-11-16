@@ -2,8 +2,8 @@ import "./index.scss";
 import React, { useEffect, useState } from "react";
 // import CarrosselDeImagens from "../../components/carrosel";
 
-import { ConsultarProdutos } from "../../../api/consultaprodutos";
-import { ConsultarImagens } from "../../../api/chamadaimagem";
+import { ConsultarProdutos } from "../../../api/user/consultaprodutos";
+import { ConsultarImagens, construirUrl } from "../../../api/chamadaimagem";
 
 export default function Produto() {
   //   const images = [
@@ -13,17 +13,27 @@ export default function Produto() {
   //   ];
 
   const [ produtos, setProdutos ] = useState([]);
-  const [ imagens, setImagens ] = useState([]);
-  const [ id, setId ] = useState([]);
+  // const [ imagens, setImagens ] = useState([]);
+  // const [ id, setId ] = useState([]);
 
   async function buscar() {
     let prod = await ConsultarProdutos();
 
     setProdutos(prod);
+    for(let cont = 0; cont < prod.length ; cont++){
+      let img = await ConsultarImagens(prod[cont].id_produto)
+      prod[cont].imagem = img.img_link
+    }
+    
+    console.log(prod);
 
-    let imagem = await ConsultarImagens(id)
+    // setImagens(imagem)
+  }
 
-    setImagens(imagem)
+  function chamarImagem(imagem) {
+    if(typeof imagem == string)
+      console.log('oi');
+    //   return construirUrl(imagem)
   }
 
   useEffect(() => {
@@ -168,8 +178,8 @@ export default function Produto() {
                 {produtos.map(produto => 
                     <div class="produto">
                     <img
-                      id={produto.id_produto}
-                      src={produto.img_link}
+                      // id={produto.id_produto}
+                      src={chamarImagem(produto.imagem)}
                       alt=""
 
                     />

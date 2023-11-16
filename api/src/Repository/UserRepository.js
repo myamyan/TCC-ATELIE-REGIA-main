@@ -1,7 +1,7 @@
 import { con } from './connection.js';
 
 
-
+//feita conexão ↓
 export async function inserircadastrousuario(cadastro) {
 
   const comando =
@@ -16,7 +16,7 @@ export async function inserircadastrousuario(cadastro) {
 
 }
 
-
+//feita conexão ↓
 export async function loginCliente(email, senha) {
 
   const comando = `
@@ -37,6 +37,7 @@ export async function loginCliente(email, senha) {
 
 }
 
+//feita conexão ↓
 export async function verificarEmailExistente(email) {
   try {
     const [linhas, campos] = await con.execute('SELECT * FROM tb_cadastrocliente WHERE  ds_emailcliente    = ?', [email]);
@@ -48,6 +49,7 @@ export async function verificarEmailExistente(email) {
   }
 }
 
+//feita cpnexão ↓
 export async function CadastroInformacoesPessoais(infop) {
 
   const comando = ` 
@@ -65,7 +67,7 @@ export async function CadastroInformacoesPessoais(infop) {
 
 }
 
-//conversar vivi
+
 
 export async function CadastroPedido(pedido) {
 
@@ -103,7 +105,7 @@ export async function ConsultaPedido(id) {
 }
 
 
-
+//feita conexão ↓
 export async function ConsultaProduto() {
 
   const comando = `

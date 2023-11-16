@@ -1,6 +1,6 @@
 import { con } from './connection.js'
 
-
+//feita conexão ↓
 export async function inserirLoginadm(loginadm) {
 
     const comando =
@@ -15,6 +15,7 @@ export async function inserirLoginadm(loginadm) {
 
 }
 
+//feita conexão ↓
 export async function verificarEmailExistente(email) {
     try {
         const [linhas, campos] = await con.execute('SELECT * FROM tb_admin WHERE ds_email = ?', [email]);
@@ -26,6 +27,7 @@ export async function verificarEmailExistente(email) {
     }
 }
 
+//feita conexão ↓
 export async function buscaremail(email) {
     const comando =
 
@@ -40,6 +42,7 @@ export async function buscaremail(email) {
 
 }
 
+//feita api ↓
 export async function CadastrarProduto(produto) {
     const comando =
         `insert into tb_produto ( nm_produto, vl_preco, vl_promocao, bt_promocao, bt_destaque, bt_disponivel, ds_detalhes, nr_estoque, id_designer )
@@ -52,6 +55,7 @@ export async function CadastrarProduto(produto) {
     return produto;
 }
 
+//feita conexão ↓
 export async function ConsultaGeralProdutosAdm() {
 
     const comando = `
@@ -103,7 +107,7 @@ export async function DeletarProduto(id) {
 }
 
 
-
+//feita api ↓
 export async function inserircategorias(categoria) {
     const comando = `insert into tb_categorias (nm_categoria)
 	values( ? );`
@@ -114,6 +118,7 @@ export async function inserircategorias(categoria) {
     return categoria;
 }
 
+//feita api ↓
 export async function inserirtecidos(tecidos) {
     const comando = `
     insert into tb_tecidos(ds_tipo)
@@ -125,7 +130,7 @@ export async function inserirtecidos(tecidos) {
     return tecidos;
 }
 
-
+//feita api ↓
 export async function inserirdesigner(designer) {
     const comando = `    
     insert into tb_designer (nm_designer)
@@ -137,6 +142,7 @@ export async function inserirdesigner(designer) {
     return designer;
 }
 
+//feita api ↓
 export async function inserircores(cores) {
     const comando = `
     insert into tb_cores (ds_hexa_decimal)
@@ -149,6 +155,7 @@ export async function inserircores(cores) {
     return cores;
 }
 
+//feita api ↓
 export async function inserirtamanho(tamanho) {
     const comando = `
     insert into tb_tamanho (ds_tamanho)
@@ -160,6 +167,7 @@ export async function inserirtamanho(tamanho) {
 
     return tamanho;
 }
+
 
 export async function cadastrarImagem(imagem) {
 
@@ -178,7 +186,7 @@ export async function cadastrarImagem(imagem) {
 }
 
 
-
+//feita api ↓
 export async function AssociarImagemProduto( imagemproduto ){
 
     const comando = ` 
@@ -196,7 +204,7 @@ export async function AssociarImagemProduto( imagemproduto ){
 
 }
 
-
+//feita api ↓
 export async function AssociarCategoriaProduto( categoriaproduto ){
 
     const comando = ` 
@@ -214,7 +222,7 @@ export async function AssociarCategoriaProduto( categoriaproduto ){
 
 }
 
-
+//feita api ↓
 export async function AssociarTamanhoProduto( tamanhoproduto ){
 
     const comando = ` 
@@ -232,7 +240,7 @@ export async function AssociarTamanhoProduto( tamanhoproduto ){
 
 }
 
-
+//feita api ↓
 export async function AssociarCorProduto( corproduto ){
 
     const comando = ` 
@@ -250,7 +258,7 @@ export async function AssociarCorProduto( corproduto ){
 
 }
 
-
+//feita api ↓
 export async function AssociarTecidosProduto( tecidoproduto ){
 
     const comando = ` 
@@ -270,7 +278,7 @@ export async function AssociarTecidosProduto( tecidoproduto ){
 
 
 
-
+//feita api ↓
 export async function BuscarTodosPedidos() {
 
     const comando = `
@@ -285,6 +293,7 @@ export async function BuscarTodosPedidos() {
 
 }
 
+//feita api ↓
 export async function BuscarPedidosAndamento() {
 
     const comando = `
@@ -301,6 +310,7 @@ export async function BuscarPedidosAndamento() {
 
 }
 
+//feita api ↓
 export async function BuscarPedidosConcluidos() {
 
     const comando = `
@@ -317,40 +327,42 @@ export async function BuscarPedidosConcluidos() {
 
 
 
-// Fazer Controller ↓
 
 
 
-export async function FiltroPorMaisNovo() {
+
+// export async function FiltroPorMaisNovo() {
 
 
-    const comando = `
+//     const comando = `
     
-    select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido ASC; 
+//     select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido ASC; 
 
-    `
+//     `
 
-    const [linhas] = await con.query(comando);
+//     const [linhas] = await con.query(comando);
 
-    return linhas;
+//     return linhas;
 
-}
+// }
 
-export async function FiltroPorMaisAntigo() {
+// export async function FiltroPorMaisAntigo() {
 
 
-    const comando = `
+//     const comando = `
     
-    select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido DESC; 
+//     select * from tb_pedido_item inner join tb_pedido on tb_pedido.id_pedido = tb_pedido_item.id_pedido order by dt_pedido DESC; 
 
-    `
+//     `
 
-    const [linhas] = await con.query(comando);
+//     const [linhas] = await con.query(comando);
 
-    return linhas;
+//     return linhas;
 
-}
+// }
 
+
+//feita api ↓
 export async function FiltroPorMaisCaro(){
 
     const comando = ` 
@@ -365,6 +377,8 @@ export async function FiltroPorMaisCaro(){
 
 }
 
+
+//feita api ↓
 export async function FiltroPorMaisBarato(){
 
     const comando = ` 
@@ -381,7 +395,7 @@ export async function FiltroPorMaisBarato(){
 
 
 
-
+//feita api ↓
 export async function ConsultaPorNomeAdm(nome) {
 
     const comando = `  
@@ -398,7 +412,7 @@ export async function ConsultaPorNomeAdm(nome) {
 
 }
 
-
+//feita api ↓
 export async function FiltroPorCategoriaAdm(categoria) {
 
     const comando = `  
@@ -409,7 +423,7 @@ export async function FiltroPorCategoriaAdm(categoria) {
   
     `
 
-    const [linhas] = await con.query(comando, [`%${categoria}%`]);
+    const [linhas] = await con.query(comando, [`${categoria}`]);
 
     return linhas;
 
@@ -691,7 +705,7 @@ export async function ConsultarImagem( id ){
 
     const [ linhas ] = await con.query(comando, [ id ]);
 
-    return linhas;
+    return linhas[0];
 
 }
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './index.scss';
 
 
-import { cadastrarCliente } from '../../../api/cadastrocliente';
+import { cadastrarCliente } from '../../../api/user/cadastrocliente';
 
 
 
