@@ -21,11 +21,12 @@ export default function Produto() {
   async function buscar() {
     let prod = await ConsultarProdutos();
 
-    setProdutos(prod);
     for (let cont = 0; cont < prod.length; cont++) {
       let img = await ConsultarImagens(prod[cont].id_produto);
       prod[cont].imagem = img.img_link;
     }
+
+    setProdutos(prod);
 
     console.log(prod);
 
@@ -179,18 +180,13 @@ export default function Produto() {
               <div class="produto-pair">
                 {produtos.map((produto) => (
                   <div class="produto">
-                    {produto.imagem 
-                      ?  <img
+                   
+                      <img
                           // id={produto.id_produto}
-                          src={chamarImagem(produto.imagem)}
+                          src={ chamarImagem(produto.imagem)}
                           alt="oi"
                         />
-                      : <img
-                          id="imagem-produto"
-                          src="/assets/images/image 49.png"
-                          alt=""
-                        />
-                    }
+                   
                     <h3 id="fixado">COMPRAR</h3>
                     <h1 id="nome-produto" className="nome-produto">
                       {produto.nm_produto}
@@ -201,112 +197,12 @@ export default function Produto() {
                     </p>
                   </div>
                 ))}
-                <div class="produto">
-                  <img
-                    id="imagem-produto"
-                    src="/assets/images/image 49.png"
-                    alt=""
-                  />
-                  <h3 id="fixado">COMPRAR</h3>
-                  <h1 id="nome-produto"> SHORT LINHO</h1>
-                  <p> Short de Linho Off-White</p>
-                  <p>
-                    POR <strong> R$ 110,00</strong>
-                  </p>
-                </div>
-
-                <div class="produto">
-                  <img
-                    id="imagem-produto"
-                    src="/assets/images/image 49.png"
-                    alt=""
-                  />
-                  <h3 id="fixado">COMPRAR</h3>
-                  <h1 id="nome-produto"> SHORT LINHO</h1>
-                  <p> Short de Linho Off-White</p>
-                  <p>
-                    POR <strong> R$ 110,00</strong>
-                  </p>
-                </div>
-                <div class="produto">
-                  <img
-                    id="imagem-produto"
-                    src="/assets/images/image 49.png"
-                    alt=""
-                  />
-                  <h3 id="fixado">COMPRAR</h3>
-                  <h1 id="nome-produto"> SHORT LINHO</h1>
-                  <p> Short de Linho Off-White</p>
-                  <p>
-                    POR <strong> R$ 110,00</strong>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="produto-pair-res">
-              <div class="produto">
-                <img
-                  id="imagem-produto"
-                  src="/assets/images/image 49.png"
-                  alt=""
-                />
-                <h3 id="fixado">COMPRAR</h3>
-                <h1 id="nome-produto" className="nome-produto">
-                  {" "}
-                  SHORT LINHO
-                </h1>
-
-                <p> Short de Linho Off-White</p>
-                <p>
-                  POR <strong> R$ 110,00</strong>
-                </p>
-              </div>
-              <div class="produto">
-                <img
-                  id="imagem-produto"
-                  src="/assets/images/image 49.png"
-                  alt=""
-                />
-                <h3 id="fixado">COMPRAR</h3>
-                <h1 id="nome-produto"> SHORT LINHO</h1>
-                <p> Short de Linho Off-White</p>
-                <p>
-                  POR <strong> R$ 110,00</strong>
-                </p>
-              </div>
-
-              <div class="produto">
-                <img
-                  id="imagem-produto"
-                  src="/assets/images/image 49.png"
-                  alt=""
-                />
-                <h3 id="fixado">COMPRAR</h3>
-                <h1 id="nome-produto"> SHORT LINHO</h1>
-                <p> Short de Linho Off-White</p>
-                <p>
-                  POR <strong> R$ 110,00</strong>
-                </p>
-              </div>
-              <div class="produto">
-                <img
-                  id="imagem-produto"
-                  src="/assets/images/image 49.png"
-                  alt=""
-                />
-                <h3 id="fixado">COMPRAR</h3>
-                <h1 id="nome-produto"> SHORT LINHO</h1>
-                <p> Short de Linho Off-White</p>
-                <p>
-                  POR <strong> R$ 110,00</strong>
-                </p>
-              </div>
+                
             </div>
           </div>
         </div>
       </div>
-
+      </div>
 
     </div>
   );
