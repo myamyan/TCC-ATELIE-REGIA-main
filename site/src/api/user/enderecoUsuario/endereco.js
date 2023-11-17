@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function addEndereco(endereco, cep, complemento, numres) {
-  const resposta = await axios.post("http://localhost:5036/endereco/", {
+  const resposta = await axios.post("http:// 129.148.42.252:5036/endereco/", {
     endereco: endereco,
     cep: cep,
     complemento: complemento,
@@ -12,7 +12,7 @@ export async function addEndereco(endereco, cep, complemento, numres) {
 
 export async function altEndereco(endereco, cep, complemento, numres, id) {
   const resposta = await axios.put(
-    "http://localhost:5036user/alterar/endereco/:id",
+    "http:// 129.148.42.252:5036user/alterar/endereco/:id",
     {
       endereco: endereco,
       cep: cep,
@@ -26,7 +26,7 @@ export async function altEndereco(endereco, cep, complemento, numres, id) {
 
 export async function verEndereco(id) {
   const resposta = await axios.get(
-    "http://localhost:5036/user/consulta/enderecos"
+    "http:// 129.148.42.252:5036/user/consulta/enderecos"
   );
 
   return resposta.data;
