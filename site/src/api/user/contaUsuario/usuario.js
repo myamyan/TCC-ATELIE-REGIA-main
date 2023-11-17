@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export async function altCadPerfil(nome, email, senha, id) {
 
-        const resposta = await axios.put('http://localhost:3000/perfil/alt/:id', {
+        const resposta = await axios.put('http:// 129.148.42.252:3000/perfil/alt/:id', {
             nome: nome,
             email: email,
             senha: senha,
@@ -16,7 +16,7 @@ export async function altCadPerfil(nome, email, senha, id) {
 
         export async function cadPerfil(id, data, cpf, celular) {
 
-            const resposta = await axios.post('http://localhost:3000/perfil/cad/', {
+            const resposta = await axios.post('http:// 129.148.42.252:3000/perfil/cad/', {
                 id: id,
                 data: data,
                 cpf: cpf,

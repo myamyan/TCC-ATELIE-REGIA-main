@@ -1,6 +1,6 @@
 
 
-import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto, DesassociarCategoriaProduto, ExcluirImagem, DesassociarTamanhoProduto, DesassociarCoresProduto, DesassociarTecidosProduto, ConsultarImagem, ExcluirPedido, AssociarImagemProduto } from '../Repository/AdmRepository.js';
+import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto, DesassociarCategoriaProduto, ExcluirImagem, DesassociarTamanhoProduto, DesassociarCoresProduto, DesassociarTecidosProduto, ConsultarImagem, ExcluirPedido, AssociarImagemProduto, SelectCategorias, SelectTecidos, SelectDesigner, SelectCores } from '../Repository/AdmRepository.js';
 
 import multer from 'multer';
 import { Router } from "express"
@@ -785,6 +785,70 @@ server.delete('/adm/deletar/pedido/:id', async (req, resp) => {
         const resposta = await ExcluirPedido(id);
 
         resp.status(204).send();
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/select/categorias', async (req, resp) => {
+
+    try {
+
+        const listacategorias = await SelectCategorias();
+
+        resp.send(listacategorias);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/select/tecidos', async (req, resp) => {
+
+    try {
+
+        const listatecidos = await SelectTecidos();
+
+        resp.send(listatecidos);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/select/designer', async (req, resp) => {
+
+    try {
+
+        const listadesigner = await SelectDesigner();
+
+        resp.send(listadesigner);
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+
+server.get('/adm/select/cores', async (req, resp) => {
+
+    try {
+
+        const listacores = await SelectCores();
+
+        resp.send(listacores);
+
     } catch (err) {
         resp.status(400).send({
             erro: err.message
