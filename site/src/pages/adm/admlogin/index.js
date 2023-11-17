@@ -28,7 +28,7 @@ async function Entrarclick() {
     return;
   }
   try {
-      const r = await axios.post('http://localhost:5000/login', {
+      const r = await axios.post('http://localhost:5036/login', {
           email: email,
           senha: senha
       });

@@ -16,6 +16,7 @@ export async function ConsultarImagens(id) {
 }
 
 export function construirUrl(imagem){
+        console.log(imagem);
         return `http://localhost:5036/${imagem}`
 }
 

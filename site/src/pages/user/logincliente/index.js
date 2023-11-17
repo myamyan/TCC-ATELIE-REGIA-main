@@ -20,7 +20,7 @@ export default function LoginCliente() {
 
         try {
 
-            const r = await axios.post('http://localhost:5000/login/cliente', {
+            const r = await axios.post('http://localhost:5036/login/cliente', {
 
                 email: email,
                 senha: senha

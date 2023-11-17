@@ -12,6 +12,9 @@ import Homepage from './pages/user/pagina-inicio';
 import RelatoriosAdm from './pages/adm/relatoriosadm';
 import ConsultaProdutos from './pages/adm/consultapedidos';
 import Detalhespedido from './pages/user/detalhespedido';
+import Enderecos from './pages/user/endereco';
+import DadosUsuario from "./pages/user/dadosUsuario";
+import Favoritos from './pages/user/listaDeDesejos';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -29,6 +32,10 @@ root.render(
         <Route path='/adm/relatorios' element={<RelatoriosAdm/>}/>
         <Route path='/adm/consulta/pedidos' element={<ConsultaProdutos/>}/>
         <Route path='/detalhespedido' element={<Detalhespedido/>}/>
+        <Route path='/user/enderecos' element={<Enderecos/>}/>
+        <Route path='/user/dados' element={<DadosUsuario/>}/>
+        <Route path='/user/favoritos' element={<Favoritos/>}/>
+
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,4 +1,4 @@
-import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, ConsultarEnderecos, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega  } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega, alterarEndereco, ConsultarEnderecosPedido  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
@@ -411,6 +411,19 @@ server.put('/user/cadastro-final/update/produto/:id', async(req,resp) =>{
       const idF = req.body;
     
       const resposta = await UpdateFinalCompraEntrega( id, idF );
+
+      
+      if (!endereco.endereco)
+      throw new Error('O campo é obrigatório ');
+
+      if (!endereco.cep)
+      throw new Error('O campo é obrigatório ');
+
+      if (!endereco.complemento)
+      throw new Error('O campo é obrigatório ');
+
+      if (!endereco.numres)
+      throw new Error('O campo é obrigatório ');
     
       resp.status(204).send()
     
@@ -450,7 +463,7 @@ server.get('/user/consulta/enderecos', async (req, resp) => {
 
       const { id } = req.query;
 
-      const enderecoscliente = await ConsultarEnderecos(id);
+      const enderecoscliente = await ConsultarEnderecosPedido(id);
 
       resp.send(enderecoscliente);
 
@@ -496,6 +509,43 @@ server.get('/user/consulta/lista-favoritos', async (req, resp) => {
   }
 })
 
+server.put('user/alterar/endereco/:id', async (req, resp) => {
+    try {
+       
+        const { id } = req.params;
+        const endereco = req.body;
+
+        if (!endereco.endereco)
+        throw new Error('O campo é obrigatório ');
+
+        if (!endereco.cep)
+        throw new Error('O campo é obrigatório ');
+
+        if (!endereco.complemento)
+        throw new Error('O campo é obrigatório ');
+
+        if (!endereco.numres)
+        throw new Error('O campo é obrigatório ');
+
+        if (!endereco.id)
+        throw new Error('Usuário não logado');
+
+        const resposta = await alterarEndereco(id, endereco);
+
+        if (resposta != 1)
+            throw new Error('Não pode ser alterado.');
+        else
+            resp.status(204).send();
+
+    } catch (err) {
+        console.error('Erro durante a alteração', err);
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+
+
+})
 
 
 export default server;

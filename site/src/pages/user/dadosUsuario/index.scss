@@ -1,0 +1,1045 @@
+
+* {
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('../../../../public/assets/fonts/Montserrat/static/Montserrat-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'krohna';
+    src: url('../../../../public/assets/fonts/krona-one/KronaOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'imprima';
+    src: url('../../../../public/assets/fonts/imprima/Imprima-Regular.ttf');
+
+}
+
+@font-face {
+    font-family: 'kodchaasan';
+    src: url('../../../../public/assets/fonts/Kodchasan/Kodchasan-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'playfairdisplay';
+    src: url('../../../../public/assets/fonts/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: 'monda-bold';
+    src: url('../../../../public/assets/fonts/IBM_Plex_Mono/IBMPlexMono-Bold.ttf');
+}
+
+
+// @font-face {
+//     font-family: 'monda-medium';
+//     src: url('../../../public/assets/fonts/Monda/IBMPlexMono-Medium.ttf');
+// }
+
+
+@font-face {
+    font-family: 'monda-regular';
+    src: url('../../../../public/assets/fonts/IBM_Plex_Mono/IBMPlexMono-Regular.ttf');
+}
+
+
+.pag-conta-dados {
+
+    .container {
+        margin-bottom: 10em;
+
+        
+        .rota-pag {
+            margin-left: 55px;
+            margin-top: 20px;
+
+            p {
+            font-family: 'monda-medium';
+            font-size: 15px;
+
+
+            span {
+                color: #846468;
+
+            }
+            }
+        }
+
+
+        .tit-pag {
+            margin-top: 50px;
+            margin-left: 55px;
+
+            h3 {
+                font-family: 'krohna';
+                font-size: 18px;
+                font-weight: 400;
+                
+            }
+        }
+    
+        .conteudo {
+            display: flex;
+            flex-direction: row;
+            width: 1250px;
+            justify-content: space-between;
+            margin-top: 62px;
+            margin-bottom: -24px;
+           
+           
+
+            .categorias {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: flex-start;
+                width: 250px;
+                height: 460px;
+                margin-left: 35px;
+                // margin-left: 55px;
+              
+                margin-top: 3px;
+               
+                
+
+                p {
+                    
+                    font-family: 'monda-regular';
+                    font-weight: 200;
+                    cursor: pointer;
+                    font-size: 16px;
+                }
+
+               .enderecos > a {
+                    text-decoration: none;
+                    color: black;
+               }
+            }
+        
+        .aba-alterar {
+            display: flex;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            flex-direction: column;
+            align-items: center;
+            width: 1270px;
+            height: 600px;
+            padding-top: 19px;
+            padding-bottom: 34px;
+            // justify-content: center;
+           
+           box-shadow: inset 0px 0px 14px -6px  rgb(176, 176, 176);
+           border: 1px solid #cbbcb9;
+           border-radius: 9px;
+           margin-left: 7px;
+           margin-top: 17px;
+
+           .nome-aba {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 28px;
+            // padding-top: 17px;
+            width: 910px;
+            // padding-left: 20px;
+            margin-right: 56px;
+
+            p {
+                font-family: 'montserrat';
+                font-weight: 700;
+                font-size: 16px;
+                width: 30px;
+                color: #211715;
+                                     
+            }
+
+        }
+          
+          
+            // margin-top: 31px;
+            
+            .info-mostrar {
+                display: flex;
+                flex-direction: column;
+                width: 730px;
+                height:150px;
+                border-bottom: 1px solid rgb(175, 173, 173);
+                border-right: 1px solid rgb(175, 173, 173);
+                border-radius: 16px;
+                margin-left: 90px;
+                padding-top: 15px;
+                padding-left: 15px;
+                margin-bottom: 48px;
+
+               
+
+                .perfil-info {
+                    display: flex;
+                    flex-direction: row;
+                    width: 480px;
+                    justify-content: space-between;
+                }
+
+                .dados-esq {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: 2.5;
+
+                    label {
+                        font-family: 'montserrat';
+                        font-weight: 300;
+                        font-size: 13px;
+                        
+                    }
+
+              
+                }
+
+                .dados-dir {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: 2.5;
+
+                    label {
+                        font-family: 'montserrat';
+                        font-weight: 300;
+                        font-size: 13px;
+                        
+                    }
+                }
+            }
+
+
+        .info {
+            display: flex;
+            // align-items: center;
+            justify-content: space-around;
+            flex-direction: row;
+            width: 900px;
+            margin-left: 20px;
+           
+            margin-top: 40px;
+
+                // > p {
+                //     width: 43px;
+                //     display: flex;
+                //     align-items: center;
+                //     margin-left: 27px;
+                //     margin-top: 30px;
+                //     font-size: 13px;
+                //     font-family: 'monda-regular';
+                //     cursor: pointer;
+                //     font-weight: 200;
+                //     color: white;
+                // }
+            
+        
+    
+            .inputs-cadperfil {
+                display: flex;
+                flex-direction: column;
+                width: 430px;
+                height:266px;
+                // box-shadow: inset 0px 0px 14px -6px  rgb(223, 223, 222);
+                border-bottom: 1px solid rgb(175, 173, 173);
+                border-right: 1px solid rgb(175, 173, 173);
+                border-radius: 16px;
+                margin-bottom: 25px;
+                margin-right: 9px;
+                padding-right: 20px;
+
+                .nome-aba {
+                    margin-bottom: 18px;
+                    padding-top: 17px;
+                    // width:306px;
+                    padding-left: 20px;
+    
+                    p {
+                        font-family: 'montserrat';
+                        font-weight: 700;
+                        font-size: 16px;
+                        width: 30px;
+                        color: #211715;
+                                             
+                    }
+
+                }
+              
+            
+            .nome {
+                display: flex;
+                flex-direction: column;
+                margin-left: 35px;
+                margin-right: 24px;
+                margin-bottom: 14px;
+
+                > input {
+                    width: 25em;
+                    height: 2em;
+                    border-radius: 10px;
+                    border: 1px solid rgb(132, 126, 126);
+                  
+                }
+
+                > label {
+                    font-family: 'imprima';
+                   font-size: 13px;
+                   font-weight: 500;
+                   line-height: 1.4;
+                }
+            }
+
+            div {
+                display: flex;
+                flex-direction: row;
+                // width: 400px;
+                // justify-content: center;
+         
+
+            .email {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 30px;
+                margin-left: 35px;
+
+                > input {
+                    width: 15em;
+                    margin-right: 15px;
+                    height: 2em;
+                    border-radius: 10px;
+                   
+                    border: 1px solid rgb(132, 126, 126);
+                }
+
+                > label {
+                    font-family: 'imprima';
+                   font-size: 13px;
+                   line-height: 1.4;
+                }
+            } 
+
+
+            .senha {
+                display: flex;
+                flex-direction: column;
+              
+
+                > input {
+                    width: 10em;
+                    height: 2em;
+                    border-radius: 10px;
+                    border: 1px solid rgb(132, 126, 126);
+                }
+
+                > label {
+                   font-family: 'imprima';
+                   font-size: 13px;
+                   line-height: 1.4;
+                }
+            } 
+
+        }
+
+        .botao-salvar {
+            display: flex;
+            // align-items: center;
+            justify-content:center;
+            
+            margin-top: -9px;      
+
+
+            > button {
+                width: 100px;
+                height: 34px;
+                border: 1px solid #211715;
+                
+                border-radius: 16px;
+                background-color: #ffff;
+                color: #211715;
+                font-family: 'montserrat';
+                font-weight: 700;
+                font-size: 12px;
+                // border: none;
+                cursor: pointer;
+            }
+        }
+
+        }
+        }
+    
+    }
+}
+
+        }
+
+        .inputs-altperfil {
+            display: flex;
+            flex-direction: column;
+            // justify-content: center;
+            width: 430px;
+            height:266px;
+            // box-shadow: inset 0px 0px 14px -6px  rgb(223, 223, 222);
+            border-bottom: 1.3px solid rgb(175, 173, 173);
+            border-right: 1.3px solid rgb(175, 173, 173);
+            border-radius: 16px;
+            // padding-top: 24px;
+            
+
+            .nome-aba {
+                margin-bottom: 18px;
+                padding-top: 17px;
+                // width:306px;
+                padding-left: 20px;
+
+                p {
+                    font-family: 'montserrat';
+                    font-weight: 700;
+                    font-size: 16px;
+                    width: 30px;
+                    color: #211715;
+                                         
+                }
+
+            }
+
+
+            .cpf-cel {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: -10px;
+            // margin-left: -19px;
+            padding-left: 25px;
+            
+
+            .celular {
+                display: flex;
+                flex-direction: column;
+           
+
+                > input {
+                    width: 12em;
+                    height: 2em;
+                    border-radius: 10px;
+                   
+                    border: 1px solid rgb(132, 126, 126);
+                }
+
+                > label {
+                    font-family: 'imprima';
+                    font-size: 13px;
+                    line-height: 1.4;
+                }
+            }
+
+
+            .cpf {
+                display: flex;
+                flex-direction: column;
+                margin-right: 40px;
+                margin-bottom: 29px;
+    
+                input {
+                    width: 12em;
+                    height: 2em;
+                    height: 2em;
+                    border-radius: 10px;
+                    border: 1px solid rgb(132, 126, 126);
+                }
+    
+                > label {
+                   font-family: 'imprima';
+                   font-size: 13px;
+                   line-height: 1.4;
+                }
+            } 
+        }
+    
+
+            .dt-gn {
+                display: flex;
+                flex-direction: row;
+                width:600px;
+                margin-bottom: 6px;
+                padding-left: 25px;
+
+            .data {
+                display: flex;
+                flex-direction: column;
+                margin-right: 64px;
+
+                > input {
+                    width: 10em;
+                    height: 2em;
+                    border-radius: 10px;
+                
+                    border: 1px solid rgb(132, 126, 126);
+                }
+
+                > label {
+                    font-family: 'imprima';
+                    font-size: 13px;
+                    line-height: 1.4;
+                    
+                }
+            }      
+
+            .genero {
+                display: flex;
+                flex-direction: column;
+    
+
+               > input {
+                    width: 12em;
+                    height: 2em;
+                    border-radius: 10px;
+                    border: 1px solid rgb(132, 126, 126);
+                }
+
+                > label {
+                    font-family: 'imprima';
+                    font-size: 13px;
+                    line-height: 1.4;
+                }  
+            } 
+
+           
+
+        }
+
+
+        .botao-salvar {
+            display: flex;
+            // align-items: center;
+            justify-content:center;
+            margin-top: 19px;
+            // margin-right: 18px;
+        
+
+
+            > button {
+                width: 100px;
+                height: 34px;
+                border-radius: 15px;
+                background-color: #ffff;
+                color: #211715;
+                font-family: 'montserrat';
+                font-weight: 700;
+                font-size: 12px;
+                border: 1px solid #211715;
+                cursor: pointer;
+            }
+        }
+    
+            }
+            }
+            
+
+            
+    
+        .categorias > span > p:hover {
+                    
+            font-family: 'monda-bold';
+            font-weight: 800;
+            
+
+            
+        }
+
+        .categorias > .dados:hover {
+            height: 50px;
+            width: 126px;
+            padding-top: 15px;
+            padding-left: 10px;
+        
+        }
+
+        .categorias > .lista-desejos:hover {
+            height: 50px;
+            width: 186px;
+            padding-top: 15px;
+            padding-left: 10px;
+
+          
+        }
+
+        .categorias > .pedidos:hover {
+            height: 50px;
+            width: 142px;
+            padding-top: 15px;
+            padding-left: 10px;
+
+        }
+
+        .categorias > .enderecos:hover {
+            height: 50px;
+            width: 113px;
+            padding-top: 15px;
+            padding-left: 10px;
+          
+        }
+
+
+        .categorias > span:hover {
+            display: flex;
+            align-items: flex-start;
+            padding-left: 7px;
+            padding-top: 2px;
+            background-color: #E9D7BB;
+            border-radius: 12px;
+           
+           
+        }
+        
+
+        @media (max-width: 720px) {
+            .pag-conta-dados {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                overflow-x: hidden;
+              
+                
+           
+        
+            .container {
+                margin-bottom: 5em;
+        
+        
+        
+                .rota-pag {
+                    margin-left: 55px;
+                    margin-top: 20px;
+        
+                    p {
+                        font-family: 'monda-medium';
+                        font-size: 15px;
+        
+        
+                        span {
+                            color: #846468;
+        
+                        }
+                    }
+                }
+        
+        
+                .tit-pag {
+                    margin-top: 23px;
+                    margin-left: 55px;
+        
+                    h3 {
+                        font-family: 'krohna';
+                        font-size: 12px;
+                        font-weight: 400;
+        
+                    }
+                }
+        
+                .conteudo {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 700px;
+                    height: 700px;
+                    margin-bottom: -35px;
+                    
+                    .categorias {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        align-items: flex-start;
+                        width: 250px;
+                        height: 460px;
+                        margin-left: 35px;
+                        margin-top: 9px;
+                        // margin-right: 50px;
+
+                        span > a > p {
+                            text-decoration: none;
+                            color: black;
+                            font-family: 'monda-regular';
+                            font-weight: 200;
+                            cursor: pointer;
+                            font-size: 16px;
+                        }
+                    
+                      
+                    }
+
+                    .aba-alterar {
+                        display: flex;
+                        flex-direction: column;
+                        width: 600px;
+                        margin-left: 0px;
+                        margin-top: 21px;
+                        overflow-y: scroll;
+                        
+                        .info-mostrar {
+                            display: flex;
+                            flex-direction: column;
+                            width: 530px;
+                            height:150px;
+                            border-bottom: 1px solid rgb(175, 173, 173);
+                            border-right: 1px solid rgb(175, 173, 173);
+                            border-radius: 16px;
+                            margin-left: 30px;
+                            padding-top: 15px;
+                            padding-left: 15px;
+                            margin-bottom: 28px;
+            
+                           
+            
+                            .perfil-info {
+                                display: flex;
+                                flex-direction: row;
+                                width: 480px;
+                                justify-content: space-between;
+                            }
+            
+                            .dados-esq {
+                                display: flex;
+                                flex-direction: column;
+                                line-height: 2.5;
+            
+                                label {
+                                    font-family: 'montserrat';
+                                    font-weight: 300;
+                                    font-size: 13px;
+                                    
+                                }
+            
+                          
+                            }
+            
+                            .dados-dir {
+                                display: flex;
+                                flex-direction: column;
+                                line-height: 2.5;
+            
+                                label {
+                                    font-family: 'montserrat';
+                                    font-weight: 300;
+                                    font-size: 13px;
+                                    
+                                }
+                            }
+                        }
+            
+            
+            
+                    .info {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+                        width: 560px;
+                        
+                        margin-top: 1px;
+            
+                            > p {
+                                width: 43px;
+                                display: flex;
+                                align-items: center;
+                                margin-left: 27px;
+                                margin-top: 30px;
+                                font-size: 13px;
+                                font-family: 'monda-regular';
+                                cursor: pointer;
+                                font-weight: 200;
+                                color: white;
+                            }
+                        
+                    
+                
+                        .inputs-cadperfil {
+                            display: flex;
+                            flex-direction: column;
+                            width: 500px;
+                            height:240px;
+                            // box-shadow: inset 0px 0px 14px -6px  rgb(223, 223, 222);
+                            border-bottom: 1px solid rgb(175, 173, 173);
+                            border-right: 1px solid rgb(175, 173, 173);
+                            border-radius: 16px;
+                            margin-bottom: 14px;
+                           
+                            // margin-left: -90px;
+                            // margin-right: 0px;
+
+
+                            .nome-aba {
+                                margin-bottom: 18px;
+                                padding-top: 17px;
+                                // width:306px;
+                                padding-left: 15px;
+                
+                                p {
+                                    font-family: 'montserrat';
+                                    font-weight: 700;
+                                    font-size: 12px;
+                                    width: 30px;
+                                    color: #211715;
+                                                         
+                                }
+            
+                            }
+                          
+            
+                            .nome {
+                                display: flex;
+                                flex-direction: column;
+                                margin-left: 25px;
+                                margin-right: 24px;
+                                margin-bottom: 12px;
+                
+                                > input {
+                                    width: 29em;
+                                    height: 2em;
+                                    border-radius: 10px;
+                                    border: 1px solid rgb(132, 126, 126);
+                                  
+                                }
+                
+                                > label {
+                                    font-family: 'imprima';
+                                   font-size: 13px;
+                                   font-weight: 500;
+                                   line-height: 1.4;
+                                }
+                            }
+                
+                            div {
+                                display: flex;
+                                flex-direction: row;
+                                // width: 400px;
+                                // justify-content: center;
+                         
+                
+                            .email {
+                                display: flex;
+                                flex-direction: column;
+                                margin-bottom: 30px;
+                                margin-left: 25px;
+                
+                                > input {
+                                    width: 20em;
+                                    margin-right: 15px;
+                                    height: 2em;
+                                    border-radius: 10px;
+                                   
+                                    border: 1px solid rgb(132, 126, 126);
+                                }
+                
+                            
+                            }
+                        }
+
+                            .botao-salvar {
+                                display: flex;
+                                // align-items: center;
+                                justify-content: center;
+                                margin-top: -8px;
+                                margin-bottom: 5px;
+                                margin-left: 18px;
+                            
+                    
+                    
+                                > button {
+                                    width: 91px;
+                                    height: 30px;
+                                    border-radius: 15px;
+                                    background-color: #211715;
+                                    color: #ffff;
+                                    font-family: 'montserrat';
+                                    font-weight: 700;
+                                    font-size: 12px;
+                                    border: none;
+                    
+                                    cursor: pointer;
+                                }
+                            }
+                }
+
+
+                .inputs-altperfil {
+                    display: flex;
+                    flex-direction: column;
+                    // justify-content: center;
+                    // align-items: center;
+                    width: 503px;
+                    height:230px;
+                    box-shadow: inset 0px 0px 14px -6px  rgb(223, 223, 222);
+                    border-bottom: 1.3px solid rgb(175, 173, 173);
+                    border-right: 1.3px solid rgb(175, 173, 173);
+                    border-radius: 16px;
+                    // padding-top: 24px;
+                    padding-bottom: 18px;
+                    margin-left: 0px;
+
+                    .nome-aba {
+                        margin-bottom: 18px;
+                        padding-top: 17px;
+                        // width:306px;
+                        padding-left: 15px;
+        
+                        p {
+                            font-family: 'montserrat';
+                            font-weight: 700;
+                            font-size: 12px;
+                            width: 30px;
+                            color: #211715;
+                                                 
+                        }
+    
+                    }
+                  
+        
+        
+                    .cpf-cel {
+                    display: flex;
+                    flex-direction: row;
+                    margin-bottom: -13px;
+                    // margin-right: 10px;
+                    padding-left: 19px;
+                    
+        
+                    .celular {
+                        display: flex;
+                        flex-direction: column;
+                   
+        
+                        > input {
+                            width: 13em;
+                            height: 2em;
+                            border-radius: 10px;
+                           
+                            border: 1px solid rgb(132, 126, 126);
+                        }
+        
+                        > label {
+                            font-family: 'imprima';
+                            font-size: 13px;
+                            line-height: 1.4;
+                        }
+                    }
+        
+        
+                    .cpf {
+                        display: flex;
+                        flex-direction: column;
+                        // margin-right: 34px;
+                        margin-bottom: 29px;
+                        
+            
+                        input {
+                            width: 17em;
+                            height: 2em;
+                            height: 2em;
+                            border-radius: 10px;
+                            border: 1px solid rgb(132, 126, 126);
+                        }
+            
+                        > label {
+                           font-family: 'imprima';
+                           font-size: 13px;
+                           line-height: 1.4;
+                        }
+                    } 
+                }
+            
+        
+                    .dt-gn {
+                        display: flex;
+                        flex-direction: row;
+                        width:600px;
+                        // align-items: center;
+                        margin-bottom: 6px;
+                        // margin-left: 10px;
+                        padding-left: 19px;
+        
+                    .data {
+                        display: flex;
+                        flex-direction: column;
+                        margin-right: 34px;
+        
+                        > input {
+                            width: 15em;
+                            height: 2em;
+                            border-radius: 10px;
+                        
+                            border: 1px solid rgb(132, 126, 126);
+                        }
+        
+                        > label {
+                            font-family: 'imprima';
+                            font-size: 13px;
+                            line-height: 1.4;
+                            
+                        }
+                    }      
+        
+                    .genero {
+                        display: flex;
+                        flex-direction: column;
+                        margin-left: 34px;
+            
+        
+                       > input {
+                            width: 13em;
+                            height: 2em;
+                            border-radius: 10px;
+                            border: 1px solid rgb(132, 126, 126);
+                        }
+        
+                        > label {
+                            font-family: 'imprima';
+                            font-size: 13px;
+                            line-height: 1.4;
+                        }  
+                    } 
+        
+                   
+        
+                }
+
+                .botao-salvar {
+                    display: flex;
+                    // align-items: center;
+                    justify-content: center;
+                    margin-top: 15px;
+                    // margin-bottom: 5px;
+                    margin-left: 18px;
+                
+        
+        
+                    > button {
+                        width: 91px;
+                        height: 30px;
+                        border-radius: 15px;
+                        background-color: #211715;
+                        color: #ffff;
+                        font-family: 'montserrat';
+                        font-weight: 700;
+                        font-size: 12px;
+                        border: none;
+        
+                        cursor: pointer;
+                    }
+                }
+
+                }
+    
+            }
+        }
+                }
+            }
+        }
+    }
+        
+       
+            
+    
+

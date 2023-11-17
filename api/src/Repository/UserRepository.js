@@ -397,9 +397,7 @@ export async function ItensPedido(id) {
 }
 
 
-
-
-export async function ConsultarEnderecos(id) {
+export async function ConsultarEnderecosPedido(id) {
 
   const comando = ` 
 
@@ -449,3 +447,16 @@ export async function ConsultarFavoritos(id) {
 }
 
 
+export async function alterarEndereco(id, enderecos) {
+  const comando =
+
+    `UPDATE tb_enderecos
+     SET    ds_endereco = ?,
+            ds_cep = ?,
+            ds_complemento = ?,
+            nr_numero_res = ?
+    WHERE id_endereco = ?`
+
+  const [resposta] = await con.query(comando, [enderecos.endereco, enderecos.cep, enderecos.complemento, enderecos.numres, id]);
+  return resposta.affectedRows;
+}

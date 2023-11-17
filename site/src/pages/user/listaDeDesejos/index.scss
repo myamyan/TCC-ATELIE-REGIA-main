@@ -1,0 +1,480 @@
+
+* {
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('../../../../public/assets/fonts/Montserrat/static/Montserrat-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'krohna';
+    src: url('../../../../public/assets/fonts/krona-one/KronaOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'imprima';
+    src: url('../../../../public/assets/fonts/imprima/Imprima-Regular.ttf');
+
+}
+
+@font-face {
+    font-family: 'kodchaasan';
+    src: url('../../../../public/assets/fonts/Kodchasan/Kodchasan-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'playfairdisplay';
+    src: url('../../../../public/assets/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf');
+}
+
+// @font-face {
+//     font-family: 'monda-bold';
+//     src: url('../../../public/assets/fonts/Monda/Monda-Bold.ttf');
+// }
+
+
+// @font-face {
+//     font-family: 'monda-medium';
+//     src: url('../../../public/assets/fonts/Monda/IBMPlexMono-Medium.ttf');
+// }
+
+
+// @font-face {
+//     font-family: 'monda-regular';
+//     src: url('../../../public/assets/fonts/Monda/Monda-Regular.ttf');
+// }
+
+.pag-lista-favoritos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-x: hidden;
+
+    .container {
+        margin-bottom: 10em;
+
+
+
+        .rota-pag {
+            margin-left: 55px;
+            margin-top: 20px;
+
+            p {
+                font-family: 'monda-medium';
+                font-size: 15px;
+
+
+                span {
+                    color: #846468;
+
+                }
+            }
+        }
+
+
+        .tit-pag {
+            margin-top: 50px;
+            margin-left: 55px;
+
+            h3 {
+                font-family: 'krohna';
+                font-size: 18px;
+                font-weight: 400;
+
+            }
+        }
+
+
+        .conteudo {
+            display: flex;
+            flex-direction: row;
+            width: 1400px;
+            // justify-content: space-between;
+            margin-top: 65px;
+
+            
+            .categorias {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: flex-start;
+                width: 250px;
+                height: 460px;
+                margin-left: 55px;
+                margin-top: 29px;
+                // margin-right: 50px;
+            
+
+                p {
+
+                    font-family: 'monda-regular';
+                    font-weight: 200;
+                    cursor: pointer;
+                    font-size: 16px;
+                }
+
+                span > a {
+                    text-decoration: none;
+                    color: black;
+                    font-family: 'monda-regular';
+                }
+            }
+
+            .aba-fav {
+                display: flex;
+                flex-direction: column;
+                overflow-y: scroll;
+                // justify-content: space-around;
+                width: 800px;
+                height: 700px;
+                box-shadow: inset 0px 0px 14px -6px  rgb(176, 176, 176);
+                border: 1px solid #cbbcb9;
+                
+                overflow-x: hidden;
+                border-radius: 9px 0px 0px 0px;
+         
+               
+            
+            .nome-aba {
+                display: flex;
+                flex-direction: row;
+                width: 820px;
+                justify-content: space-between;
+                padding-left: 20px;
+                padding-top: 15px;
+             
+                .titulo {
+
+                    >p {
+                        font-family: 'montserrat';
+                        font-weight: 700;
+                        font-size: 13px;
+                        width: 30px;
+                        color: #211715;
+
+                    }
+                }
+
+                .total {
+                    padding-right: 10px;
+
+                    >p {
+                        font-family: 'montserrat';
+                        font-weight: 700;
+                        font-size: 13px;
+                        width: 90px;
+                        color: #211715;
+                    }
+                }
+            }
+
+            .item-fav {
+                display: flex;
+                flex-direction: row;
+                margin-top: 30px;
+                margin-left: 50px;
+                border: 1px solid rgb(228, 228, 228);
+                border-radius: 29px;
+                width: 700px;
+                padding-left: 13px;
+                padding-top: 13px;
+                padding-bottom: 19px;
+                box-shadow: 0px 0px 9px -4px  rgb(176, 176, 176);
+                
+                .short-jeans {
+
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 14px;
+                    
+                  
+                }
+                .info-item {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: 1.9;
+                    margin-left: 19px;
+                    width: 400px;
+
+                    .produto {
+                        font-family: 'montserrat';
+                        font-weight: 600;
+                        // width: 900px;
+                        font-size: 13px;
+                        width: 30px;
+                        color: #211715;
+            }
+
+                    .preco {
+                        font-family: 'montserrat';
+                        font-weight: 600;
+                        font-size: 13px;
+                        width: 30px;
+                        color: #211715;
+                    }
+            }
+
+            .botao-ver {
+                display: flex;
+                align-items: center;
+
+                button {
+                    border: none;
+                    background-color: #B7A598;
+                    color: white;
+                    font-family: 'montserrat';
+                    font-weight: 800;
+                    font-size: 10px;
+                    padding-top: 10px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    padding-bottom: 10px;
+                    border-radius: 18px;
+                    cursor: pointer;
+
+                }
+            }
+
+        
+        }
+    }
+
+    }
+}
+}
+
+          
+
+
+           
+
+                     
+            
+        
+
+
+            
+
+
+.categorias>span>p:hover {
+
+    font-family: 'monda-bold';
+    font-weight: 800;
+
+}
+
+.categorias>.dados:hover {
+    height: 50px;
+    width: 126px;
+    padding-top: 15px;
+    padding-left: 10px;
+
+}
+
+.categorias>.lista-desejos:hover {
+    height: 50px;
+    width: 186px;
+    padding-top: 15px;
+    padding-left: 10px;
+
+
+}
+
+.categorias>.pedidos:hover {
+    height: 50px;
+    width: 142px;
+    padding-top: 15px;
+    padding-left: 10px;
+
+}
+
+.categorias>.enderecos:hover {
+    height: 50px;
+    width: 113px;
+    padding-top: 15px;
+    padding-left: 10px;
+
+}
+
+
+.categorias>span:hover {
+    display: flex;
+    align-items: flex-start;
+    padding-left: 7px;
+    padding-top: 2px;
+    background-color: #E9D7BB;
+    border-radius: 12px;
+
+}
+
+.add >div > input:hover {
+    display: block;
+}
+
+
+
+
+@media (max-width: 720px) {
+    .pag-lista-favoritos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow-x: hidden;
+      
+        
+   
+
+    .container {
+        margin-bottom: 5em;
+
+
+
+        .rota-pag {
+            margin-left: 55px;
+            margin-top: 20px;
+
+            p {
+                font-family: 'monda-medium';
+                font-size: 15px;
+
+
+                span {
+                    color: #846468;
+
+                }
+            }
+        }
+
+
+        .tit-pag {
+            margin-top: 23px;
+            margin-left: 55px;
+
+            h3 {
+                font-family: 'krohna';
+                font-size: 12px;
+                font-weight: 400;
+
+            }
+        }
+
+
+   
+
+    .conteudo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 670px;
+        height: 700px;
+        
+
+         .categorias {
+            display: flex;
+            flex-direction: row;
+            // align-items: flex-start;
+            align-items: space-evenly;
+            // justify-content: center;
+            
+            width: 670px;
+            height: 15px;
+            // margin-left: 10em;
+            margin-top: 0px;
+
+            span > a {
+                width: 100px;
+                text-align: center;
+                font-family: 'monda-regular';
+                font-weight: 200;
+                cursor: pointer;
+                font-size: 11px;
+
+            }
+
+            #pd {
+                text-align: center;
+                width: 98px;
+            }
+
+            #lt {
+                text-align: center;
+                width: 83px;
+                font-size: 11px;
+            }
+
+            span > a > p {
+                text-align: center;
+                width: 70px;
+                font-size: 11px;
+            }
+        }
+
+        .aba-fav{
+            display: flex;
+            height: 750px;
+            width: 500px;
+            overflow-y: scroll;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 39px;
+
+
+                .nome-aba {
+                    display: flex;
+                    flex-direction: row;
+                    width: 520px;
+                    justify-content: space-between;
+                    padding-left: 20px;
+                    padding-top: 15px;
+                
+                    .titulo {
+
+                        >p {
+                            font-family: 'montserrat';
+                            font-weight: 700;
+                            font-size: 13px;
+                            width: 30px;
+                            color: #211715;
+
+                        }
+                    }
+
+                    .total {
+                        padding-right: 10px;
+
+                        >p {
+                            font-family: 'montserrat';
+                            font-weight: 700;
+                            font-size: 13px;
+                            width: 90px;
+                            color: #211715;
+                        }
+                    }
+                }
+
+                .item-fav {
+                    width: 410px;
+                    margin-left: 0px;
+
+                    .info-item {
+                        width: 200px;
+                    }
+
+                    .botao-ver {
+                        margin-left: 0px;
+                        margin-right: 19px;
+                    }
+                }
+   
+}
+    }
+}
+}
+}
+
+
+            

@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 
 import { ConsultarProdutos } from "../../../api/user/consultaprodutos";
 import { ConsultarImagens, construirUrl } from "../../../api/chamadaimagem";
+// import Cabecalho2 from "../../../components/cabecalho2";
+// import Rodape from "../../../components/rodape";
 
 export default function Produto() {
   //   const images = [
@@ -12,7 +14,7 @@ export default function Produto() {
   //     "/assets/images/image_48.png"
   //   ];
 
-  const [ produtos, setProdutos ] = useState([]);
+  const [produtos, setProdutos] = useState([]);
   // const [ imagens, setImagens ] = useState([]);
   // const [ id, setId ] = useState([]);
 
@@ -20,31 +22,31 @@ export default function Produto() {
     let prod = await ConsultarProdutos();
 
     setProdutos(prod);
-    for(let cont = 0; cont < prod.length ; cont++){
-      let img = await ConsultarImagens(prod[cont].id_produto)
-      prod[cont].imagem = img.img_link
+    for (let cont = 0; cont < prod.length; cont++) {
+      let img = await ConsultarImagens(prod[cont].id_produto);
+      prod[cont].imagem = img.img_link;
     }
-    
+
     console.log(prod);
 
     // setImagens(imagem)
   }
 
   function chamarImagem(imagem) {
-    if(typeof imagem == string)
-      console.log('oi');
-    //   return construirUrl(imagem)
+    // if(typeof imagem == string)
+    //   console.log('oi');
+      console.log(imagem);
+      return construirUrl(imagem)
   }
 
   useEffect(() => {
-
     buscar();
-
-
-  }, [])
+  }, []);
 
   return (
     <div className="container-produtos">
+
+
       {/* <CarrosselDeImagens imagens={images} /> */}
 
       {/* ............................................................ */}
@@ -175,14 +177,20 @@ export default function Produto() {
           <div id="secao-produto" className="secao-produto">
             <div id="produtos" className="produtos">
               <div class="produto-pair">
-                {produtos.map(produto => 
-                    <div class="produto">
-                    <img
-                      // id={produto.id_produto}
-                      src={chamarImagem(produto.imagem)}
-                      alt=""
-
-                    />
+                {produtos.map((produto) => (
+                  <div class="produto">
+                    {produto.imagem 
+                      ?  <img
+                          // id={produto.id_produto}
+                          src={chamarImagem(produto.imagem)}
+                          alt="oi"
+                        />
+                      : <img
+                          id="imagem-produto"
+                          src="/assets/images/image 49.png"
+                          alt=""
+                        />
+                    }
                     <h3 id="fixado">COMPRAR</h3>
                     <h1 id="nome-produto" className="nome-produto">
                       {produto.nm_produto}
@@ -191,8 +199,8 @@ export default function Produto() {
                     <p>
                       POR <strong>{produto.vl_preco}</strong>
                     </p>
-                  </div>    
-                )}
+                  </div>
+                ))}
                 <div class="produto">
                   <img
                     id="imagem-produto"
@@ -298,6 +306,8 @@ export default function Produto() {
           </div>
         </div>
       </div>
+
+
     </div>
   );
 }
