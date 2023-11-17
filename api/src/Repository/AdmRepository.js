@@ -725,3 +725,70 @@ export async function ExcluirPedido( id ){
     return linhas.affectedRows;
 
 }
+
+export async function SelectCategorias(){
+
+
+    const comando = `
+    
+        select * from tb_categorias
+
+    `
+
+    const [ linhas ] = await con.query(comando);
+
+    return linhas;
+
+}
+
+
+export async function SelectTecidos(){
+
+
+    const comando = `
+    
+        select * from tb_produto_tecidos
+
+    `
+
+    const [ linhas ] = await con.query(comando);
+
+    return linhas;
+
+}
+
+
+
+export async function SelectDesigner(){
+
+
+    const comando = `
+    
+        select * from tb_designer
+
+    `
+
+    const [ linhas ] = await con.query(comando);
+
+    return linhas;
+
+}
+
+
+
+export async function SelectCores(){
+
+
+    const comando = `
+    
+        select * from tb_cores
+
+    `
+
+    const [ linhas ] = await con.query(comando);
+
+    return linhas;
+
+}
+
+
