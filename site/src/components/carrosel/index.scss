@@ -1,0 +1,123 @@
+@font-face {
+  font-family: 'kronaone';
+  src: url('../../../public/assets/fonts/krona-one/KronaOne-Regular.ttf');
+}
+  
+@font-face {
+  font-family: 'raleway';
+  src: url('../../../public//assets/fonts/Raleway/Raleway-Italic-VariableFont_wght.ttf');
+  
+}
+
+
+
+@font-face {
+  font-family: 'imprima';
+  src: url('../../../public/assets/fonts/imprima/Imprima-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'imprima2';
+  src: url('../../../public/assets/fonts/Imprima2/Imprima-Regular.ttf');
+}
+
+
+@font-face {
+  font-family: 'kodchasan';
+  src: url('../../../public/assets/fonts/Kodchasan/Kodchasan-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'montserrat';
+  src: url('../../../public/assets/fonts/Montserrat/static/Montserrat-Medium.ttf');
+}
+
+
+*{
+    padding: 0px;
+     margin: 0px;
+     box-sizing: border-box;
+}
+
+.cabecalho-sobreposto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0);
+  z-index: 2;
+}
+
+.slide {
+  position: relative;
+  overflow: hidden;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.conteudo-sobre-imagens {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  align-items: center;
+}
+
+.cabecalho-sobreposto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0);
+  z-index: 2;
+}
+
+.slide {
+  position: relative;
+  overflow: hidden;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.conteudo-sobre-imagens {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+ padding: 0px 50px 20px ;
+
+  color: #fff;
+}
+
+.direita >p{
+  font-size: 20px;
+  width: 120px;
+  text-align: start;
+position: absolute;
+bottom: 25px;
+}
+
+.esquerda{
+
+}
+
+.esquerda > p {
+margin-bottom: 5px;
+ font-size: 35px;
+ width:200px;
+ text-align: end;
+font-family: 'imprima2';
+letter-spacing: 1px;
+}

@@ -15,6 +15,7 @@ import Detalhespedido from './pages/user/detalhespedido';
 import Enderecos from './pages/user/endereco';
 import DadosUsuario from "./pages/user/dadosUsuario";
 import Favoritos from './pages/user/listaDeDesejos';
+import Painel from './pages/adm/paineladm';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -35,7 +36,8 @@ root.render(
         <Route path='/user/enderecos' element={<Enderecos/>}/>
         <Route path='/user/dados' element={<DadosUsuario/>}/>
         <Route path='/user/favoritos' element={<Favoritos/>}/>
-
+        <Route path='/painel' element={<Painel/>}/>
+      
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

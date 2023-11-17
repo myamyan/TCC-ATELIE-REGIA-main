@@ -1,0 +1,239 @@
+@font-face {
+    font-family: 'Kronaone';
+    src: url('../../../public/assets/fonts/krona-one/KronaOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'imprima';
+    src: url('../../../public/assets/fonts/imprima/Imprima-Regular.ttf');
+}
+
+
+.page {
+
+    width: 100%;
+    position: absolute;
+
+    .cabecalho {
+        top: 0;
+        width: 100%;
+        background-color: #ffffff00;
+        z-index: 999;
+        position: absolute;
+        transform: translateX(0);
+    }
+
+    .cabecalho.aberto {
+        transform: translateX(230px);
+    }
+
+    .cabecalho.fechado {
+        transform: translateX(0);
+    }
+
+    .menu-container {
+        backdrop-filter: blur(2px);
+        background-color: #0000002a;
+        width: 230px;
+        height: 95vh;
+        color: #fff;
+        display: flex;
+
+        flex-direction: column;
+
+        .menu-overlay {
+            z-index: 1000;
+            top: 0;
+            width: 100%;
+            background-color: #ffffff00;
+            z-index: 100;
+            position: relative;
+
+            .menu-container {
+                background-color: #B7A598;
+                width: 230px;
+                height: 100vh;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                z-index: 1001;
+            }
+        }
+
+
+        img {
+            padding: 50px 0px;
+            align-self: center;
+            width: 150px;
+
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            padding: 0px 30px;
+
+            a {
+                margin: 10px;
+            }
+        }
+
+        .log {
+            align-self: center;
+        }
+
+        a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.39);
+            color: white;
+        }
+    }
+
+    .cabecalho {
+
+        top: 0;
+        width: 100%;
+        background-color: #ffffff00;
+        transition: transform 0.3s;
+        z-index: 100;
+
+        .cabecalho1 {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #ffffff00;
+
+
+        }
+
+        .cab1-esquerda {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 20px;
+        }
+
+        .cab1-direita {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 20px;
+            width: 200px;
+        }
+
+        .menu1 {
+            height: 60px;
+            width: 60px;
+            padding-right: 20px;
+            padding-top: 5px;
+            cursor: pointer;
+        }
+
+        h2 {
+            color: #fff;
+            font-family: 'Kronaone';
+            font-weight: 300;
+            font-size: 18px;
+        }
+
+        .logo1 {
+            display: none;
+        }
+
+        .img1-cab1 {
+            max-height: 90px;
+            max-width: 104px;
+            padding-top: 15px;
+        }
+
+        .img2-cab1 {
+            max-height: 70px;
+            max-width: 70px;
+            padding-right: 20px;
+            width: 200px;
+            padding-left: 15px;
+        }
+
+        h3>a {
+            color: #fff;
+            font-family: 'imprima';
+            font-weight: 300;
+            text-decoration: none;
+        }
+
+        h3:hover {
+            cursor: pointer;
+        }
+
+        img1-cab1,
+        .img2-cab1 {
+            cursor: pointer;
+        }
+
+        h4:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+
+    #menu1{
+      width: 35px;
+      height:  3vh;
+    }
+  
+    #nome{
+      font-size: 10px;
+    }
+  
+    #log{
+      font-size: 15px;
+    }
+    #img2-cab1{
+      width: 60px;
+    }
+
+    .page .menu-container {
+       padding: 0px 0px;
+        width: 100px;
+        height: 35vh;
+   
+    }
+      
+
+    .page .menu-container img {
+        
+        width: 80px;
+    }
+
+    .menu>a{
+        font-size: 10px;
+    }
+
+    .page .menu-container .menu {
+        
+        padding: 0px 10px;
+    }
+
+    .page .cabecalho h2 {
+      
+        font-size: 13px;
+    }
+
+    .page .menu-container img {
+        padding: 50px 0px;
+       
+    }
+      }
