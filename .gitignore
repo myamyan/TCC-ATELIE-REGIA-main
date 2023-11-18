@@ -31307,3 +31307,5 @@ node/src/logo.svg
 node/src/reportWebVitals.js
 node/src/setupTests.js
 api/.env
+site/src/pages/user/pagina-produto/index.js
+api/.env

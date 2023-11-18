@@ -1,4 +1,4 @@
-import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega, alterarEndereco, ConsultarEnderecosPedido  } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega, alterarEndereco, ConsultarEnderecosPedido, verCartao  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
@@ -545,6 +545,28 @@ server.put('user/alterar/endereco/:id', async (req, resp) => {
     }
 
 
+})
+
+
+
+
+server.get('user/consulta/cartao', async (req, resp) => {
+
+    try {
+
+        const { id } = req.query;
+
+        const cartaoinfo = await verCartao(id);
+  
+        resp.send(cartaoinfo);
+        
+     
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
 })
 
 

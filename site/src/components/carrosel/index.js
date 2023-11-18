@@ -36,7 +36,7 @@ const CarrosselDeImagens = ({ imagens }) => {
             <p className="">INICIO / COLEÇÕES /</p>
           </div>
           <div className="esquerda">
-            <p>NOVA COLEÇÃO PRIMAVERA/ VERÃO 2023</p>
+            <p>NOVA COLEÇÃO PRIMAVERA/ VERÃO 2024</p>
           </div>
         </div>
 

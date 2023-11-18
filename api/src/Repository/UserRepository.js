@@ -460,3 +460,16 @@ export async function alterarEndereco(id, enderecos) {
   const [resposta] = await con.query(comando, [enderecos.endereco, enderecos.cep, enderecos.complemento, enderecos.numres, id]);
   return resposta.affectedRows;
 }
+
+
+export async function verCartao(id) {
+  const comando =
+
+    `SELECT * from tb_pedido
+    where id_pedido like ?`
+
+    const [linhas] = await con.query(comando, [id]);
+
+    return linhas;
+
+}

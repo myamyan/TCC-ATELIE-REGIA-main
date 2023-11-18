@@ -4,40 +4,9 @@ import CarrosselDeImagens from "../../../components/carrosel";
 
 import { ConsultarProdutos } from "../../../api/user/consultaprodutos";
 import { ConsultarImagens, construirUrl } from "../../../api/chamadaimagem";
-import Cabecalho2 from "../../../components/cabecalho2";
 import Rodape from "../../../components/rodape";
 
 export default function Produto() {
-
-
-  // const [ imagens, setImagens ] = useState([]);
-  // const [ id, setId ] = useState([]);
-
-  async function buscar() {
-    let prod = await ConsultarProdutos();
-
-    for (let cont = 0; cont < prod.length; cont++) {
-      let img = await ConsultarImagens(prod[cont].id_produto);
-      prod[cont].imagem = img.img_link;
-    }
-
-    setProdutos(prod);
-
-    console.log(prod);
-
-    // setImagens(imagem)
-  }
-
-  function chamarImagem(imagem) {
-    // if(typeof imagem == string)
-    //   console.log('oi');
-      console.log(imagem);
-      return construirUrl(imagem)
-  }
-
-  useEffect(() => {
-    buscar();
-  }, []);
 
 
 
@@ -48,8 +17,6 @@ export default function Produto() {
     ];
 
   const [produtos, setProdutos] = useState([]);
-  const [ imagens, setImagens ] = useState([]);
-  const [ id, setId ] = useState([]);
 
   const carregarProdutosPorCategoria = async (categoriaId) => {
     try {
@@ -75,16 +42,10 @@ export default function Produto() {
     }
 
     setProdutos(prod);
-
-    console.log(prod);
-
-    // setImagens(imagem)
   }
 
   function chamarImagem(imagem) {
-    // if(typeof imagem == string)
-    //   console.log('oi');
-      console.log(imagem);
+
       return construirUrl(imagem)
   }
 
@@ -102,8 +63,8 @@ export default function Produto() {
 
       <div className="secao-container-ordem">
         <div className="faixa-ordem">
-          <p id="titulo-ordem">15 PRODUTOS</p>
-          <div className="secao-ordem">
+          <p id="titulo-ordem"> {produtos.length} PRODUTOS</p>
+          <div className="secao-                      ordem">
             <p id="titulo-ordem">ORDENAR POR </p>
             <div className="images">
               <img id="baixo" src="/assets/images/Arrow 1.png" alt="" />
