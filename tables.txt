@@ -70,7 +70,7 @@ CREATE TABLE tb_produto (
     FOREIGN KEY (id_designer) REFERENCES tb_designer(id_designer)
 );
 
--- select * from tb_produto;
+select * from tb_produto;
 
 -- drop table tb_produto;
 
@@ -84,6 +84,8 @@ CREATE TABLE tb_p_imagem (
    
     
 );
+
+-- select * from tb_p_imagem;
 
 -- PRODUTO/DESIGNER(N:N)
 /*CREATE TABLE tb_p_designer (
@@ -168,7 +170,19 @@ create table tb_enderecos(
 	nr_numero_res                    decimal(5,0)
 );
 
+select * from tb_enderecos;
 
+create table tb_endereco_cliente(
+
+id_endereco_cliente                 int primary key auto_increment not null,
+id_cliente                          int,
+id_endereco                         int,
+
+
+FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente),
+FOREIGN KEY (id_endereco) REFERENCES tb_enderecos(id_endereco)
+
+);
 
 -- select * from tb_enderecos;
 
