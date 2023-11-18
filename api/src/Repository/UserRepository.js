@@ -401,8 +401,8 @@ export async function ConsultarEnderecosPedido(id) {
 
   const comando = ` 
 
-  select * from tb_pedido_item
-  inner join tb_enderecos on tb_enderecos.id_endereco = tb_pedido_item.id_endereco
+  select * from tb_endereco_cliente
+  inner join tb_enderecos on tb_enderecos.id_endereco = tb_endereco_cliente.id_endereco
   where id_cliente like ?;
 
   `
@@ -471,5 +471,38 @@ export async function verCartao(id) {
     const [linhas] = await con.query(comando, [id]);
 
     return linhas;
+
+}
+
+
+
+export async function AssociarEnderecoCliente( enderecocliente ){
+
+  const comando = ` 
+  
+  insert into tb_endereco_cliente( id_endereco, id_cliente )
+                      values( ?, ? )
+
+  `
+
+  const [linhas] = await con.query(comando, [enderecocliente.endereco, enderecocliente.cliente]);
+
+  enderecocliente.id = linhas.insertId;
+
+  return enderecocliente;
+
+}
+
+
+export async function ExibirtodosEnderecos(){
+
+  const comando = `
+  
+    select * from tb_enderecos;
+  `
+
+  const [ linhas ] = await con.query(comando)
+
+  return linhas;
 
 }

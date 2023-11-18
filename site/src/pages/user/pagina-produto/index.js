@@ -82,7 +82,7 @@ export default function Produto() {
               <h6 id='filtra'> 
                 <strong>CATEGORIAS</strong>
               </h6>
-              <div class="secoes-quadrado"onClick={() => carregarProdutosPorCategoria("Blusas")}>
+              <div class="secoes-quadrado" onClick={() => carregarProdutosPorCategoria("Blusas")}>
               <input type="checkbox"></input>
                 <a>Blusas</a>
               </div>

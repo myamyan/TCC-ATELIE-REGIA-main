@@ -21,19 +21,19 @@ export default function Sacola() {
                             </div>
                             <img className='lixo' src="/assets/images/Vector.png" alt="" />
                             <div className='maismenos'>
-                                
-                            <button >-</button>
-                            <p>1</p>
-                            <button>+</button>
-        
+
+                                <button >-</button>
+                                <p>1</p>
+                                <button>+</button>
+
                             </div>
-                            
+
 
                         </div>
                         <div className="produtos-sacola">
-                            
+
                             <img className="images" src="/assets/images/image 49.png" alt="" />
-                            
+
                             <div className="produtosacola">
 
                                 <p>SHORT DE LINHO OFF -WHITE</p>
@@ -43,17 +43,17 @@ export default function Sacola() {
                             </div>
                             <img className='lixo' src="/assets/images/Vector.png" alt="" />
                             <div className='maismenos'>
-                            <button >-</button>
-                            <p>1</p>
-                            <button>+</button>
+                                <button >-</button>
+                                <p>1</p>
+                                <button>+</button>
                             </div>
 
-                
+
                         </div>
                         <div className="produtos-sacola">
-                            
+
                             <img className="images" src="/assets/images/image 49.png" alt="" />
-                            
+
                             <div className="produtosacola">
 
                                 <p>SHORT DE LINHO OFF -WHITE</p>
@@ -63,12 +63,12 @@ export default function Sacola() {
                             </div>
                             <img className='lixo' src="/assets/images/Vector.png" alt="" />
                             <div className='maismenos'>
-                            <button >-</button>
-                            <p>1</p>
-                            <button>+</button>
+                                <button >-</button>
+                                <p>1</p>
+                                <button>+</button>
                             </div>
 
-                
+
                         </div>
                     </div>
 

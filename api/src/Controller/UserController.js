@@ -1,4 +1,4 @@
-import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega, alterarEndereco, ConsultarEnderecosPedido, verCartao  } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega, alterarEndereco, ConsultarEnderecosPedido, verCartao, AssociarEnderecoCliente, ExibirtodosEnderecos  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
@@ -330,7 +330,7 @@ server.post('/user/cadastro/informacoes-entrega', async (req, resp) => {
 
     resp.send(infoCadastrada);
   } catch (err) {
-    console.error('Erro na função de cadastro de usuário:', err);
+    console.error('Erro na função de cadastro de endereço:', err);
     resp.status(400).send({
       erro: err.message
     });
@@ -568,6 +568,49 @@ server.get('user/consulta/cartao', async (req, resp) => {
         })
     }
 })
+
+
+
+server.get('user/consulta/todosenderecos', async (req, resp) => {
+
+  try {
+
+
+      const enderecos = await ExibirtodosEnderecos();
+
+      resp.send(enderecos);
+      
+   
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      })
+  }
+})
+
+
+
+server.post('/user/associacao/endereco-cliente', async (req, resp) => {
+
+  try {
+
+
+      const enderecoParaAssociar = req.body;
+
+      const enderecoAssociado = await AssociarEnderecoCliente(enderecoParaAssociar);
+
+      resp.send(enderecoAssociado);
+
+
+  } catch (err) {
+      resp.status(400).send({
+          erro: err.message
+      });
+  }
+});
+
+
 
 
 export default server;

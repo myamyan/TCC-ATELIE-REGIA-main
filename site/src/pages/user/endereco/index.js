@@ -1,8 +1,5 @@
-import {
-  addEndereco,
-  altEndereco,
-  verEndereco,
-} from "../../../api/user/enderecoUsuario/endereco.js";
+
+import { addEndereco, AssociarEndereco, verEndereco }  from '../../../api/user/enderecoUsuario/endereco.js';
 import Cabecalho1 from "../../../components/cabecalho1/index.js";
 import Rodape from "../../../components/rodape/index.js";
 import "./index.scss";
@@ -10,51 +7,24 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 function Enderecos() {
-  const [id, setId] = useState(0);
-  const [endereco, setEndereco] = useState("");
-  const [numres, setNumres] = useState("");
-  const [cep, setCEP] = useState("");
-  const [complemento, setComplemento] = useState("");
-  const [dadosEnd, setDadosEnd] = useState([]);
 
-  // const[buscaEndereco, setBuscaEndereco] = ([]);
+  const [dados, setDados] = useState([]);
+  const [dadosc, setDadosc] = useState([])
+  const [ endereco, setEndereco] = useState('');
+  const [cep, setCep] = useState('');
+  const [ complemento , setComplemento ] = useState('');
+  const [ numres, setNumres ] = useState();
 
-  // const { id_endereco } = useParams();
+  async function cadastrar(){
 
-  async function novoEndereco() {
-    try {
-      let r = await addEndereco(endereco, cep, complemento, numres);
+    const end = addEndereco( endereco, cep, complemento, numres )
 
-      setDadosEnd(r);
+    setDados(end)
 
-      // setDadosEnd(...dadosEnd, []);
-      // dadosEnd(...dadosEnd);
 
-      alert("Endereço adicionado com sucesso!");
-    } catch (err) {
-      alert(err.response.data.erro);
-    }
+
   }
 
-  async function listarEndereco() {
-    const resp = await verEndereco();
-    // setBuscaEndereco(resp);
-    console.log(resp);
-  }
-
-  async function buscandoEndereco() {
-    try {
-      const r = await verEndereco();
-      setDadosEnd(r);
-    } catch (err) {
-      alert(err.response.data.erro);
-    }
-  }
-
-  useEffect(() => {
-    listarEndereco();
-    buscandoEndereco();
-  }, []);
 
   return (
     <div className="pag-conta-endereco">
@@ -120,8 +90,8 @@ function Enderecos() {
                     <input
                       type="text"
                       value={cep}
-                      onChange={(e) => setCEP(e.target.value)}
-                      onClick={(e) => setDadosEnd(e.target.value)}
+                      onChange={(e) => setCep(e.target.value)}
+
                     />
                   </div>
 
@@ -131,7 +101,7 @@ function Enderecos() {
                       type="text"
                       value={complemento}
                       onChange={(e) => setComplemento(e.target.value)}
-                      onClick={(e) => setDadosEnd(e.target.value)}
+
                     />
                   </div>
 
@@ -141,7 +111,7 @@ function Enderecos() {
                       type="text"
                       value={numres}
                       onChange={(e) => setNumres(e.target.value)}
-                      onClick={(e) => setDadosEnd(e.target.value)}
+
                     />
                   </div>
                 </div>
@@ -154,12 +124,12 @@ function Enderecos() {
                     type="text"
                     value={endereco}
                     onChange={(e) => setEndereco(e.target.value)}
-                    onClick={(e) => setDadosEnd(e.target.value)}
+
                   />
                 </div>
 
                 <div className="botao-salvar">
-                  <button onClick={novoEndereco}> SALVAR </button>
+                  <button onClick={cadastrar}> SALVAR </button>
                 </div>
               </div>
             </div>
@@ -173,16 +143,16 @@ function Enderecos() {
 
             <div className="lista-scroll">
               <div>
-                {dadosEnd.map((item) => (
+                {dados.map((item) => (
                   <div className="info-end">
-                    <p> {item.ds_cep} </p>
+                    <p> {item.cep} </p>
 
                     <div>
-                      <p> {item.ds_complemento} </p>
-                      <p id="num"> {item.nr_numero_res} </p>
+                      <p> {item.complemento} </p>
+                      <p id="num"> {item.numres} </p>
                     </div>
 
-                    <p id="log"> {item.ds_endereco} </p>
+                    <p id="log"> {item.endereco} </p>
                   </div>
                 ))}
               </div>
