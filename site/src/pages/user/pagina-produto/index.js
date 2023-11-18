@@ -63,7 +63,7 @@ export default function Produto() {
 
       <div className="secao-container-ordem">
         <div className="faixa-ordem">
-          <p id="titulo-ordem"> {produtos.length} PRODUTOS</p>
+          <p id="titulo-ordem"> {produtos.length} PRODUTOS </p>
           <div className="secao-                      ordem">
             <p id="titulo-ordem">ORDENAR POR </p>
             <div className="images">
