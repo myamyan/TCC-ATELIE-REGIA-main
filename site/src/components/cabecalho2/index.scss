@@ -185,6 +185,32 @@
             cursor: pointer;
         }
     }
+
+    
+    .lupa-escondida {
+        display: flex;
+        align-items: center;
+        transition: transform 0.3s;
+      }
+      
+      .input-invisivel {
+        opacity: 1;
+        transform: translateX(10%);
+        transition: transform 0.3s;
+      }
+      
+      .move-to-side {
+        transform: translateX(0);
+      }
+      .cab1-direita.move-to-side {
+        transform: translateX(-28%);
+      }
+      
+      .input-invisivel {
+        opacity: 1;
+        transform: translateX(0);
+        transition: transform 0.3s;
+      }
 }
 
 @media (max-width: 400px) {

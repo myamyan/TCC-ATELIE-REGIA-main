@@ -3,7 +3,7 @@ import "./index.scss";
 
 export default function Cabecalho2() {
   const [menuVisivel, setMenuVisivel] = useState(false);
-
+  const [inputVisivel, setInputVisivel] = useState(false);
   const [width, setWidth] = useState(0);
   const elementRef = useRef(null);
 
@@ -13,11 +13,23 @@ export default function Cabecalho2() {
       return;
 
     setWidth(elementRef.current.getBoundingClientRect().width);
-  }); //empty dependency array so it only runs once at render
+  }); 
 
   const ve = () => {
     setMenuVisivel(!menuVisivel);
   };
+
+  
+  const vein = () => {
+    setInputVisivel(!inputVisivel);
+  };
+
+  useEffect(() => {
+    if (!elementRef.current) 
+      return;
+
+    setWidth(elementRef.current.getBoundingClientRect().width);
+  }); 
 
   return (
     <div className="page">
@@ -41,13 +53,26 @@ export default function Cabecalho2() {
               <img src="/assets/images/logo.png" alt="" className="logo1" />
             </div>
           </div>
-          <div className="cab1-direita">
-            <img className="img1-cab1" src="/assets/images/lupis.png" alt="" />
+          <div className={`cab1-direita ${inputVisivel ? "move-to-side" : ""}`}>
+          <div className={`lupa-escondida ${inputVisivel ? "move-to-side" : ""}`}>
+            <img className="img1-cab1" src="/assets/images/lupis.png" alt="" onClick={vein} />
+            {inputVisivel && (
+              <div class="input-invisivel"  ref={elementRef} >
+                
+                <input
+                  type="text"
+              placeholder="Digite aqui"
+              className="move-to-side" 
+                />
+              </div>
+            )}
+
+            </div>
+            
             <h3>
-              <a id="log" href="/login/cliente">LOGIN</a>
+              <a href="/login/cliente">LOGIN</a>
             </h3>
             <img
-            id="img2-cab1"
               className="img2-cab1"
               src="/assets/images/redfivediamonds.png"
               alt=""

@@ -5,10 +5,23 @@ import "./index.scss";
 export default function Cabecalho1() {
   const [menuVisivel, setMenuVisivel] = useState(false);
   const [width, setWidth] = useState(0);
+  const [inputVisivel, setInputVisivel] = useState(false);
   const elementRef = useRef(null);
 
   const ve = () => {
     setMenuVisivel(!menuVisivel);
+  };
+
+  useEffect(() => {
+    if (!elementRef.current) 
+      return;
+
+    setWidth(elementRef.current.getBoundingClientRect().width);
+  }); 
+
+
+  const vein = () => {
+    setInputVisivel(!inputVisivel);
   };
 
   useEffect(() => {
@@ -37,8 +50,22 @@ export default function Cabecalho1() {
               <img src="/assets/images/logo.png" alt="" className="logo1" />
             </div>
           </div>
-          <div className="cab1-direita">
-            <img className="img1-cab1" src="/assets/images/lupis.png" alt="" />
+          <div className={`cab1-direita ${inputVisivel ? "move-to-side" : ""}`}>
+          <div className={`lupa-escondida ${inputVisivel ? "move-to-side" : ""}`}>
+            <img className="img1-cab1" src="/assets/images/lupis.png" alt="" onClick={vein} />
+            {inputVisivel && (
+              <div class="input-invisivel"  ref={elementRef} >
+                
+                <input
+                  type="text"
+              placeholder="Digite aqui"
+              className="move-to-side" 
+                />
+              </div>
+            )}
+
+            </div>
+            
             <h3>
               <a href="/login/cliente">LOGIN</a>
             </h3>

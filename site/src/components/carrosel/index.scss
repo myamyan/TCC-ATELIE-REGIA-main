@@ -48,6 +48,8 @@
   z-index: 2;
 }
 
+
+
 .slide {
   position: relative;
   overflow: hidden;
@@ -120,4 +122,44 @@ margin-bottom: 5px;
  text-align: end;
 font-family: 'imprima2';
 letter-spacing: 1px;
+}
+
+.imagem-do-slide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.carrossel-de-imagens img {
+  width: 100%;
+  height: auto;
+}
+
+.botao-navegacao {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 24px; 
+  color: white; 
+}
+
+.botao-esquerda {
+  left: 10px; 
+}
+
+.botao-direita {
+  right: 10px; 
+}
+
+.botao-navegacao {
+  font-size: 24px; 
+  cursor: pointer;
+}
+
+.botao-navegacao {
+  font-size: 50px; 
+  font-weight: normal;
+  cursor: pointer;
+  color: #ffffff73;
 }
