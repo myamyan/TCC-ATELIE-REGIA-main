@@ -29,9 +29,7 @@ export default function Cadastroproduto() {
   const [novaCategoria, setNovaCategoria] = useState("");
   const [produtoIdParaExcluir, setProdutoIdParaExcluir] = useState(null);
   const [imagem, setImagem] = useState(null);
-const [produtoid, setProdutoid]= useState(null);
-
-
+  
   async function buscarCategoria() {
     try {
       const r = await axios.get(
@@ -165,6 +163,66 @@ const [produtoid, setProdutoid]= useState(null);
     fetchData();
   }, []);
 
+  async function salvardados() {
+    try {
+    const imagemId =await Salvarimagem(); 
+  
+      console.log("Dados enviados para o servidor:", {
+        imagem,
+        nome,
+        preco,
+        promocao,
+        promocaoBt,
+        destaque,
+        disponivel,
+        detalhes,
+        estoque,
+        designer,
+        categoria,
+        cor,
+        tecido,
+        tamanho,
+      });
+  
+      const r = await axios.post(
+        "http://localhost:5036/adm/cadastro/produto",
+        {
+          nome: nome,
+          preco: preco,
+          promocao: promocao,
+          promocaobool: promocaoBt,
+          destaquebool: destaque,
+          disponivelbool: disponivel,
+          detalhes: detalhes,
+          estoque: estoque,
+          designer: designer,
+          categoria: novaCategoria,
+        }
+      );
+  
+      console.log("Resposta do servidor:", r.data);
+      return r.data.id_produto;
+    } catch (error) {
+      console.error("Erro na solicitação:", error);
+      console.log("Detalhes do erro:", error.response.data);
+    }
+  }
+  
+
+  async function buscarCore() {
+    try {
+      const response = await axios.get("http://localhost:5036/buscarcores");
+      const data = response.data;
+      setBuscarCores(data);
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  }
+  
+  useEffect(() => {
+    buscarCore();
+  }, []);
+
   async function postarCor() {
     try {
       const response = await axios.post(
@@ -173,7 +231,7 @@ const [produtoid, setProdutoid]= useState(null);
           codhexa: novacor,
         }
       );
-
+  
       if (response.status === 200) {
         setCor(response.data.id_cores);
         buscarCores();
@@ -194,7 +252,7 @@ const [produtoid, setProdutoid]= useState(null);
       console.error("Erro ao buscar dados:", error);
     }
   }
-
+  
   useEffect(() => {
     buscartecido();
   }, []);
@@ -207,7 +265,7 @@ const [produtoid, setProdutoid]= useState(null);
           tipo: novotecido,
         }
       );
-
+  
       if (response.status === 200) {
         setTecido(response.data.id_tecidos);
         buscarTecidos();
@@ -219,6 +277,8 @@ const [produtoid, setProdutoid]= useState(null);
     }
   }
 
+
+
   async function buscartamanhos() {
     try {
       const response = await axios.get("http://localhost:5036/buscarTAMANHO");
@@ -228,9 +288,9 @@ const [produtoid, setProdutoid]= useState(null);
       console.error("Erro ao buscar dados:", error);
     }
   }
-
+  
   useEffect(() => {
-    buscartamanhos();
+   buscartamanhos();
   }, []);
 
   async function postartamanho() {
@@ -241,7 +301,7 @@ const [produtoid, setProdutoid]= useState(null);
           tamanho: novotamanho,
         }
       );
-
+  
       if (response.status === 200) {
         setTamanho(response.data.id_tamanho);
         buscartamanho();
@@ -255,121 +315,40 @@ const [produtoid, setProdutoid]= useState(null);
   async function Deletar(id) {
     try {
       if (id) {
-        const resposta = await axios.delete(
-          `http://localhost:5036/adm/produto/deletar/${id}`
-        );
-
+        const resposta = await axios.delete(`http://localhost:5036/adm/produto/deletar/${id}`);
+    
         if (resposta.status === 200) {
-          console.log("Produto excluído com sucesso");
+          console.log('Produto excluído com sucesso');
         } else {
-          console.error("Falha ao excluir o produto");
+          console.error('Falha ao excluir o produto');
         }
       } else {
-        console.error("ID do produto para exclusão não definido");
+        console.error('ID do produto para exclusão não definido');
       }
     } catch (erro) {
-      console.error("Erro durante a exclusão:", erro);
+      console.error('Erro durante a exclusão:', erro);
     }
   }
-
-  // ...................................................................
-
-  async function buscarCore() {
-    try {
-      const response = await axios.get("http://localhost:5036/buscarcores");
-      const data = response.data;
-      setBuscarCores(data);
-    } catch (error) {
-      console.error("Erro ao buscar dados:", error);
-    }
-  }
-
-  useEffect(() => {
-    buscarCore();
-  }, []);
-
-  // ..............................................
-  
-  async function SalvarProduto(imagemId) {
-    try {
-      const r = await axios.post("http://localhost:5036/adm/cadastro/produto", {
-        idproduto: produtoid,
-        nome: nome,
-        preco: preco,
-        promocao: promocao,
-        promocaobool: promocaoBt,
-        destaquebool: destaque,
-        disponivelbool: disponivel,
-        detalhes: detalhes,
-        estoque: estoque,
-        designer: designer,
-        categoria: novaCategoria,
-      });
-
-      console.log("Resposta do servidor (produto):", r.data);
-      return r.data.id_produto;
-    } catch (error) {
-      console.error("Erro na solicitação (produto):", error);
-      console.log("Detalhes do erro (produto):", error.response.data);
-      throw error;
-    }
-  }
-  
 
   async function Salvarimagem() {
     try {
       const formData = new FormData();
-      formData.append("imagem", imagem);
+      formData.append('imagem', imagem);
   
-      const response = await axios.post(
-        "http://localhost:5036/adm/cadastro/produto/imagem",
+      const r = await axios.post(
+        'http://localhost:5036/adm/cadastro/produto/imagem',
         formData
       );
   
-      console.log("Resposta do servidor (imagem):", response.data);
-  
-      return response.data.id_imagem;
+      console.log('Resposta do servidor:', r.data);
     } catch (error) {
-      console.error("Erro na solicitação (imagem):", error);
-      console.log("Detalhes do erro (imagem):", error.response.data);
-      throw error;
+      console.error('Erro na solicitação:', error);
+      console.log('Detalhes do erro:', error.response.data);
     }
   }
   
-
-  // .................................................
-
-  async function salvardados() {
-    try {
-      const imagemId = await Salvarimagem();
-  
-      if (imagemId) {
-        const produtoId = await SalvarProduto(imagemId);
-  
-        if (produtoId) {
-          const responseAssociacao = await axios.post(
-            "http://localhost:5036/adm/associacao/imagem-produto",
-            {
-              idProduto: produtoId,
-              idImagem: imagemId,
-            }
-          );
-  
-          console.log("Resposta do servidor (associação):", responseAssociacao.data);
-        } else {
-          console.error("ID do produto retornado de SalvarProduto é nulo ou indefinido.");
-        }
-      } else {
-        console.error("ID da imagem retornado de Salvarimagem é nulo ou indefinido.");
-      }
-    } catch (error) {
-      console.error("Erro ao salvar dados:", error);
-      console.log("Detalhes do erro:", error.response.data);
-    }
-  }
   
 
-  
   return (
     <div className="tudo-cadastroproduto">
       <div className="escrever">
@@ -379,34 +358,33 @@ const [produtoid, setProdutoid]= useState(null);
 
       <div className="input-orisontal1">
         <div className="direita-cadastroproduto-quadrado">
-          <div class="custom-file-input-wrapper">
-            <button
-              class="custom-file-input-button"
-              onClick={() => document.getElementById("inputImagem").click()}
-            >
-              ADICIONAR IMAGEM +
-            </button>
-            <input
-              type="file"
-              id="inputImagem"
-              className="input-file"
-              accept="image/*"
-              onChange={(e) => {
-                if (e.target.files.length > 0) {
-                  setImagem(e.target.files[0]);
-                }
-              }}
-            />
-          </div>
-          {imagem && (
-            <div className="imagem-preview">
-              <img
-                src={URL.createObjectURL(imagem)}
-                className="image"
-                alt="Imagem de pré-visualização"
-              />
-            </div>
-          )}
+        <div class="custom-file-input-wrapper">
+  <button
+    class="custom-file-input-button"
+    onClick={() => document.getElementById('inputImagem').click()}
+
+  >
+    ADICIONAR IMAGEM +
+  </button>
+  <input
+  type="file"
+  id="inputImagem"
+  className="input-file"
+  accept="image/*"
+  onChange={(e) => {
+    if (e.target.files.length > 0) {
+      setImagem(e.target.files[0]);
+    }
+  }}
+/>
+
+</div>
+{imagem && (
+  <div className="imagem-preview">
+    <img src={URL.createObjectURL(imagem)} className="image" alt="Imagem de pré-visualização"   />
+  </div>
+)}
+
         </div>
 
         <div className="inputs-adicionar">
@@ -443,12 +421,14 @@ const [produtoid, setProdutoid]= useState(null);
                 value={designer}
                 onChange={(e) => setDesigner(e.target.value)}
               >
-                <option>Escolha um designer</option>
+                 <option>Escolha um designer</option>
                 {dadosCarregados &&
                   buscarDesigner.map((item) => (
+                   
                     <option key={item.id_designer} value={item.id_designer}>
                       {item.nm_designer}
                     </option>
+
                   ))}
               </select>
 
@@ -509,7 +489,7 @@ const [produtoid, setProdutoid]= useState(null);
 
             <div className="input-estoque">
               <label>ESTOQUE</label>
-              <input placeholder="0" inputMode="numeric" />
+              <input  placeholder="0" inputMode="numeric"  />
             </div>
           </div>
 
@@ -517,48 +497,53 @@ const [produtoid, setProdutoid]= useState(null);
             <div className="cor">
               <label>COR</label>
               <select
-                className="custom-select1"
-                value={cor}
-                onChange={(e) => setCor(e.target.value)}
-              >
-                <option>Selecione designer</option>
-                {dadosCarregados &&
-                  buscarCores.map((item) => (
-                    <option key={item.id_cores} value={item.id_cores}>
-                      {item.ds_hexa_decimal}
-                    </option>
-                  ))}
-              </select>
+  className="custom-select1"
+  value={cor}
+  onChange={(e) => setCor(e.target.value)}
+>
+<option>Selecione designer</option>
+  {dadosCarregados &&
+    buscarCores.map((item) => (
+      <option key={item.id_cores} value={item.id_cores}>
+        {item.ds_hexa_decimal}
+      </option>
+    ))}
+</select>
               <div className="button-designer" type="button">
-                <input
-                  type="text"
-                  class="muda"
-                  placeholder="Adicionar nova cor"
-                  value={novacor}
-                  onChange={(e) => setNovacor(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      postarCor(undefined, true);
-                    }
-                  }}
-                />
+              <input
+    type="text"
+    class="muda"
+    placeholder="Adicionar nova cor"
+    value={novacor}
+    onChange={(e) => setNovacor(e.target.value)}
+    onKeyDown={(e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        postarCor(undefined, true);
+      }
+    }}
+  />
               </div>
             </div>
 
             <div className="tecido">
               <label>TECIDO</label>
               <select className="custom-select5">
-                <option>Selecione tecido</option>
-                {dadosCarregados &&
+
+              <option>Selecione tecido</option>
+              {dadosCarregados &&
                   buscarTecidos.map((item) => {
                     console.log("Mapeando item:", item);
                     return (
-                      <option key={item.id_tecidos} value={item.id_tecidos}>
+                      <option
+                        key={item.id_tecidos}
+                        value={item.id_tecidos}
+                      >
                         {item.ds_tipo}
                       </option>
                     );
                   })}
+
               </select>
               <div className="button-designer" type="button">
                 <input
@@ -580,16 +565,16 @@ const [produtoid, setProdutoid]= useState(null);
             <div className="tamanho">
               <label>TAMANHO</label>
               <select className="custom-select6">
-                <option>Selecione tamanho</option>
-                {dadosCarregados &&
-                  buscartamanho.map((item) => {
-                    console.log("Mapeando item:", item);
-                    return (
-                      <option key={item.id_tamanho} value={item.id_tamanho}>
-                        {item.ds_tamanho}
-                      </option>
-                    );
-                  })}
+              <option>Selecione tamanho</option>
+              {dadosCarregados &&
+  buscartamanho.map((item) => {
+    console.log("Mapeando item:", item);
+    return (
+      <option key={item.id_tamanho} value={item.id_tamanho}>
+        {item.ds_tamanho}
+      </option>
+    );
+  })}
               </select>
               <div className="button-designer" type="button">
                 <input
@@ -616,7 +601,7 @@ const [produtoid, setProdutoid]= useState(null);
                 placeholder="R$ 00,00"
                 value={preco}
                 onChange={(e) => setPreco(e.target.value)}
-                inputMode="numeric"
+                inputMode="numeric" 
               />
             </div>
 
@@ -626,32 +611,34 @@ const [produtoid, setProdutoid]= useState(null);
                 placeholder="R$ 00,00"
                 value={promocao}
                 onChange={(e) => setPromocao(e.target.value)}
-                inputMode="numeric"
+                  inputMode="numeric" 
               />
             </div>
           </div>
 
           <div className="checkbox">
             <input
-              type="checkbox"
-              checked={promocaoBt}
-              onChange={() => setPromocaoBt(!promocaoBt)}
+               type="checkbox"
+               checked={promocaoBt}
+               onChange={() => setPromocaoBt(!promocaoBt)}
+             
             />
             <label> PROMOÇÃO</label>
 
             <input
-              type="checkbox"
-              checked={destaque}
-              onChange={(e) => setDestaque(e.target.checked)}
-            />
+ type="checkbox"
+ checked={destaque}
+ onChange={(e) => setDestaque(e.target.checked)}
+/>
 
             <label> DESTAQUE</label>
 
             <input
-              type="checkbox"
-              checked={disponivel}
-              onChange={(e) => setDisponivel(e.target.checked)}
-            />
+
+type="checkbox"
+  checked={disponivel}
+  onChange={(e) => setDisponivel(e.target.checked)}
+/>
             <label> DISPONÍVEL</label>
           </div>
         </div>
@@ -660,10 +647,7 @@ const [produtoid, setProdutoid]= useState(null);
       <hr />
 
       <div className="botoes-produto">
-        <button id="branco" onClick={Deletar}>
-          {" "}
-          DELETAR{" "}
-        </button>
+      <button id="branco" onClick={Deletar}> DELETAR </button>
         <button id="preto" onClick={salvardados}>
           SALVAR
         </button>
@@ -671,7 +655,6 @@ const [produtoid, setProdutoid]= useState(null);
     </div>
   );
 }
-
 // import './index.scss';
 
 // export default function Cadastroproduto() {
