@@ -29,8 +29,7 @@ export default function Cadastroproduto() {
   const [novaCategoria, setNovaCategoria] = useState("");
   const [produtoIdParaExcluir, setProdutoIdParaExcluir] = useState(null);
   const [imagem, setImagem] = useState(null);
-const{imagemId, setImagemid}= useState(null);
-const [produtoId, setProdutoId]=useState(null);
+const [produtoid, setProdutoid]= useState(null);
 
 
   async function buscarCategoria() {
@@ -166,23 +165,6 @@ const [produtoId, setProdutoId]=useState(null);
     fetchData();
   }, []);
 
- 
-  
-
-  async function buscarCore() {
-    try {
-      const response = await axios.get("http://localhost:5036/buscarcores");
-      const data = response.data;
-      setBuscarCores(data);
-    } catch (error) {
-      console.error("Erro ao buscar dados:", error);
-    }
-  }
-
-  useEffect(() => {
-    buscarCore();
-  }, []);
-
   async function postarCor() {
     try {
       const response = await axios.post(
@@ -270,7 +252,6 @@ const [produtoId, setProdutoId]=useState(null);
       console.error("Erro na solicitação:", error);
     }
   }
-  
   async function Deletar(id) {
     try {
       if (id) {
@@ -291,58 +272,28 @@ const [produtoId, setProdutoId]=useState(null);
     }
   }
 
-  async function Salvarimagem(imagem, produtoId) {
+  // ...................................................................
+
+  async function buscarCore() {
     try {
-      const formData = new FormData();
-      formData.append("imagem", imagem);
-  
-      const response = await axios.post(
-        "http://localhost:5036/adm/cadastro/produto/imagem",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-  
-      console.log("Resposta do servidor (imagem):", response.data);
-  
-      return response.data.id_imagem;
+      const response = await axios.get("http://localhost:5036/buscarcores");
+      const data = response.data;
+      setBuscarCores(data);
     } catch (error) {
-      console.error("Erro na solicitação (imagem):", error);
-      console.log("Detalhes do erro (imagem):", error.response.data);
-      throw error;
+      console.error("Erro ao buscar dados:", error);
     }
   }
 
+  useEffect(() => {
+    buscarCore();
+  }, []);
 
-  async function salvardados() {
-    try {
+  // ..............................................
   
-      const responseAssociacao = await axios.post(
-        "http://localhost:5036/adm/associacao/imagem-produto",
-        {
-          idProduto: produtoId,
-          idImagem: imagemId,
-        }
-      );
-  
-      console.log("Resposta do servidor (associacao):", responseAssociacao.data);
-  
-  
-    } catch (error) {
-      console.error("Erro na solicitação:", error);
-      console.log("Detalhes do erro:", error.response ? error.response.data : error.message);
-    }
-  }
-  
-  
-  
-  async function salvarproduto(imagemId) {
+  async function SalvarProduto(imagemId) {
     try {
       const r = await axios.post("http://localhost:5036/adm/cadastro/produto", {
-        img_link: imagemId,
+        idproduto: produtoid,
         nome: nome,
         preco: preco,
         promocao: promocao,
@@ -354,15 +305,71 @@ const [produtoId, setProdutoId]=useState(null);
         designer: designer,
         categoria: novaCategoria,
       });
-  
-      console.log("Resposta do servidor:", r.data);
+
+      console.log("Resposta do servidor (produto):", r.data);
       return r.data.id_produto;
     } catch (error) {
-      console.error("Erro na solicitação:", error);
-      console.log("Detalhes do erro:", error.response ? error.response.data : error.message);
+      console.error("Erro na solicitação (produto):", error);
+      console.log("Detalhes do erro (produto):", error.response.data);
+      throw error;
     }
   }
+  
 
+  async function Salvarimagem() {
+    try {
+      const formData = new FormData();
+      formData.append("imagem", imagem);
+  
+      const response = await axios.post(
+        "http://localhost:5036/adm/cadastro/produto/imagem",
+        formData
+      );
+  
+      console.log("Resposta do servidor (imagem):", response.data);
+  
+      return response.data.id_imagem;
+    } catch (error) {
+      console.error("Erro na solicitação (imagem):", error);
+      console.log("Detalhes do erro (imagem):", error.response.data);
+      throw error;
+    }
+  }
+  
+
+  // .................................................
+
+  async function salvardados() {
+    try {
+      const imagemId = await Salvarimagem();
+  
+      if (imagemId) {
+        const produtoId = await SalvarProduto(imagemId);
+  
+        if (produtoId) {
+          const responseAssociacao = await axios.post(
+            "http://localhost:5036/adm/associacao/imagem-produto",
+            {
+              idProduto: produtoId,
+              idImagem: imagemId,
+            }
+          );
+  
+          console.log("Resposta do servidor (associação):", responseAssociacao.data);
+        } else {
+          console.error("ID do produto retornado de SalvarProduto é nulo ou indefinido.");
+        }
+      } else {
+        console.error("ID da imagem retornado de Salvarimagem é nulo ou indefinido.");
+      }
+    } catch (error) {
+      console.error("Erro ao salvar dados:", error);
+      console.log("Detalhes do erro:", error.response.data);
+    }
+  }
+  
+
+  
   return (
     <div className="tudo-cadastroproduto">
       <div className="escrever">
