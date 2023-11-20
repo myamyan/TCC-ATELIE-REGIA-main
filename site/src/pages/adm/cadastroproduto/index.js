@@ -28,6 +28,10 @@ export default function Cadastroproduto() {
   const [novotamanho, setNovotamanho] = useState("");
   const [novaCategoria, setNovaCategoria] = useState("");
   const [produtoIdParaExcluir, setProdutoIdParaExcluir] = useState(null);
+  const [imagem, setImagem] = useState(null);
+const{imagemId, setImagemid}= useState(null);
+const [produtoId, setProdutoId]=useState(null);
+
 
   async function buscarCategoria() {
     try {
@@ -162,49 +166,8 @@ export default function Cadastroproduto() {
     fetchData();
   }, []);
 
-  async function salvardados() {
-    try {
-      console.log("Dados enviados para o servidor:", {
-        nome,
-        preco,
-        promocao,
-        promocaoBt,
-        destaque,
-        disponivel,
-        detalhes,
-        estoque,
-        designer,
-        categoria,
-        cor,
-        tecido,
-        tamanho,
-      });
-
-      const r = await axios.post(
-        "http://localhost:5036/adm/cadastro/produto",
-        // "http://129.148.42.252:5036/adm/cadastro/produto",
-        {
-          nome: nome,
-          preco: preco,
-          promocao: promocao,
-          promocaoBt: promocaoBt,
-          destaque: destaque,
-          disponivel: disponivel,
-          detalhes: detalhes,
-          estoque: estoque,
-          designer: designer,
-          categoria: novaCategoria,
-        }
-      );
-
-      console.log("Resposta do servidor:", r.data);
-    } catch (error) {
-      console.error("Erro na solicitação:", error);
-      console.log("Detalhes do erro:", error.response.data);
-    }
-
-    
-  }
+ 
+  
 
   async function buscarCore() {
     try {
@@ -215,7 +178,7 @@ export default function Cadastroproduto() {
       console.error("Erro ao buscar dados:", error);
     }
   }
-  
+
   useEffect(() => {
     buscarCore();
   }, []);
@@ -228,7 +191,7 @@ export default function Cadastroproduto() {
           codhexa: novacor,
         }
       );
-  
+
       if (response.status === 200) {
         setCor(response.data.id_cores);
         buscarCores();
@@ -249,7 +212,7 @@ export default function Cadastroproduto() {
       console.error("Erro ao buscar dados:", error);
     }
   }
-  
+
   useEffect(() => {
     buscartecido();
   }, []);
@@ -262,7 +225,7 @@ export default function Cadastroproduto() {
           tipo: novotecido,
         }
       );
-  
+
       if (response.status === 200) {
         setTecido(response.data.id_tecidos);
         buscarTecidos();
@@ -274,8 +237,6 @@ export default function Cadastroproduto() {
     }
   }
 
-
-
   async function buscartamanhos() {
     try {
       const response = await axios.get("http://localhost:5036/buscarTAMANHO");
@@ -285,9 +246,9 @@ export default function Cadastroproduto() {
       console.error("Erro ao buscar dados:", error);
     }
   }
-  
+
   useEffect(() => {
-   buscartamanhos();
+    buscartamanhos();
   }, []);
 
   async function postartamanho() {
@@ -298,7 +259,7 @@ export default function Cadastroproduto() {
           tamanho: novotamanho,
         }
       );
-  
+
       if (response.status === 200) {
         setTamanho(response.data.id_tamanho);
         buscartamanho();
@@ -309,24 +270,99 @@ export default function Cadastroproduto() {
       console.error("Erro na solicitação:", error);
     }
   }
+  
   async function Deletar(id) {
     try {
       if (id) {
-        const resposta = await axios.delete(`http://localhost:5036/adm/produto/deletar/${id}`);
-    
+        const resposta = await axios.delete(
+          `http://localhost:5036/adm/produto/deletar/${id}`
+        );
+
         if (resposta.status === 200) {
-          console.log('Produto excluído com sucesso');
+          console.log("Produto excluído com sucesso");
         } else {
-          console.error('Falha ao excluir o produto');
+          console.error("Falha ao excluir o produto");
         }
       } else {
-        console.error('ID do produto para exclusão não definido');
+        console.error("ID do produto para exclusão não definido");
       }
     } catch (erro) {
-      console.error('Erro durante a exclusão:', erro);
+      console.error("Erro durante a exclusão:", erro);
+    }
+  }
+
+  async function Salvarimagem(imagem, produtoId) {
+    try {
+      const formData = new FormData();
+      formData.append("imagem", imagem);
+  
+      const response = await axios.post(
+        "http://localhost:5036/adm/cadastro/produto/imagem",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
+      console.log("Resposta do servidor (imagem):", response.data);
+  
+      return response.data.id_imagem;
+    } catch (error) {
+      console.error("Erro na solicitação (imagem):", error);
+      console.log("Detalhes do erro (imagem):", error.response.data);
+      throw error;
+    }
+  }
+
+
+  async function salvardados() {
+    try {
+  
+      const responseAssociacao = await axios.post(
+        "http://localhost:5036/adm/associacao/imagem-produto",
+        {
+          idProduto: produtoId,
+          idImagem: imagemId,
+        }
+      );
+  
+      console.log("Resposta do servidor (associacao):", responseAssociacao.data);
+  
+  
+    } catch (error) {
+      console.error("Erro na solicitação:", error);
+      console.log("Detalhes do erro:", error.response ? error.response.data : error.message);
     }
   }
   
+  
+  
+  async function salvarproduto(imagemId) {
+    try {
+      const r = await axios.post("http://localhost:5036/adm/cadastro/produto", {
+        img_link: imagemId,
+        nome: nome,
+        preco: preco,
+        promocao: promocao,
+        promocaobool: promocaoBt,
+        destaquebool: destaque,
+        disponivelbool: disponivel,
+        detalhes: detalhes,
+        estoque: estoque,
+        designer: designer,
+        categoria: novaCategoria,
+      });
+  
+      console.log("Resposta do servidor:", r.data);
+      return r.data.id_produto;
+    } catch (error) {
+      console.error("Erro na solicitação:", error);
+      console.log("Detalhes do erro:", error.response ? error.response.data : error.message);
+    }
+  }
+
   return (
     <div className="tudo-cadastroproduto">
       <div className="escrever">
@@ -339,12 +375,31 @@ export default function Cadastroproduto() {
           <div class="custom-file-input-wrapper">
             <button
               class="custom-file-input-button"
-              onclick="document.getElementById('inputImagem').click()"
+              onClick={() => document.getElementById("inputImagem").click()}
             >
               ADICIONAR IMAGEM +
             </button>
-            <input type="file" id="inputImagem" class="input-file" />
+            <input
+              type="file"
+              id="inputImagem"
+              className="input-file"
+              accept="image/*"
+              onChange={(e) => {
+                if (e.target.files.length > 0) {
+                  setImagem(e.target.files[0]);
+                }
+              }}
+            />
           </div>
+          {imagem && (
+            <div className="imagem-preview">
+              <img
+                src={URL.createObjectURL(imagem)}
+                className="image"
+                alt="Imagem de pré-visualização"
+              />
+            </div>
+          )}
         </div>
 
         <div className="inputs-adicionar">
@@ -381,6 +436,7 @@ export default function Cadastroproduto() {
                 value={designer}
                 onChange={(e) => setDesigner(e.target.value)}
               >
+                <option>Escolha um designer</option>
                 {dadosCarregados &&
                   buscarDesigner.map((item) => (
                     <option key={item.id_designer} value={item.id_designer}>
@@ -413,6 +469,7 @@ export default function Cadastroproduto() {
                 className="custom-select2"
                 name="select-categoria"
               >
+                <option>Selecione categoria</option>
                 {dadosCarregados &&
                   buscarCategorias.map((item) => {
                     console.log("Mapeando item:", item);
@@ -445,7 +502,7 @@ export default function Cadastroproduto() {
 
             <div className="input-estoque">
               <label>ESTOQUE</label>
-              <input type="number" placeholder="0" />
+              <input placeholder="0" inputMode="numeric" />
             </div>
           </div>
 
@@ -453,50 +510,48 @@ export default function Cadastroproduto() {
             <div className="cor">
               <label>COR</label>
               <select
-  className="custom-select1"
-  value={cor}
-  onChange={(e) => setCor(e.target.value)}
->
-  {dadosCarregados &&
-    buscarCores.map((item) => (
-      <option key={item.id_cores} value={item.id_cores}>
-        {item.ds_hexa_decimal}
-      </option>
-    ))}
-</select>
+                className="custom-select1"
+                value={cor}
+                onChange={(e) => setCor(e.target.value)}
+              >
+                <option>Selecione designer</option>
+                {dadosCarregados &&
+                  buscarCores.map((item) => (
+                    <option key={item.id_cores} value={item.id_cores}>
+                      {item.ds_hexa_decimal}
+                    </option>
+                  ))}
+              </select>
               <div className="button-designer" type="button">
-              <input
-    type="text"
-    class="muda"
-    placeholder="Adicionar nova cor"
-    value={novacor}
-    onChange={(e) => setNovacor(e.target.value)}
-    onKeyDown={(e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        postarCor(undefined, true);
-      }
-    }}
-  />
+                <input
+                  type="text"
+                  class="muda"
+                  placeholder="Adicionar nova cor"
+                  value={novacor}
+                  onChange={(e) => setNovacor(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      postarCor(undefined, true);
+                    }
+                  }}
+                />
               </div>
             </div>
 
             <div className="tecido">
               <label>TECIDO</label>
               <select className="custom-select5">
-              {dadosCarregados &&
+                <option>Selecione tecido</option>
+                {dadosCarregados &&
                   buscarTecidos.map((item) => {
                     console.log("Mapeando item:", item);
                     return (
-                      <option
-                        key={item.id_tecidos}
-                        value={item.id_tecidos}
-                      >
+                      <option key={item.id_tecidos} value={item.id_tecidos}>
                         {item.ds_tipo}
                       </option>
                     );
                   })}
-
               </select>
               <div className="button-designer" type="button">
                 <input
@@ -518,15 +573,16 @@ export default function Cadastroproduto() {
             <div className="tamanho">
               <label>TAMANHO</label>
               <select className="custom-select6">
-              {dadosCarregados &&
-  buscartamanho.map((item) => {
-    console.log("Mapeando item:", item);
-    return (
-      <option key={item.id_tamanho} value={item.id_tamanho}>
-        {item.ds_tamanho}
-      </option>
-    );
-  })}
+                <option>Selecione tamanho</option>
+                {dadosCarregados &&
+                  buscartamanho.map((item) => {
+                    console.log("Mapeando item:", item);
+                    return (
+                      <option key={item.id_tamanho} value={item.id_tamanho}>
+                        {item.ds_tamanho}
+                      </option>
+                    );
+                  })}
               </select>
               <div className="button-designer" type="button">
                 <input
@@ -550,20 +606,20 @@ export default function Cadastroproduto() {
             <div className="valor-produto">
               <label> VALOR </label>
               <input
-                type="Number"
                 placeholder="R$ 00,00"
                 value={preco}
                 onChange={(e) => setPreco(e.target.value)}
+                inputMode="numeric"
               />
             </div>
 
             <div className="valor-promocional-produto">
               <label> VALOR PROMOCINAL </label>
               <input
-                type="Number"
                 placeholder="R$ 00,00"
                 value={promocao}
                 onChange={(e) => setPromocao(e.target.value)}
+                inputMode="numeric"
               />
             </div>
           </div>
@@ -579,14 +635,15 @@ export default function Cadastroproduto() {
             <input
               type="checkbox"
               checked={destaque}
-              onChange={() => setDestaque(!destaque)}
+              onChange={(e) => setDestaque(e.target.checked)}
             />
+
             <label> DESTAQUE</label>
 
             <input
               type="checkbox"
               checked={disponivel}
-              onChange={() => setDisponivel(!disponivel)}
+              onChange={(e) => setDisponivel(e.target.checked)}
             />
             <label> DISPONÍVEL</label>
           </div>
@@ -596,7 +653,10 @@ export default function Cadastroproduto() {
       <hr />
 
       <div className="botoes-produto">
-      <button id="branco" onClick={Deletar}> DELETAR </button>
+        <button id="branco" onClick={Deletar}>
+          {" "}
+          DELETAR{" "}
+        </button>
         <button id="preto" onClick={salvardados}>
           SALVAR
         </button>

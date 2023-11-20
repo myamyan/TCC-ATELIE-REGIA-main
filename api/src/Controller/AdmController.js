@@ -313,10 +313,6 @@ server.post('/adm/cadastro/tamanho', async (req, resp) => {
 
 
 
-
-
-
-
 server.post('/adm/associacao/imagem-produto', async (req, resp) => {
 
     try {
@@ -910,5 +906,23 @@ server.get('/adm/select/cores', async (req, resp) => {
     }
 })
 
+
+server.post('/adm/cadastro/produto/imagem', upload.single('imagem'), async (req, resp) => {
+    try {
+      const imagem = req.file.path;
+  
+      const idDaImagemInserida = await cadastrarImagem(imagem);
+  
+      resp.status(200).send({
+        id: idDaImagemInserida
+      });
+  
+    } catch (err) {
+      resp.status(400).send({
+        erro: err.message
+      });
+    }
+  });
+  
 
 export default server;

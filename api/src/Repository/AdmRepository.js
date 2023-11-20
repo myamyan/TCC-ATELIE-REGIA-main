@@ -240,15 +240,15 @@ export async function inserirtamanho(tamanho) {
   return tamanho;
 }
 
-export async function cadastrarImagem(imagem) {
-  const comando = `         
-            insert into tb_produto_imagem( img_link )
-                                    values( ? )
-    `;
+// export async function cadastrarImagem(imagem) {
+//   const comando = `         
+//             insert into tb_produto_imagem( img_link )
+//                                     values( ? )
+//     `;
 
-  const [resposta] = await con.query(comando, [imagem]);
-  return resposta.affectedRows;
-}
+//   const [resposta] = await con.query(comando, [imagem]);
+//   return resposta.affectedRows;
+// }
 
 //feita api ↓
 export async function AssociarImagemProduto(imagemproduto) {
@@ -758,4 +758,14 @@ export async function SelectCores() {
   const [linhas] = await con.query(comando);
 
   return linhas;
+}
+
+export async function cadastrarImagem(imagem) {
+  const comando = `INSERT INTO tb_produto_imagem (img_link) VALUES (?)`;
+
+  const [resposta] = await con.query(comando, [imagem]);
+
+  const idDaImagemInserida = resposta.insertId;
+
+  return idDaImagemInserida;
 }
