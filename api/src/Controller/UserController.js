@@ -1,4 +1,4 @@
-import { inserircadastrousuario, loginCliente, verificarEmailExistente,  CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega, alterarEndereco, ConsultarEnderecosPedido, verCartao, AssociarEnderecoCliente, ExibirtodosEnderecos  } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega, alterarEndereco, ConsultarEnderecosPedido, verCartao, AssociarEnderecoCliente, ExibirtodosEnderecos  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
@@ -19,50 +19,22 @@ server.post('/user/cadastro/usuario', async (req, resp) => {
     }
   });
 
+
   server.post('/user/login/cliente', async (req, resp) => {
     try {
-      const loginparainserir = req.body;
+      const { email, senha } = req.body;
   
-      const emailExistente = await verificarEmailExistente(loginparainserir.email);
-  
-      if (emailExistente) {
-    
-        const logininserida = await inserircadastrousuario(loginparainserir);
-        resp.send(logininserida);
-      } else {
-        
-        throw new Error('Este email não está cadastrado.');
-      }
-  
+      const emailjaExistente = await loginCliente(email, senha);
+
+      resp.send(emailjaExistente)
+
     } catch (err) {
       resp.status(400).send({
         erro: err.message
       });
     }
   });
-  
-  server.get('/user/login/email/:email', async (req, resp) => {
-    try {
-      const { email } = req.params;
-  
-      if (!email) {
-        resp.status(400).send({ erro: 'O parâmetro email é obrigatório' });
-        return;
-      }
-  
-      const resposta = await buscaremail(email);
-  
-      if (!resposta) {
-        resp.status(404).send({ erro: 'Email não encontrado' });
-        return;
-      }
-  
-      resp.send(resposta);
-    } catch (err) {
-      console.error('Erro na função emaillogin:', err);
-      resp.status(500).send({ erro: 'Ocorreu um erro ao processar a requisição.' });
-    }
-  });
+
 
 
   server.post('/user/cadastro/finalizacao', async (req, resp) => {
@@ -247,27 +219,6 @@ server.get('/user/filtro/tamanho', async (req, resp) => {
 })
 
 
-// server.get('/user/filtro/valor', async (req, resp) => {
-
-//     try {
-
-//         const { valor } = req.query;
-
-//         const produtoporvalor = await FiltroPorValor( valor );
-
-//         resp.send(produtoporvalor);
-
-
-//     } catch (err) {
-//         resp.status(400).send({
-//             erro: err.message
-//         })
-//     }
-// })
-
-
-
-
 server.get('/user/filtro/promocao', async (req, resp) => {
 
   try {
@@ -329,6 +280,7 @@ server.post('/user/cadastro/informacoes-entrega', async (req, resp) => {
     const infoCadastrada = await CadastroInfoEntrega(infoParaCadastrar);
 
     resp.send(infoCadastrada);
+
   } catch (err) {
     console.error('Erro na função de cadastro de endereço:', err);
     resp.status(400).send({

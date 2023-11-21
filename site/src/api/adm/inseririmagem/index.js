@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 
-//         const resposta = await axios.post('http:// 129.148.42.252:5036/adm/cadastro/produto/imagem', {
+//         const resposta = await axios.post('http:// localhost:5036/adm/cadastro/produto/imagem', {
         
 //         imagem: imagem
 

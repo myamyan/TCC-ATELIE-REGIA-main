@@ -7,7 +7,7 @@ export async function ConsultarImagens(id) {
 
 
 
-        const resposta = await axios.get(`http:// 129.148.42.252:5036/adm/busca/imagem?id=${id}`)
+        const resposta = await axios.get(`http:// localhost:5036/adm/busca/imagem?id=${id}`)
 
         
         return resposta.data;
@@ -17,7 +17,7 @@ export async function ConsultarImagens(id) {
 
 export function construirUrl(imagem){
         console.log(imagem);
-        return `http:// 129.148.42.252:5036/${imagem}`
+        return `http:// localhost:5036/${imagem}`
 }
 
 

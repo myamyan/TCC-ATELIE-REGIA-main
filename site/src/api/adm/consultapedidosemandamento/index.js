@@ -7,7 +7,7 @@ export async function ConsultarPedidosEmAndamento() {
 
 
 
-        const resposta = await axios.get('http:// 129.148.42.252:5036/adm/consulta/pedidos-concluidos')
+        const resposta = await axios.get('http:// localhost:5036/adm/consulta/pedidos-concluidos')
         return resposta.data;
 
 

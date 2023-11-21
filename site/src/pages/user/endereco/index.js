@@ -5,25 +5,46 @@ import Rodape from "../../../components/rodape/index.js";
 import "./index.scss";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import storage from "local-storage";
+
 
 function Enderecos() {
 
   const [dados, setDados] = useState([]);
-  const [dadosc, setDadosc] = useState([])
+  const [exibir, setExibir] = useState([]);
   const [ endereco, setEndereco] = useState('');
   const [cep, setCep] = useState('');
   const [ complemento , setComplemento ] = useState('');
   const [ numres, setNumres ] = useState();
 
-  async function cadastrar(){
+  async function cadastrarendereco(){
 
     const end = addEndereco( endereco, cep, complemento, numres )
 
     setDados(end)
 
+    if(!endereco || endereco === undefined)
+    alert('Erro ao cadastrar o endereço, por favor verificar se as informações estão corretas')
 
 
   }
+
+
+  // async function exibirenderecos(){
+
+  //   const cliente = storage("usuario-login".id)
+
+  //   const info = AssociarEndereco( dados.id, cliente );
+
+  //   setExibir(info);
+
+
+  // }
+
+
+  // useEffect(() => {
+  //   exibirenderecos();
+  // }, []);
 
 
   return (
@@ -78,7 +99,7 @@ function Enderecos() {
               </div>
 
               <div className="total">
-                <p> endereços </p>
+                <p> {dados.length} endereços </p>
               </div>
             </div>
 
@@ -129,7 +150,7 @@ function Enderecos() {
                 </div>
 
                 <div className="botao-salvar">
-                  <button onClick={cadastrar}> SALVAR </button>
+                  <button onClick={cadastrarendereco}> SALVAR </button>
                 </div>
               </div>
             </div>
@@ -143,7 +164,7 @@ function Enderecos() {
 
             <div className="lista-scroll">
               <div>
-                {dados.map((item) => (
+                {/* {dados.map((item) => (
                   <div className="info-end">
                     <p> {item.cep} </p>
 
@@ -154,14 +175,14 @@ function Enderecos() {
 
                     <p id="log"> {item.endereco} </p>
                   </div>
-                ))}
+                ))} */}
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <Rodape></Rodape>
+      <Rodape/>
     </div>
   );
 }

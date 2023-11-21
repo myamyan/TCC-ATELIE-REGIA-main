@@ -7,7 +7,7 @@ export async function CadastrarTecido(tipo) {
 
 
 
-        const resposta = await axios.post('http:// 129.148.42.252:5036/adm/cadastro/tecidos', {
+        const resposta = await axios.post('http:// localhost:5036/adm/cadastro/tecidos', {
         
         tipo: tipo
 
