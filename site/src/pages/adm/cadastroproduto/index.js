@@ -30,15 +30,13 @@ export default function Cadastroproduto() {
   const [novaCategoria, setNovaCategoria] = useState("");
   const [produtoIdParaExcluir, setProdutoIdParaExcluir] = useState(null);
   const [imagem, setImagem] = useState(null);
-<<<<<<< HEAD
+
 const [produtoid, setProdutoid]= useState(null);
 const [imagemId, setImagemId] = useState(null);
 
-=======
-  const[produto, setProduto] = useState([]);
-  const[id, setId] = useState(0);
-  
->>>>>>> 70dfdf65553dc93845b8c37dabec04c6f698afb2
+const [produto, setProduto]= useState([]);
+
+
   async function buscarCategoria() {
     try {
       const r = await axios.get(
@@ -171,51 +169,6 @@ const [imagemId, setImagemId] = useState(null);
 
     fetchData();
   }, []);
-
-  async function salvardados() {
-    try {
-    const imagemId =await Salvarimagem(); 
-  
-      console.log("Dados enviados para o servidor:", {
-        imagem,
-        nome,
-        preco,
-        promocao,
-        promocaoBt,
-        destaque,
-        disponivel,
-        detalhes,
-        estoque,
-        designer,
-        categoria,
-        cor,
-        tecido,
-        tamanho,
-      });
-  
-      const r = await axios.post(
-        "http://localhost:5036/adm/cadastro/produto",
-        {
-          nome: nome,
-          preco: preco,
-          promocao: promocao,
-          promocaobool: promocaoBt,
-          destaquebool: destaque,
-          disponivelbool: disponivel,
-          detalhes: detalhes,
-          estoque: estoque,
-          designer: designer,
-          categoria: novaCategoria,
-        }
-      );
-  
-      console.log("Resposta do servidor:", r.data);
-      return r.data.id_produto;
-    } catch (error) {
-      console.error("Erro na solicitação:", error);
-      console.log("Detalhes do erro:", error.response.data);
-    }
-  }
   
   async function carregarLista () {
     try{
@@ -367,22 +320,18 @@ const [imagemId, setImagemId] = useState(null);
   
       const r = await axios.post(
         'http://localhost:5036/adm/cadastro/produto/imagem',
-<<<<<<< HEAD
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data"  
           }
         }
-=======
-        formData
->>>>>>> 70dfdf65553dc93845b8c37dabec04c6f698afb2
       );
   
-      console.log('Resposta do servidor:', r.data);
+      setImagemId(r.data.id);
+
     } catch (error) {
       console.error('Erro na solicitação:', error);
-<<<<<<< HEAD
   
       if (error.response) {
         console.log('Detalhes do erro:', error.response.data);
@@ -395,28 +344,91 @@ const [imagemId, setImagemId] = useState(null);
 
   async function salvardados() {
     try {
-      const responseAssociacao = await axios.post(
+
+      console.log("Dados enviados para o servidor: " + produtoid + imagemId);
+
+      if(!imagemId){
+        console.error('ID da imagem não é válida', imagemId);
+        return;
+      }
+
+      const r = await axios.post(
         "http://localhost:5036/adm/associacao/imagem-produto",
         { idProduto: produtoid, 
           idImagem: imagemId }
       );
+
+
     } catch (error) {
       console.error("Erro ao salvar dados:", error);
+      console.log("Detalhes do erro:", error.r.data);
+    }
+  }
+  
+  async function SalvarProduto() {
+    try {
+    const imagemId =await Salvarimagem(); 
+  
+      console.log("Dados enviados para o servidor:", {
+        imagem,
+        nome,
+        preco,
+        promocao,
+        promocaoBt,
+        destaque,
+        disponivel,
+        detalhes,
+        estoque,
+        designer,
+        categoria,
+        cor,
+        tecido,
+        tamanho,
+      });
+  
+      const r = await axios.post(
+        "http://localhost:5036/adm/cadastro/produto",
+        {
+          nome: nome,
+          preco: preco,
+          promocao: promocao,
+          promocaobool: promocaoBt,
+          destaquebool: destaque,
+          disponivelbool: disponivel,
+          detalhes: detalhes,
+          estoque: estoque,
+          designer: designer,
+          categoria: novaCategoria,
+        }
+      );
+  
+      setProdutoid(r.data.id)
+
+      salvardados();
+
+      return r.data.id_produto;
+    } catch (error) {
+      console.error("Erro na solicitação:", error);
       console.log("Detalhes do erro:", error.response.data);
     }
   }
-  
 
+  async function SalvarProdutoImagemAssociar() {
+    try {
+      const idProduto = await SalvarProduto();
 
+      const {idImagem} = await Salvarimagem(idProduto);
+      setImagemId(idImagem);
+
+      await salvardados(idProduto, idImagem);
+
+      console.log('produto associado com sucesso')
+    } catch (error) {
+      console.log(error)
   
-=======
-      console.log('Detalhes do erro:', error.response.data);
     }
   }
   
-  
-
->>>>>>> 70dfdf65553dc93845b8c37dabec04c6f698afb2
   return (
     <div className="tudo-cadastroproduto">
       <div className="escrever">
@@ -426,7 +438,6 @@ const [imagemId, setImagemId] = useState(null);
 
       <div className="input-orisontal1">
         <div className="direita-cadastroproduto-quadrado">
-<<<<<<< HEAD
           <div class="custom-file-input-wrapper">
             <button
               class="custom-file-input-button"
@@ -441,49 +452,20 @@ const [imagemId, setImagemId] = useState(null);
               accept="image/*"
               onChange={(e) => {
                 if (e.target.files.length > 0) {
-                  setImagemId(e.target.files[0]);
+                  setImagem(e.target.files[0]);
                 }
               }}
             />
           </div>
-          {imagemId && (
+          {imagem && (
             <div className="imagem-preview">
               <img
-                src={URL.createObjectURL(imagem)}
+                src={imagem && URL.createObjectURL(imagem)}
                 className="image"
                 alt="Imagem de pré-visualização"
               />
             </div>
           )}
-=======
-        <div class="custom-file-input-wrapper">
-  <button
-    class="custom-file-input-button"
-    onClick={() => document.getElementById('inputImagem').click()}
-
-  >
-    ADICIONAR IMAGEM +
-  </button>
-  <input
-  type="file"
-  id="inputImagem"
-  className="input-file"
-  accept="image/*"
-  onChange={(e) => {
-    if (e.target.files.length > 0) {
-      setImagem(e.target.files[0]);
-    }
-  }}
-/>
-
-</div>
-{imagem && (
-  <div className="imagem-preview">
-    <img src={URL.createObjectURL(imagem)} className="image" alt="Imagem de pré-visualização"   />
-  </div>
-)}
-
->>>>>>> 70dfdf65553dc93845b8c37dabec04c6f698afb2
         </div>
 
         <div className="inputs-adicionar">
@@ -819,22 +801,19 @@ type="checkbox"
       <hr />
 
       <div className="botoes-produto">
-<<<<<<< HEAD
         <button id="branco" onClick={Deletar}>
           {" "}
           DELETAR{" "}
         </button>
         <button id="preto" onClick={SalvarProduto}>
-=======
-      {/* <button id="branco" onClick={Deletar}> DELETAR </button> */}
-        <button id="preto" onClick={salvardados}>
->>>>>>> 70dfdf65553dc93845b8c37dabec04c6f698afb2
           SALVAR
         </button>
       </div>
     </div>
   );
 }
+
+
 // import './index.scss';
 
 // export default function Cadastroproduto() {

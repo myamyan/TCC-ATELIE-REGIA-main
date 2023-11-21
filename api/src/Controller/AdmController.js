@@ -320,6 +320,8 @@ server.post('/adm/associacao/imagem-produto', async (req, resp) => {
 
         const imagemParaAssociar = req.body;
 
+        console.log(imagemParaAssociar);
+
         const imagemAssociada = await AssociarImagemProduto(imagemParaAssociar);
 
         resp.send(imagemAssociada);
