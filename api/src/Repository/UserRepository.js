@@ -21,35 +21,25 @@ export async function loginCliente(email, senha) {
 
   const comando = `
   
-        select   id_cliente             id,
+        select   id_cadcliente             id,
             ds_emailcliente             email,
             ds_senhacliente             senha
 
         from tb_cadastrocliente
 
         where ds_emailcliente = ?
-        and ds_senhacliente = ?
+        and ds_senhacliente = ?;
 
   `
 
   const [linhas] = await con.query(comando, [email, senha]);
-  return linhas;
+  
+  return linhas[0];
 
 }
+
 
 //feita conexão ↓
-export async function verificarEmailExistente(email) {
-  try {
-    const [linhas, campos] = await con.execute('SELECT * FROM tb_cadastrocliente WHERE  ds_emailcliente    = ?', [email]);
-
-    return linhas.length > 0;
-  } catch (err) {
-    console.error('Erro ao verificar email existente:', err);
-    return false;
-  }
-}
-
-//feita cpnexão ↓
 export async function CadastroInformacoesPessoais(infop) {
 
   const comando = ` 
@@ -218,25 +208,6 @@ export async function FiltroPorTamanho(id) {
   return linhas;
 
 }
-
-
-
-// export async function FiltroPorValor( valornormal, valorpromocional ) {
-
-//   const comando = `  
-
-//     select * from tb_produto 
-
-//     where vl_preco or vl_promocao between ? or ?;
-
-//     `
-
-//   const [linhas] = await con.query(comando, [ valornormal, valorpromocional ]);
-
-//   return linhas[0];
-
-// }
-
 
 
 export async function FiltroPorPromocao(promocao) {
