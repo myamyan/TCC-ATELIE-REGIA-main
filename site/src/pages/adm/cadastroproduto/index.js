@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./index.scss";
+import {ConsultarProdutosAdm} from '../../../api/adm/consultaprodutosadm'
 
 export default function Cadastroproduto() {
   const [nome, setNome] = useState("");
@@ -29,6 +30,8 @@ export default function Cadastroproduto() {
   const [novaCategoria, setNovaCategoria] = useState("");
   const [produtoIdParaExcluir, setProdutoIdParaExcluir] = useState(null);
   const [imagem, setImagem] = useState(null);
+  const[produto, setProduto] = useState([]);
+  const[id, setId] = useState(0);
   
   async function buscarCategoria() {
     try {
@@ -208,6 +211,27 @@ export default function Cadastroproduto() {
     }
   }
   
+  async function carregarLista () {
+    try{
+        const resp = await ConsultarProdutosAdm()
+
+        if(resp.length === 0){
+          alert('Não há produtos cadastrados')
+          setProduto([])
+        }
+        else{
+          setProduto(resp)
+        }
+    } catch (error) {
+      console.error('Erro na solicitação:', error);
+  }
+}
+
+  useEffect(() => {
+    carregarLista();
+
+  }, []);
+
 
   async function buscarCore() {
     try {
@@ -644,10 +668,83 @@ type="checkbox"
         </div>
       </div>
 
+<hr />
+      
+      <div className="faixa-lista">
+        
+      <thead>
+
+      <tr>
+
+      <th> ID </th>
+      <th> IMG </th>
+      <th> ITEM </th>
+      <th> DETALHES </th>
+      <th> DESIGNER </th>
+      <th> CATEGORIA </th>
+      <th> COR </th>
+      <th> TECIDO </th>
+      <th> TAMANHO</th>
+      <th> VALOR </th>
+      <th> VALOR PROMO. </th>
+      <th> DISPONIVEL </th>
+      <th> DESTAQUE </th>
+      <th> PROMOÇÃO </th>
+
+
+      </tr>
+
+      </thead>
+
+      <table>
+
+      <tbody>
+
+        {produto.map(item  =>  {
+
+        return (
+
+    <tr> 
+
+      <td> {item.id} </td>
+      <td> {item.imagem}  </td>
+      <td> {item.nome} </td>
+      <td> {item.detalhes} </td>
+      <td> {item.designer} </td>
+      <td> {item.categoria} </td>
+      <td> {item.cor} </td>
+      <td> {item.tecido} </td>
+      <td> {item.tamanho} </td>
+      <td> {item.preco} </td>
+      <td> {item.promocao} </td>
+      <td> {item.disponivel ? 'Sim' : 'Não'} </td>
+      <td> {item.destaque ? 'Sim' : 'Não'} </td>
+      <td> {item.disponivel ? 'Sim' : 'Não'} </td>
+      <td> <button onClick={Deletar} > DELETAR </button> 
+      </td>
+      {/* <td> <button> ALTERAR </button></td> */}
+
+    </tr>
+  )     
+})} 
+
+      </tbody>
+
+
+
+      </table>
+         
+      </div>
+      
+  
+         
+<hr />
+
+
       <hr />
 
       <div className="botoes-produto">
-      <button id="branco" onClick={Deletar}> DELETAR </button>
+      {/* <button id="branco" onClick={Deletar}> DELETAR </button> */}
         <button id="preto" onClick={salvardados}>
           SALVAR
         </button>
