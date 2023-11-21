@@ -30,7 +30,7 @@ export default function Cadastroproduto() {
   const [produtoIdParaExcluir, setProdutoIdParaExcluir] = useState(null);
   const [imagem, setImagem] = useState(null);
 const [produtoid, setProdutoid]= useState(null);
-
+const [imagemId, setImagemId] = useState(null);
 
   async function buscarCategoria() {
     try {
@@ -319,20 +319,25 @@ const [produtoid, setProdutoid]= useState(null);
   async function Salvarimagem() {
     try {
       const formData = new FormData();
-      formData.append("imagem", imagem);
+      formData.append('imagem', imagem);
   
-      const response = await axios.post(
-        "http://localhost:5036/adm/cadastro/produto/imagem",
-        formData
+      const r = await axios.post(
+        'http://localhost:5036/adm/cadastro/produto/imagem',
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data"  
+          }
+        }
       );
   
-      console.log("Resposta do servidor (imagem):", response.data);
-  
-      return response.data.id_imagem;
+      console.log('Resposta do servidor:', r.data);
     } catch (error) {
-      console.error("Erro na solicitação (imagem):", error);
-      console.log("Detalhes do erro (imagem):", error.response.data);
-      throw error;
+      console.error('Erro na solicitação:', error);
+  
+      if (error.response) {
+        console.log('Detalhes do erro:', error.response.data);
+      }
     }
   }
   
@@ -341,33 +346,18 @@ const [produtoid, setProdutoid]= useState(null);
 
   async function salvardados() {
     try {
-      const imagemId = await Salvarimagem();
-  
-      if (imagemId) {
-        const produtoId = await SalvarProduto(imagemId);
-  
-        if (produtoId) {
-          const responseAssociacao = await axios.post(
-            "http://localhost:5036/adm/associacao/imagem-produto",
-            {
-              idProduto: produtoId,
-              idImagem: imagemId,
-            }
-          );
-  
-          console.log("Resposta do servidor (associação):", responseAssociacao.data);
-        } else {
-          console.error("ID do produto retornado de SalvarProduto é nulo ou indefinido.");
-        }
-      } else {
-        console.error("ID da imagem retornado de Salvarimagem é nulo ou indefinido.");
-      }
+      const responseAssociacao = await axios.post(
+        "http://localhost:5036/adm/associacao/imagem-produto",
+        { idProduto: produtoid, 
+          idImagem: imagemId }
+      );
     } catch (error) {
       console.error("Erro ao salvar dados:", error);
       console.log("Detalhes do erro:", error.response.data);
     }
   }
   
+
 
   
   return (
@@ -393,12 +383,12 @@ const [produtoid, setProdutoid]= useState(null);
               accept="image/*"
               onChange={(e) => {
                 if (e.target.files.length > 0) {
-                  setImagem(e.target.files[0]);
+                  setImagemId(e.target.files[0]);
                 }
               }}
             />
           </div>
-          {imagem && (
+          {imagemId && (
             <div className="imagem-preview">
               <img
                 src={URL.createObjectURL(imagem)}
@@ -664,7 +654,7 @@ const [produtoid, setProdutoid]= useState(null);
           {" "}
           DELETAR{" "}
         </button>
-        <button id="preto" onClick={salvardados}>
+        <button id="preto" onClick={SalvarProduto}>
           SALVAR
         </button>
       </div>
