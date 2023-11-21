@@ -5,9 +5,17 @@ import CarrosselDeImagens from "../../../components/carrosel";
 import { ConsultarProdutos } from "../../../api/user/consultaprodutos";
 import { ConsultarImagens, construirUrl } from "../../../api/chamadaimagem";
 import Rodape from "../../../components/rodape";
+import axios from "axios";
 
 export default function Produto() {
 
+  async function Categorias( ) {
+    try {
+      const r= await axios.get("")
+    } catch (error) {
+      
+    }
+  }
 
 
     const images = [

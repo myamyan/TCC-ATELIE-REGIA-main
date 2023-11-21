@@ -125,7 +125,7 @@ export async function ConsultaGeralProdutosAdm() {
 export async function AlterarProduto(id, produto) {
   const comando = `
     update  tb_produto
-    set     id_imagem               = ?,
+    set    
             nm_produto              = ?,
             vl_preco                = ?,
             vl_promocao             = ?,
@@ -139,16 +139,15 @@ export async function AlterarProduto(id, produto) {
             where id_produto        = ?`;
 
   const [resposta] = await con.query(comando, [
-    produto.idimagem,
-    produto.nome,
-    produto.preco,
-    produto.promocao,
-    produto.promocaobool,
-    produto.destaquebool,
-    produto.disponivelbool,
-    produto.detalhes,
-    produto.estoque,
-    produto.iddesigner,
+    produto.nm_nome,
+    produto.vl_preco,
+    produto.vl_promocao,
+    produto.bt_promocao,
+    produto.bt_destaque,
+    produto.bt_disponivel,
+    produto.ds_detalhes,
+    produto.nr_estoque,
+    produto.designer,
     id,
   ]);
 
@@ -646,6 +645,13 @@ export async function DesassociarCategoriaProduto(id) {
   return resposta.affectedRows;
 }
 
+
+// export async function procurarImagem(id,image) {
+//   const comando `
+//   select* from tb_produto_imagem`
+  
+// }
+
 export async function DesassociarTamanhoProduto(id) {
   const comando = `
     
@@ -697,6 +703,21 @@ export async function ConsultarImagem(id) {
   const [linhas] = await con.query(comando, [id]);
 
   return linhas[0];
+}
+
+export async function alterarImagem(imagem) {
+  ` update  tb_produto_imagem
+  set     id_imagem        = ?
+          img_link= ?
+          
+        
+  `
+  const [resposta] = await con.query(comando, [
+    imagem.id_imagem, imagem.img_link,
+  
+  ]);
+
+  return resposta.affectedRows;
 }
 
 export async function ExcluirPedido(id) {

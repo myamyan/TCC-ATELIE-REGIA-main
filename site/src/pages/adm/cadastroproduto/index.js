@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./index.scss";
-import {ConsultarProdutosAdm} from '../../../api/adm/consultaprodutosadm'
+import { ConsultarProdutosAdm } from '../../../api/adm/consultaprodutosadm'
 
 export default function Cadastroproduto() {
   const [nome, setNome] = useState("");
@@ -31,10 +31,10 @@ export default function Cadastroproduto() {
   const [produtoIdParaExcluir, setProdutoIdParaExcluir] = useState(null);
   const [imagem, setImagem] = useState(null);
 
-const [produtoid, setProdutoid]= useState(null);
-const [imagemId, setImagemId] = useState(null);
+  const [produtoid, setProdutoid] = useState(null);
+  const [imagemId, setImagemId] = useState(null);
 
-const [produto, setProduto]= useState([]);
+  const [produto, setProduto] = useState([]);
 
 
   async function buscarCategoria() {
@@ -169,26 +169,26 @@ const [produto, setProduto]= useState([]);
 
     fetchData();
   }, []);
-  
-  async function carregarLista () {
-    try{
-        const resp = await ConsultarProdutosAdm()
 
-        if(resp.length === 0){
-          alert('Não há produtos cadastrados')
-          setProduto([])
-        }
-        else{
-          setProduto(resp)
-        }
+  async function carregarLista() {
+    try {
+      const resp = await ConsultarProdutosAdm()
+      console.log(resp);
+
+      if (resp.length === 0) {
+        alert('Não há produtos cadastrados')
+        setProduto([])
+      }
+      else {
+        setProduto(resp)
+      }
     } catch (error) {
       console.error('Erro na solicitação:', error);
+    }
   }
-}
 
   useEffect(() => {
     carregarLista();
-
   }, []);
 
 
@@ -201,7 +201,7 @@ const [produto, setProduto]= useState([]);
       console.error("Erro ao buscar dados:", error);
     }
   }
-  
+
   useEffect(() => {
     buscarCore();
   }, []);
@@ -214,7 +214,7 @@ const [produto, setProduto]= useState([]);
           codhexa: novacor,
         }
       );
-  
+
       if (response.status === 200) {
         setCor(response.data.id_cores);
         buscarCores();
@@ -235,7 +235,7 @@ const [produto, setProduto]= useState([]);
       console.error("Erro ao buscar dados:", error);
     }
   }
-  
+
   useEffect(() => {
     buscartecido();
   }, []);
@@ -248,7 +248,7 @@ const [produto, setProduto]= useState([]);
           tipo: novotecido,
         }
       );
-  
+
       if (response.status === 200) {
         setTecido(response.data.id_tecidos);
         buscarTecidos();
@@ -271,9 +271,9 @@ const [produto, setProduto]= useState([]);
       console.error("Erro ao buscar dados:", error);
     }
   }
-  
+
   useEffect(() => {
-   buscartamanhos();
+    buscartamanhos();
   }, []);
 
   async function postartamanho() {
@@ -284,7 +284,7 @@ const [produto, setProduto]= useState([]);
           tamanho: novotamanho,
         }
       );
-  
+
       if (response.status === 200) {
         setTamanho(response.data.id_tamanho);
         buscartamanho();
@@ -295,16 +295,18 @@ const [produto, setProduto]= useState([]);
       console.error("Erro na solicitação:", error);
     }
   }
+  
   async function Deletar(id) {
     try {
       if (id) {
-        const resposta = await axios.delete(`http://localhost:5036/adm/produto/deletar/${id}`);
-    
-        if (resposta.status === 200) {
-          console.log('Produto excluído com sucesso');
-        } else {
-          console.error('Falha ao excluir o produto');
-        }
+        const resposta = await axios.delete(`http://localhost:5036/adm/produto/deletar/${id}` );
+
+        // if (resposta.status === 200) {
+        //   console.log('Produto excluído com sucesso');
+        // } else {
+          
+        //   console.error('Falha ao excluir o produto');
+        // }
       } else {
         console.error('ID do produto para exclusão não definido');
       }
@@ -317,28 +319,28 @@ const [produto, setProduto]= useState([]);
     try {
       const formData = new FormData();
       formData.append('imagem', imagem);
-  
+
       const r = await axios.post(
         'http://localhost:5036/adm/cadastro/produto/imagem',
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data"  
+            "Content-Type": "multipart/form-data"
           }
         }
       );
-  
+
       setImagemId(r.data.id);
 
     } catch (error) {
       console.error('Erro na solicitação:', error);
-  
+
       if (error.response) {
         console.log('Detalhes do erro:', error.response.data);
       }
     }
   }
-  
+
 
   // .................................................
 
@@ -347,15 +349,17 @@ const [produto, setProduto]= useState([]);
 
       console.log("Dados enviados para o servidor: " + produtoid + imagemId);
 
-      if(!imagemId){
+      if (!imagemId) {
         console.error('ID da imagem não é válida', imagemId);
         return;
       }
 
       const r = await axios.post(
         "http://localhost:5036/adm/associacao/imagem-produto",
-        { idProduto: produtoid, 
-          idImagem: imagemId }
+        {
+          idProduto: produtoid,
+          idImagem: imagemId
+        }
       );
 
 
@@ -364,11 +368,11 @@ const [produto, setProduto]= useState([]);
       console.log("Detalhes do erro:", error.r.data);
     }
   }
-  
+
   async function SalvarProduto() {
     try {
-    const imagemId =await Salvarimagem(); 
-  
+      const imagemId = await Salvarimagem();
+
       console.log("Dados enviados para o servidor:", {
         imagem,
         nome,
@@ -385,7 +389,7 @@ const [produto, setProduto]= useState([]);
         tecido,
         tamanho,
       });
-  
+
       const r = await axios.post(
         "http://localhost:5036/adm/cadastro/produto",
         {
@@ -401,7 +405,7 @@ const [produto, setProduto]= useState([]);
           categoria: novaCategoria,
         }
       );
-  
+
       setProdutoid(r.data.id)
 
       salvardados();
@@ -417,7 +421,7 @@ const [produto, setProduto]= useState([]);
     try {
       const idProduto = await SalvarProduto();
 
-      const {idImagem} = await Salvarimagem(idProduto);
+      const { idImagem } = await Salvarimagem(idProduto);
       setImagemId(idImagem);
 
       await salvardados(idProduto, idImagem);
@@ -425,9 +429,11 @@ const [produto, setProduto]= useState([]);
       console.log('produto associado com sucesso')
     } catch (error) {
       console.log(error)
-  
+
     }
   }
+
+
   
   return (
     <div className="tudo-cadastroproduto">
@@ -502,10 +508,10 @@ const [produto, setProduto]= useState([]);
                 value={designer}
                 onChange={(e) => setDesigner(e.target.value)}
               >
-                 <option>Escolha um designer</option>
+                <option>Escolha um designer</option>
                 {dadosCarregados &&
                   buscarDesigner.map((item) => (
-                   
+
                     <option key={item.id_designer} value={item.id_designer}>
                       {item.nm_designer}
                     </option>
@@ -570,7 +576,7 @@ const [produto, setProduto]= useState([]);
 
             <div className="input-estoque">
               <label>ESTOQUE</label>
-              <input  placeholder="0" inputMode="numeric"  />
+              <input placeholder="0" inputMode="numeric" />
             </div>
           </div>
 
@@ -578,32 +584,32 @@ const [produto, setProduto]= useState([]);
             <div className="cor">
               <label>COR</label>
               <select
-  className="custom-select1"
-  value={cor}
-  onChange={(e) => setCor(e.target.value)}
->
-<option>Selecione designer</option>
-  {dadosCarregados &&
-    buscarCores.map((item) => (
-      <option key={item.id_cores} value={item.id_cores}>
-        {item.ds_hexa_decimal}
-      </option>
-    ))}
-</select>
+                className="custom-select1"
+                value={cor}
+                onChange={(e) => setCor(e.target.value)}
+              >
+                <option>Selecione designer</option>
+                {dadosCarregados &&
+                  buscarCores.map((item) => (
+                    <option key={item.id_cores} value={item.id_cores}>
+                      {item.ds_hexa_decimal}
+                    </option>
+                  ))}
+              </select>
               <div className="button-designer" type="button">
-              <input
-    type="text"
-    class="muda"
-    placeholder="Adicionar nova cor"
-    value={novacor}
-    onChange={(e) => setNovacor(e.target.value)}
-    onKeyDown={(e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        postarCor(undefined, true);
-      }
-    }}
-  />
+                <input
+                  type="text"
+                  class="muda"
+                  placeholder="Adicionar nova cor"
+                  value={novacor}
+                  onChange={(e) => setNovacor(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      postarCor(undefined, true);
+                    }
+                  }}
+                />
               </div>
             </div>
 
@@ -611,8 +617,8 @@ const [produto, setProduto]= useState([]);
               <label>TECIDO</label>
               <select className="custom-select5">
 
-              <option>Selecione tecido</option>
-              {dadosCarregados &&
+                <option>Selecione tecido</option>
+                {dadosCarregados &&
                   buscarTecidos.map((item) => {
                     console.log("Mapeando item:", item);
                     return (
@@ -646,16 +652,16 @@ const [produto, setProduto]= useState([]);
             <div className="tamanho">
               <label>TAMANHO</label>
               <select className="custom-select6">
-              <option>Selecione tamanho</option>
-              {dadosCarregados &&
-  buscartamanho.map((item) => {
-    console.log("Mapeando item:", item);
-    return (
-      <option key={item.id_tamanho} value={item.id_tamanho}>
-        {item.ds_tamanho}
-      </option>
-    );
-  })}
+                <option>Selecione tamanho</option>
+                {dadosCarregados &&
+                  buscartamanho.map((item) => {
+                    console.log("Mapeando item:", item);
+                    return (
+                      <option key={item.id_tamanho} value={item.id_tamanho}>
+                        {item.ds_tamanho}
+                      </option>
+                    );
+                  })}
               </select>
               <div className="button-designer" type="button">
                 <input
@@ -682,7 +688,7 @@ const [produto, setProduto]= useState([]);
                 placeholder="R$ 00,00"
                 value={preco}
                 onChange={(e) => setPreco(e.target.value)}
-                inputMode="numeric" 
+                inputMode="numeric"
               />
             </div>
 
@@ -692,123 +698,111 @@ const [produto, setProduto]= useState([]);
                 placeholder="R$ 00,00"
                 value={promocao}
                 onChange={(e) => setPromocao(e.target.value)}
-                  inputMode="numeric" 
+                inputMode="numeric"
               />
             </div>
           </div>
 
           <div className="checkbox">
             <input
-               type="checkbox"
-               checked={promocaoBt}
-               onChange={() => setPromocaoBt(!promocaoBt)}
-             
+              type="checkbox"
+              checked={promocaoBt}
+              onChange={() => setPromocaoBt(!promocaoBt)}
+
             />
             <label> PROMOÇÃO</label>
 
             <input
- type="checkbox"
- checked={destaque}
- onChange={(e) => setDestaque(e.target.checked)}
-/>
+              type="checkbox"
+              checked={destaque}
+              onChange={(e) => setDestaque(e.target.checked)}
+            />
 
             <label> DESTAQUE</label>
 
             <input
 
-type="checkbox"
-  checked={disponivel}
-  onChange={(e) => setDisponivel(e.target.checked)}
-/>
+              type="checkbox"
+              checked={disponivel}
+              onChange={(e) => setDisponivel(e.target.checked)}
+            />
             <label> DISPONÍVEL</label>
           </div>
         </div>
       </div>
-
-<hr />
-      
-      <div className="faixa-lista">
-        
-      <thead>
-
-      <tr>
-
-      <th> ID </th>
-      <th> IMG </th>
-      <th> ITEM </th>
-      <th> DETALHES </th>
-      <th> DESIGNER </th>
-      <th> CATEGORIA </th>
-      <th> COR </th>
-      <th> TECIDO </th>
-      <th> TAMANHO</th>
-      <th> VALOR </th>
-      <th> VALOR PROMO. </th>
-      <th> DISPONIVEL </th>
-      <th> DESTAQUE </th>
-      <th> PROMOÇÃO </th>
-
-
-      </tr>
-
-      </thead>
-
-      <table>
-
-      <tbody>
-
-        {produto.map(item  =>  {
-
-        return (
-
-    <tr> 
-
-      <td> {item.id} </td>
-      <td> {item.imagem}  </td>
-      <td> {item.nome} </td>
-      <td> {item.detalhes} </td>
-      <td> {item.designer} </td>
-      <td> {item.categoria} </td>
-      <td> {item.cor} </td>
-      <td> {item.tecido} </td>
-      <td> {item.tamanho} </td>
-      <td> {item.preco} </td>
-      <td> {item.promocao} </td>
-      <td> {item.disponivel ? 'Sim' : 'Não'} </td>
-      <td> {item.destaque ? 'Sim' : 'Não'} </td>
-      <td> {item.disponivel ? 'Sim' : 'Não'} </td>
-      <td> <button onClick={Deletar} > DELETAR </button> 
-      </td>
-      {/* <td> <button> ALTERAR </button></td> */}
-
-    </tr>
-  )     
-})} 
-
-      </tbody>
-
-
-
-      </table>
-         
-      </div>
-      
-  
-         
-<hr />
-
-
-      <hr />
-
       <div className="botoes-produto">
-        <button id="branco" onClick={Deletar}>
-          {" "}
-          DELETAR{" "}
-        </button>
+       
         <button id="preto" onClick={SalvarProduto}>
           SALVAR
         </button>
       </div>
+      <hr />
+      <div className="faixa-lista">
+
+        <table>
+          <thead>
+
+            <tr>
+
+              <th> ID </th>
+              <th> IMG </th>
+              <th> ITEM </th>
+              <th> DETALHES </th>
+              <th> DESIGNER </th>
+              <th> CATEGORIA </th>
+              <th> COR </th>
+              <th> TECIDO </th>
+              <th> TAMANHO</th>
+              <th> VALOR </th>
+              <th> VALOR PROMO. </th>
+              <th> DISPONIVEL </th>
+              <th> DESTAQUE </th>
+              <th> PROMOÇÃO </th>
+
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            {produto.map(item => {
+
+              return (
+
+                <tr>
+
+                  <td> {item.id_produto} </td>
+                  <td> {item.imagem}  </td>
+                  <td> {item.nm_nome} </td>
+                  <td> {item.ds_detalhes} </td>
+                  <td> {item.id_designer} </td>
+                  <td> {item.id_categoria} </td>
+                  <td> {item.id_cor} </td>
+                  <td> {item.id_tecido} </td>
+                  <td> {item.id_tamanho} </td>
+                  <td> {item.vl_preco} </td>
+                  <td> {item.vl_promocao} </td>
+                  <td> {item.bt_disponivel ? 'Sim' : 'Não'} </td>
+                  <td> {item.bt_destaque ? 'Sim' : 'Não'} </td>
+                  <td> {item.bt_disponivel ? 'Sim' : 'Não'} </td>
+                  <td> <button onClick={() => Deletar(item.id_produto)} > DELETAR </button>
+                  </td>
+                  <td> <button> ALTERAR </button></td>
+
+                </tr>
+              )
+            })}
+
+          </tbody>
+
+
+
+        </table>
+
+      </div>
+
+      <hr />
     </div>
   );
 }

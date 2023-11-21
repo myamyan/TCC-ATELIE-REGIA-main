@@ -1,6 +1,6 @@
 
 
-import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto, DesassociarCategoriaProduto, ExcluirImagem, DesassociarTamanhoProduto, DesassociarCoresProduto, DesassociarTecidosProduto, ConsultarImagem, ExcluirPedido, AssociarImagemProduto, SelectCategorias, SelectTecidos, SelectDesigner, SelectCores, buscarCategorias, buscarDesigner, buscarCores, buscartecido, buscartamanho } from '../Repository/AdmRepository.js';
+import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto, DesassociarCategoriaProduto, ExcluirImagem, DesassociarTamanhoProduto, DesassociarCoresProduto, DesassociarTecidosProduto, ConsultarImagem, ExcluirPedido, AssociarImagemProduto, SelectCategorias, SelectTecidos, SelectDesigner, SelectCores, buscarCategorias, buscarDesigner, buscarCores, buscartecido, buscartamanho, alterarImagem } from '../Repository/AdmRepository.js';
 
 import multer from 'multer';
 import { Router } from "express"
@@ -180,6 +180,26 @@ server.put('/adm/produto/alterar/:id', async (req, resp) => {
 
 
         const resposta = await AlterarProduto(  id, produto );
+
+        resp.status(204).send();
+
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+
+
+})
+
+
+server.put('/adm/produto/imagem/alterar/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
+        const imagem = req.body;
+
+
+        const resposta = await alterarImagem(  id, imagem );
 
         resp.status(204).send();
 

@@ -52,10 +52,10 @@ export default function CabecalhoAdm(props) {
             />
             <div id="menu" className="menu">
               <h5>PAINEL</h5>
-              <a href="http://129.148.42.252:3000/cadastro/produto"> CADASTRO DE PRODUTOS</a>
-              <a href="http://129.148.42.252:3000/adm/consulta/pedidos">CONSULTA DE PRODUTOS</a>
+              <a href="http://localhost:3000/cadastro/produto"> CADASTRO DE PRODUTOS</a>
+              <a href="http://localhost:3000/adm/consulta/pedidos">CONSULTA DE PRODUTOS</a>
               <a href="">PEDIDOS</a>
-              <a href="http://129.148.42.252:3000/relatorios">RELATÓRIOS</a>
+              <a href="http://localhost:3000/relatorios">RELATÓRIOS</a>
             </div>
           </div>
         </div>
