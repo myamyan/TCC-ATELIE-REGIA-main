@@ -9,6 +9,7 @@ export default function LoginCliente() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
+
     const navigate = useNavigate();
 
 
@@ -16,7 +17,7 @@ export default function LoginCliente() {
 
         try {
 
-            const r = await axios.post('http:// localhost:5036/login/cliente', {
+            const r = await axios.post('http://localhost:5036/user/login/cliente', {
 
                 email: email,
                 senha: senha
@@ -25,6 +26,11 @@ export default function LoginCliente() {
 
                 if(!email || ! senha || email === undefined || senha === undefined)
                     throw new Error('Há algo e errado com suas informações! Para prosseguir, certifique-se de que suas informações de login estão corretas.')
+
+
+                    else
+                    
+                    storage("usuario-login", r.data)
 
                 navigate('/');
 
@@ -39,7 +45,7 @@ export default function LoginCliente() {
 
 
     }
-  }
+  
 
   return (
     <div className="pagina-logincliente">

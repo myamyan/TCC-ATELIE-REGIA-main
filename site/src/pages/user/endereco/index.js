@@ -1,6 +1,6 @@
 
 import { addEndereco, AssociarEndereco, verEndereco }  from '../../../api/user/enderecoUsuario/endereco.js';
-import Cabecalho1 from "../../../components/cabecalho1/index.js";
+import Cabecalho2 from "../../../components/cabecalho2/index.js";
 import Rodape from "../../../components/rodape/index.js";
 import "./index.scss";
 import React, { useState, useEffect } from "react";
@@ -16,6 +16,7 @@ function Enderecos() {
   const [cep, setCep] = useState('');
   const [ complemento , setComplemento ] = useState('');
   const [ numres, setNumres ] = useState();
+  const [infoFinal, setInfoFinal] = useState([]);
 
   async function cadastrarendereco(){
 
@@ -27,14 +28,18 @@ function Enderecos() {
     alert('Erro ao cadastrar o endereço, por favor verificar se as informações estão corretas')
 
 
+    const cliente = storage("usuario-login").id
+
+    const info = AssociarEndereco( dados.id, cliente );
+
+    setInfoFinal(info)
+
+
   }
 
 
-  // async function exibirenderecos(){
+  // async function associarenderecos(){
 
-  //   const cliente = storage("usuario-login".id)
-
-  //   const info = AssociarEndereco( dados.id, cliente );
 
   //   setExibir(info);
 
@@ -49,7 +54,7 @@ function Enderecos() {
 
   return (
     <div className="pag-conta-endereco">
-      <Cabecalho1></Cabecalho1>
+      <Cabecalho2/>
 
       <div className="container">
         <div className="rota-pag">
