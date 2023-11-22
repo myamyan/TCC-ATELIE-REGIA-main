@@ -30,7 +30,7 @@ export default function Cadastroproduto() {
   const [novaCategoria, setNovaCategoria] = useState("");
   const [produtoIdParaExcluir, setProdutoIdParaExcluir] = useState(null);
   const [imagem, setImagem] = useState(null);
-
+const [idcategoria, setIdcategoria] = useState(null);
   const [produtoid, setProdutoid] = useState(null);
   const [imagemId, setImagemId] = useState(null);
 
@@ -39,7 +39,7 @@ export default function Cadastroproduto() {
 
   async function buscarCategoria() {
     try {
-      const r = await axios.get(
+      const r = await axios.post(
         "http://localhost:5036/adm/cadastro/categoria",
         {
           categoria: categoria,
@@ -73,26 +73,31 @@ export default function Cadastroproduto() {
 
   async function postarCategoria() {
     try {
+      console.log("Enviando requisição para adicionar categoria:", novaCategoria);
+  
       const r = await axios.post(
         "http://localhost:5036/adm/cadastro/categoria",
         {
           nome: novaCategoria,
         }
       );
-
+  
+      console.log("Resposta do servidor ao adicionar categoria:", r);
+  
       if (r.status === 200) {
         setCategoria(r.data.id_categorias);
-
         buscarCategoria();
+        console.log("Categoria adicionada com sucesso!");
       } else {
         console.error("Falha ao adicionar categoria.");
       }
-
+  
       buscarCategoria();
     } catch (error) {
       console.error("Erro na solicitação:", error);
     }
   }
+  
 
   async function buscarDesigners() {
     try {
@@ -111,11 +116,11 @@ export default function Cadastroproduto() {
     async function fetchData() {
       try {
         const response = await axios.get(
-          "http://localhost:5036/buscarcategoria"
+          "http://localhost:5036/buscardesigner"
         );
         const data = response.data;
         console.log("Dados recebidos:", data);
-        setBuscarCategorias(data);
+        setBuscarDesigner(data);
         setDadosCarregados(true);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
@@ -149,11 +154,11 @@ export default function Cadastroproduto() {
     async function fetchData() {
       try {
         const responseCategorias = await axios.get(
-          "http://localhost:5036/buscarcategoria"
+          "http://localhost:5036/buscardesigner"
         );
         const dataCategorias = responseCategorias.data;
-        console.log("Dados de Categorias recebidos:", dataCategorias);
-        setBuscarCategorias(dataCategorias);
+        console.log("Dados de Categorias recebidos:", dataDesigners);
+        setBuscarDesigner(dataDesigners);
         setDadosCarregados(true);
 
         const responseDesigners = await axios.get(
@@ -170,6 +175,8 @@ export default function Cadastroproduto() {
     fetchData();
   }, []);
 
+
+  
   async function carregarLista() {
     try {
       const resp = await ConsultarProdutosAdm()
@@ -409,7 +416,7 @@ export default function Cadastroproduto() {
       setProdutoid(r.data.id)
 
       salvardados();
-
+AssociarProdutoCategoria();
       return r.data.id_produto;
     } catch (error) {
       console.error("Erro na solicitação:", error);
@@ -433,6 +440,18 @@ export default function Cadastroproduto() {
     }
   }
 
+  async function AssociarProdutoCategoria() {
+    try {
+      const r= await axios.post("/adm/associacao/categoria-produto",{
+        id_produto: produtoid,
+        id_categoria: idcategoria
+      });
+
+    } catch (error) {
+      console.log(error)
+
+    }
+  }
 
   
   return (
@@ -539,24 +558,21 @@ export default function Cadastroproduto() {
             <div className="input-categoria">
               <label>CATEGORIA</label>
               <select
-                onChange={(e) => setCategoria(e.target.value)}
-                className="custom-select2"
-                name="select-categoria"
-              >
-                <option>Selecione categoria</option>
-                {dadosCarregados &&
-                  buscarCategorias.map((item) => {
-                    console.log("Mapeando item:", item);
-                    return (
-                      <option
-                        key={item.id_categorias}
-                        value={item.id_categorias}
-                      >
-                        {item.nm_categoria}
-                      </option>
-                    );
-                  })}
-              </select>
+  onChange={(e) => setIdcategoria(e.target.value)}
+  className="custom-select2"
+  name="select-categoria"
+>
+  <option>Selecione categoria</option>
+  {dadosCarregados &&
+    Array.isArray(buscarCategorias) &&
+    buscarCategorias.map((item) => (
+      <option key={item.id_categorias} value={item.id_categorias}>
+        {item.nm_categoria}
+      </option>
+    ))
+  }
+</select>
+
               <div className="button-designer" type="button">
                 <input
                   type="text"

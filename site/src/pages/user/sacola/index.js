@@ -1,7 +1,8 @@
 import './index.scss';
-
+import { useCarrinho } from '../carrinhocontext/CarrinhoContext.js';
+import { Link } from 'react-router-dom';
 export default function Sacola() {
-
+    const { carrinho } = useCarrinho();
     return (
         <div className="pagina-sacola">
             <div className='pagina-sacolas'>
@@ -10,67 +11,24 @@ export default function Sacola() {
 
                     <h1> SACOLA</h1>
                     <div className="sacola-produtos">
-                        <div className="produtos-sacola">
-                            <img className="images" src="/assets/images/image 49.png" alt="" />
-                            <div className="produtosacola">
-
-                                <p>SHORT DE LINHO OFF -WHITE</p>
-
-                                <p><strong>R$100,00</strong></p>
-
-                            </div>
-                            <img className='lixo' src="/assets/images/Vector.png" alt="" />
-                            <div className='maismenos'>
-
-                                <button >-</button>
-                                <p>1</p>
-                                <button>+</button>
-
-                            </div>
-
-
-                        </div>
-                        <div className="produtos-sacola">
-
-                            <img className="images" src="/assets/images/image 49.png" alt="" />
-
-                            <div className="produtosacola">
-
-                                <p>SHORT DE LINHO OFF -WHITE</p>
-
-                                <p><strong>R$100,00</strong></p>
-
-                            </div>
-                            <img className='lixo' src="/assets/images/Vector.png" alt="" />
-                            <div className='maismenos'>
-                                <button >-</button>
-                                <p>1</p>
-                                <button>+</button>
-                            </div>
-
-
-                        </div>
-                        <div className="produtos-sacola">
-
-                            <img className="images" src="/assets/images/image 49.png" alt="" />
-
-                            <div className="produtosacola">
-
-                                <p>SHORT DE LINHO OFF -WHITE</p>
-
-                                <p><strong>R$100,00</strong></p>
-
-                            </div>
-                            <img className='lixo' src="/assets/images/Vector.png" alt="" />
-                            <div className='maismenos'>
-                                <button >-</button>
-                                <p>1</p>
-                                <button>+</button>
-                            </div>
-
-
-                        </div>
-                    </div>
+            {carrinho.map((produto) => (
+              <div className="produtos-sacola" key={produto.id_produto}>
+                <img className="images" src={produto.imagem} alt={produto.nm_produto} />
+                <div className="produtosacola">
+                  <p>{produto.nm_produto}</p>
+                  <p>
+                    <strong>{produto.vl_preco}</strong>
+                  </p>
+                </div>
+                <img className="lixo" src="/assets/images/Vector.png" alt="Remover" />
+                <div className="maismenos">
+                  <button>-</button>
+                  <p>1</p>
+                  <button>+</button>
+                </div>
+              </div>
+            ))}
+          </div>
 
                 </div>
 
@@ -103,10 +61,11 @@ export default function Sacola() {
                     <div className='botoes'>
                         <button className="claro">
                             <strong>CONFIRMAR PEDIDO</strong></button>
-
-                        <button className="escuro">
+<Link to={'/pagamento'}>
+<button className="escuro">
                             CONTINUAR COMPRANDO
                         </button>
+</Link>                    
                     </div>
 
                 </div>
