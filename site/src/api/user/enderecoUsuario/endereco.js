@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export async function addEndereco(endereco, cep, complemento, numres) {
+
   const resposta = await axios.post("http://localhost:5036/user/cadastro/informacoes-entrega", {
     endereco: endereco,
     cep: cep,
@@ -11,18 +12,12 @@ export async function addEndereco(endereco, cep, complemento, numres) {
 }
 
 export async function AssociarEndereco( endereco, cliente ){
-
   const resp = await axios.post("http://localhost:5036/user/associacao/endereco-cliente", {
-
-
-  endereco: endereco,
-  cliente: cliente
-
+    endereco: endereco,
+    cliente: cliente
   });
 
   return resp.data;
-
-
 }
 
 export async function altEndereco(endereco, cep, complemento, numres, id) {
@@ -41,7 +36,7 @@ export async function altEndereco(endereco, cep, complemento, numres, id) {
 
 export async function verEndereco(id) {
   const resposta = await axios.get(
-    "http://localhost:5036/user/consulta/enderecos"
+    `http://localhost:5036/user/consulta/enderecos?id=${id}`
   );
 
   return resposta.data;

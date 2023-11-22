@@ -1,12 +1,12 @@
 
 import { addEndereco, AssociarEndereco, verEndereco }  from '../../../api/user/enderecoUsuario/endereco.js';
-import Cabecalho1 from "../../../components/cabecalho1/index.js";
+import Cabecalho2 from "../../../components/cabecalho2/index.js";
 import Rodape from "../../../components/rodape/index.js";
 import "./index.scss";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import storage from "local-storage";
-
+import axios from 'axios';
 
 function Enderecos() {
 
@@ -16,40 +16,56 @@ function Enderecos() {
   const [cep, setCep] = useState('');
   const [ complemento , setComplemento ] = useState('');
   const [ numres, setNumres ] = useState();
+  const [infoFinal, setInfoFinal] = useState([]);
 
   async function cadastrarendereco(){
 
-    const end = addEndereco( endereco, cep, complemento, numres )
+    
+  const resposta = await axios.post("http://localhost:5036/user/cadastro/informacoes-entrega", {
+    endereco: endereco,
+    cep: cep,
+    complemento: complemento,
+    numres: numres
+  });
 
-    setDados(end)
+  const dados = resposta.data;
 
+    
     if(!endereco || endereco === undefined)
     alert('Erro ao cadastrar o endereço, por favor verificar se as informações estão corretas')
+
+    const clienteId = storage('usuario-login').id
+
+    const info = AssociarEndereco( dados.id, clienteId );
+
+    setInfoFinal(info)
+
+    alert( 'Endereço cadastrado com sucesso!' )
+
+    exibirend();
+  }
+
+
+  async function exibirend(){
+
+    const idcliente = storage('usuario-login').id
+
+    let infoend = await verEndereco(idcliente);
+    console.log(infoend)
+    setExibir(infoend)
 
 
   }
 
 
-  // async function exibirenderecos(){
-
-  //   const cliente = storage("usuario-login".id)
-
-  //   const info = AssociarEndereco( dados.id, cliente );
-
-  //   setExibir(info);
-
-
-  // }
-
-
-  // useEffect(() => {
-  //   exibirenderecos();
-  // }, []);
+  useEffect(() => {
+    exibirend();
+  }, []);
 
 
   return (
     <div className="pag-conta-endereco">
-      <Cabecalho1></Cabecalho1>
+      <Cabecalho2/>
 
       <div className="container">
         <div className="rota-pag">
@@ -99,7 +115,7 @@ function Enderecos() {
               </div>
 
               <div className="total">
-                <p> {dados.length} endereços </p>
+                <p> {exibir.length} endereços </p>
               </div>
             </div>
 
@@ -164,18 +180,18 @@ function Enderecos() {
 
             <div className="lista-scroll">
               <div>
-                {/* {dados.map((item) => (
+                {exibir.map((item) => (
                   <div className="info-end">
-                    <p> {item.cep} </p>
+                    <p> {item.ds_cep} </p>
 
                     <div>
-                      <p> {item.complemento} </p>
-                      <p id="num"> {item.numres} </p>
+                      <p> {item.ds_complemento} </p>
+                      <p id="num"> {item.nr_numero_res} </p>
                     </div>
 
-                    <p id="log"> {item.endereco} </p>
+                    <p id="log"> {item.ds_endereco} </p>
                   </div>
-                ))} */}
+                ))}
               </div>
             </div>
           </div>

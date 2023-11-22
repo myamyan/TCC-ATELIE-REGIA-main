@@ -1,4 +1,4 @@
-import { inserircadastrousuario, loginCliente, CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega, alterarEndereco, ConsultarEnderecosPedido, verCartao, AssociarEnderecoCliente, ExibirtodosEnderecos  } from '../Repository/UserRepository.js'; 
+import { inserircadastrousuario, loginCliente, CadastroPedido,  ConsultaPedido, ConsultaProduto, ConsultaPorNome, FiltroPorCategoria, FiltroPorTamanho, FiltroPorTecido, FiltroPorCor, FiltroPorDesigner, FiltroPorPromocao, FiltroPorDestaque, FiltroPorDisponivel, CadastroInformacoesPessoais, CadastroInfoEntrega, ItensPedido, CadastrarFavorito, ConsultarFavoritos, CadastroFinalCompra, UpdateFinalCompraPedido, UpdateFinalCompraProduto, UpdateFinalCompraEntrega, alterarEndereco, verCartao, AssociarEnderecoCliente, ExibirtodosEnderecos, ConsultarEnderecos  } from '../Repository/UserRepository.js'; 
 
 import { Router } from "express";
 
@@ -415,7 +415,7 @@ server.get('/user/consulta/enderecos', async (req, resp) => {
 
       const { id } = req.query;
 
-      const enderecoscliente = await ConsultarEnderecosPedido(id);
+      const enderecoscliente = await ConsultarEnderecos(id);
 
       resp.send(enderecoscliente);
 

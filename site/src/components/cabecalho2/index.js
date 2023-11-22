@@ -39,7 +39,7 @@ export default function Cabecalho2() {
         className={`cabecalho ${menuVisivel ? "aberto" : ""}`}
         style={{ maxWidth: menuVisivel && `calc(100% - ${width}px)`, transform: menuVisivel && `translateX(${width}px)`}}
       >
-        <div className="cabecalho1">
+        <div className="cabecalho2">
           <div className="cab1-esquerda">
             <div className="menu-img">
               <img

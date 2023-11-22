@@ -37,10 +37,10 @@
 }
 
 
-// @font-face {
-//     font-family: 'monda-medium';
-//     src: url('../../../public/assets/fonts/Monda/IBMPlexMono-Medium.ttf');
-// }
+@font-face {
+    font-family: 'monda-medium';
+    src: url('../../../../public/assets/fonts/Monda/Monda-Regular.ttf');
+}
 
 
 @font-face {
@@ -51,12 +51,11 @@
 .pag-conta-endereco {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     overflow-x: hidden;
 
     .container {
         margin-bottom: 10em;
-
+        padding-top: 170px;
 
 
         .rota-pag {

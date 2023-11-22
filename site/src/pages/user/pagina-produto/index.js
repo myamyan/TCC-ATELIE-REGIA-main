@@ -1,10 +1,14 @@
 import "./index.scss";
 import React, { useEffect, useState } from "react";
 import CarrosselDeImagens from "../../../components/carrosel";
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+=======
+import Cabecalho1 from "../../../components/cabecalho1/index";
+>>>>>>> 6d60b910a631126017169ac52a7f6fa6af2745cb
 import { ConsultarProdutos } from "../../../api/user/consultaprodutos";
 import { ConsultarImagens, construirUrl } from "../../../api/chamadaimagem";
 import Rodape from "../../../components/rodape";
@@ -143,6 +147,7 @@ const adicionarAoCarrinhoENavegar = async (produto) => {
   return (
     <div className="container-produtos">
 
+        <Cabecalho1/>
 
       <CarrosselDeImagens imagens={images} />
 
