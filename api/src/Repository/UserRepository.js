@@ -368,7 +368,7 @@ export async function ItensPedido(id) {
 }
 
 
-export async function ConsultarEnderecosPedido(id) {
+export async function ConsultarEnderecos(id) {
 
   const comando = ` 
 

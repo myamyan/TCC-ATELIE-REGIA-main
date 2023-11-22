@@ -1,7 +1,7 @@
 import "./index.scss";
 import React, { useEffect, useState } from "react";
 import CarrosselDeImagens from "../../../components/carrosel";
-
+import Cabecalho1 from "../../../components/cabecalho1/index";
 import { ConsultarProdutos } from "../../../api/user/consultaprodutos";
 import { ConsultarImagens, construirUrl } from "../../../api/chamadaimagem";
 import Rodape from "../../../components/rodape";
@@ -64,6 +64,7 @@ export default function Produto() {
   return (
     <div className="container-produtos">
 
+        <Cabecalho1/>
 
       <CarrosselDeImagens imagens={images} />
 
