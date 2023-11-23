@@ -30,7 +30,8 @@ export default function Cadastroproduto() {
   const [novaCategoria, setNovaCategoria] = useState("");
   const [produtoIdParaExcluir, setProdutoIdParaExcluir] = useState(null);
   const [imagem, setImagem] = useState(null);
-
+  
+  const [idCategoria, setIdCategoria] = useState(null);
   const [produtoid, setProdutoid] = useState(null);
   const [imagemId, setImagemId] = useState(null);
 
@@ -409,6 +410,7 @@ export default function Cadastroproduto() {
       setProdutoid(r.data.id)
 
       salvardados();
+      salvarCategoria(r.data.id, idCategoria);
 
       return r.data.id_produto;
     } catch (error) {
@@ -433,6 +435,41 @@ export default function Cadastroproduto() {
     }
   }
 
+  async function salvarCategoria(idProduto, idCategoria) {
+    let url = "http://localhost:5036/adm/associacao/categoria-produto";
+
+    await axios.post(url, {
+      idProduto: idProduto,
+      idCategorias: idCategoria
+    });
+  }
+
+  async function salvarTamanho(idProduto, idTamanho) {
+    let url = "http://localhost:5036/adm/associacao/tamanho-produto";
+
+    await axios.post(url, {
+      idProduto: idProduto,
+      idCategorias: idCategoria
+    });
+  }
+
+  async function salvarCor(idProduto, idCor) {
+    let url = "http://localhost:5036/adm/associacao/cor-produto";
+
+    await axios.post(url, {
+      idProduto: idProduto,
+      idCategorias: idCategoria
+    });
+  }
+
+  async function salvarTecido(idProduto, idTecido) {
+    let url = "http://localhost:5036/adm/associacao/tecidos-produto";
+
+    await axios.post(url, {
+      idProduto: idProduto,
+      idCategorias: idCategoria
+    });
+  }
 
   
   return (
@@ -539,7 +576,7 @@ export default function Cadastroproduto() {
             <div className="input-categoria">
               <label>CATEGORIA</label>
               <select
-                onChange={(e) => setCategoria(e.target.value)}
+                onChange={(e) => setIdCategoria(e.target.value)}
                 className="custom-select2"
                 name="select-categoria"
               >
@@ -773,11 +810,11 @@ export default function Cadastroproduto() {
                 <tr>
 
                   <td> {item.id_produto} </td>
-                  <td> {item.imagem}  </td>
-                  <td> {item.nm_nome} </td>
+                  <td> <img src={'http://localhost:5036/' + item.img_link} alt="" />  </td>
+                  <td> {item.nm_produto} </td>
                   <td> {item.ds_detalhes} </td>
                   <td> {item.id_designer} </td>
-                  <td> {item.id_categoria} </td>
+                  <td> {item.nm_categoria} </td>
                   <td> {item.id_cor} </td>
                   <td> {item.id_tecido} </td>
                   <td> {item.id_tamanho} </td>

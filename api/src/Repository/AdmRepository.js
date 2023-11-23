@@ -113,8 +113,12 @@ export async function CadastrarProduto(produto) {
 export async function ConsultaGeralProdutosAdm() {
   const comando = `
 
-        select * from tb_produto;
-
+        select * 
+          from tb_produto    
+     left join tb_p_categorias on tb_produto.id_produto = tb_p_categorias.id_produto
+     left join tb_categorias on tb_p_categorias.id_categorias = tb_categorias.id_categorias
+     left join tb_p_imagem on tb_produto.id_produto = tb_p_imagem.id_produto
+     left join tb_produto_imagem on tb_p_imagem.id_imagem = tb_produto_imagem.id_imagem
     `;
 
   const [linhas] = await con.query(comando);
@@ -281,6 +285,8 @@ export async function AssociarCategoriaProduto(categoriaproduto) {
     categoriaproduto.idProduto,
     categoriaproduto.idCategorias,
   ]);
+
+  console.log(linhas);
 
   categoriaproduto.id = linhas.insertId;
 

@@ -357,11 +357,9 @@ server.post('/adm/associacao/imagem-produto', async (req, resp) => {
 
 
 server.post('/adm/associacao/categoria-produto', async (req, resp) => {
-
     try {
-
-
         const categoriaParaAssociar = req.body;
+        console.log(categoriaParaAssociar);
 
         const categoriaAssociada = await AssociarCategoriaProduto(categoriaParaAssociar);
 
