@@ -1,21 +1,30 @@
 import "./index.scss";
 import React, { useEffect, useState } from "react";
 import CarrosselDeImagens from "../../../components/carrosel";
+<<<<<<< HEAD
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import axios from "axios";
+=======
 import Cabecalho1 from "../../../components/cabecalho1/index";
+>>>>>>> 6d60b910a631126017169ac52a7f6fa6af2745cb
 import { ConsultarProdutos } from "../../../api/user/consultaprodutos";
 import { ConsultarImagens, construirUrl } from "../../../api/chamadaimagem";
 import Rodape from "../../../components/rodape";
-import axios from "axios";
+import { useCarrinho } from '../carrinhocontext/CarrinhoContext.js';
 
 export default function Produto() {
+ const [carrinho, setCarrinho] = useState([]);
+ const navigate = useNavigate();
 
-  async function Categorias( ) {
-    try {
-      const r= await axios.get("")
-    } catch (error) {
+  // async function Categorias( ) {
+  //   try {
+  //     const r= await axios.get("")
+  //   } catch (error) {
       
-    }
-  }
+  //   }
+  // }
 
 
     const images = [
@@ -23,23 +32,10 @@ export default function Produto() {
       "/assets/images/image_47.webp",
       "/assets/images/image_48.png"
     ];
+    const [produtosFiltrados, setProdutosFiltrados] = useState([]);
 
-  const [produtos, setProdutos] = useState([]);
-
-  const carregarProdutosPorCategoria = async (categoriaId) => {
-    try {
-      const response = await (categoriaId);
-
-      if (Array.isArray(response)) {
-        console.log('Produtos filtrados por categoria:', response);
-        setProdutos(response);
-      } else {
-        console.error('A resposta do servidor não contém um array de produtos:', response);
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+    const [produtos, setProdutos] = useState([]);
+    const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
 
   async function buscar() {
     let prod = await ConsultarProdutos();
@@ -52,15 +48,102 @@ export default function Produto() {
     setProdutos(prod);
   }
 
+
   function chamarImagem(imagem) {
-
-      return construirUrl(imagem)
+   
+    if (imagem) {
+      return construirUrl(imagem);
+    } else {
+      
+      
+      return "/caminho/para/imagem/default.png";
+    }
   }
-
+  
   useEffect(() => {
     buscar();
   }, []);
+  
 
+// ........................................FILTROS..............................
+
+function adicionarAoCarrinho(produto) {
+  setCarrinho([...carrinho, produto]);
+  alert(`Produto ${produto.nm_produto} adicionado ao carrinho!`);
+ 
+  navigate('/sacola');
+}
+
+
+async function carregarProdutosPorCategoria(categoria) {
+  try {
+    if (!categoria) {
+      console.log('Categoria não definida.');
+      return;
+    }
+
+    const response = await fetch(`http://localhost:5036/buscarcategoriafiltros?categoria=${categoria}`);
+    const data = await response.json();
+
+    if (Array.isArray(data)) {
+      console.log('Produtos filtrados por categoria:', data);
+      setProdutosFiltrados(data);
+    } else {
+      console.error('A resposta do servidor não contém um array de produtos:', data);
+    }
+    console.log('Categoria enviada para o servidor:', categoria);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+
+async function filtroCategoria(categoriaDesejada) {
+  console.log('Categoria desejada:', categoriaDesejada);
+  setCategoriaSelecionada(categoriaDesejada);
+
+  try {
+    const response = await fetch(`http://localhost:5036/buscarcategoriafiltros?categoria=${categoriaDesejada}`);
+    const data = await response.json();
+
+    if (Array.isArray(data)) {
+      console.log('Produtos filtrados por categoria:', data);
+      setProdutos(data);
+    } else {
+      console.error('A resposta do servidor não contém um array de produtos:', data);
+    }
+  } catch (error) {
+    console.error('Erro ao carregar produtos por categoria:', error);
+  }
+}
+
+
+// .............................................
+
+
+async function adicionarAoCarrinho(produto) {
+  try {
+    
+    const r= await axios.post("http://localhost:5036//user/cadastro/pedido");
+
+    const idDoPedido = r.id_pedido;
+  } catch (error) {
+    
+  }
+}
+
+const adicionarAoCarrinhoENavegar = async (produto) => {
+  try {
+    
+    setCarrinho([...carrinho, produto]);
+    alert(`Produto ${produto.nm_produto} adicionado ao carrinho!`);
+
+ 
+    navigate('/sacola');
+  } catch (error) {
+    console.error('Erro ao adicionar ao carrinho:', error);
+  }
+};
   return (
     <div className="container-produtos">
 
@@ -96,14 +179,16 @@ export default function Produto() {
                 <a>Blusas</a>
               </div>
               <div class="secoes-quadrado" onClick={() => carregarProdutosPorCategoria("Calças")}>
-              <input type="checkbox"></input> <a>Calças</a>
-              </div>
+  <input type="checkbox"></input>
+  <a>Calças</a>
+</div>
+
               <div class="secoes-quadrado">
-              <input type="checkbox"></input>
+              <input type="checkbox" onClick={() => carregarProdutosPorCategoria("Shorts")}></input>
                 <a>Shorts</a>
               </div>
               <div class="secoes-quadrado">
-              <input type="checkbox"></input><a>Vestidos</a>
+              <input type="checkbox" onClick={() => carregarProdutosPorCategoria("Vestido")}></input><a>Vestidos</a>
               </div>
             </div>
 
@@ -199,26 +284,48 @@ export default function Produto() {
           <div id="secao-produto" className="secao-produto">
             <div id="produtos" className="produtos">
               <div class="produto-pair">
-                {produtos.map((produto) => (
-                  <div class="produto">
-                   
-                      <img
-                          // id={produto.id_produto}
-                          src={ chamarImagem(produto.imagem)}
-                          alt="oi"
-                        />
-                   
-                    <h3 id="fixado">COMPRAR</h3>
-                    <h1 id="nome-produto" className="nome-produto">
-                      {produto.nm_produto}
-                    </h1>
+              {produtos
+  .filter((produto) => !categoriaSelecionada || produto.nm_categoria === categoriaSelecionada)
+  .map((produto) => (
+    <div class="produto" key={produto.id_produto}>
+      <img src={chamarImagem(produto.imagem)} />
+      <Link to="/sacola">
+        <h3 id="fixado" onClick={() => adicionarAoCarrinhoENavegar(produto)}>
+          COMPRAR
+        </h3>
+      </Link>
+      <h1 id="nome-produto" className="nome-produto">
+        {produto.nm_produto}
+      </h1>
+      <p>
+        POR <strong>{produto.vl_preco}</strong>
+      </p>
+    </div>
+))}
 
-                    <p>
-                      POR <strong>{produto.vl_preco}</strong>
-                    </p>
-                  </div>
-                ))}
                 
+                {/* {produtos.map((produto) => {
+
+if (produto.nm_categoria === categoriaSelecionada) {
+  return (
+    <div class="produto" key={produto.id_produto}>
+      {produto.imagem ? (
+        <img src={chamarImagem(produto.imagem)} alt="Produto" />
+      ) : (
+        <p>Imagem não disponível</p>
+      )}
+      <h3 id="fixado">COMPRAR</h3>
+      <h1 id="nome-produto" className="nome-produto">
+        {produto.nm_produto}
+      </h1>
+      <p>
+        POR <strong>{produto.vl_preco}</strong>
+      </p>
+    </div>
+  );
+}
+return null; 
+})} */}
             </div>
           </div>
         </div>

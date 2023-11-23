@@ -8,7 +8,35 @@ export async function buscarCategorias() {
 
   
   return linhas;
+
 }
+
+export async function buscarProdutosPorCategoria(categoria) {
+
+  categoria= '%' + categoria + '%'
+  const comando = 
+  `
+    SELECT *
+    FROM tb_produto 
+    LEFT JOIN tb_p_categorias  ON tb_produto.id_produto = tb_p_categorias.id_produto
+   LEFT JOIN tb_categorias  ON tb_p_categorias.id_categorias = tb_categorias.id_categorias
+
+  `;
+
+  try {
+    console.log('Categoria recebida no servidor:', categoria);
+    
+    const [linhas] = await con.query(comando, [categoria]);
+    
+    console.log('Resultado da consulta:', linhas);
+    
+    return linhas;
+  } catch (error) {
+    console.error('Erro ao executar consulta:', error);
+    throw error;
+  }
+}
+
 
 export async function buscarDesigner() {
   

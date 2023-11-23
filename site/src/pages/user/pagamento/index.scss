@@ -1,0 +1,301 @@
+@font-face {
+    font-family: 'kronaone';
+    src: url('../../../../public/assets/fonts/krona-one/KronaOne-Regular.ttf');
+  }
+    
+  @font-face {
+    font-family: 'raleway';
+    src: url('../../../../public/assets/fonts/static/Raleway-Regular.ttf');
+  }
+  
+  @font-face {
+    font-family: 'imprima';
+    src: url('../../../../public/assets/fonts/imprima/Imprima-Regular.ttf');
+  }
+
+  
+  @font-face {
+    font-family: 'kodchasan';
+    src: url('../../../../public/assets/fonts/Kodchasan/Kodchasan-Regular.ttf');
+  }
+  
+  @font-face {
+    font-family: 'montserrat';
+    src: url('../../../../public/assets/fonts/Montserrat/static/Montserrat-Medium.ttf');
+  }
+  
+
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+  
+  .pagamento {
+   
+
+    .container {
+margin-top: 0px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  
+  
+    .pagamento-titulo{
+margin-top: 100px;
+  padding: 0px 120px;
+  margin-bottom: 30px;
+    }
+    .container-preencher {
+      border: 1px solid black;
+      border-radius: 15px;
+      width: 90vw;
+      display: flex;
+      flex-direction: column;
+      box-shadow: inset 0 1px 2px rgb(160, 160, 149);
+    }
+  
+    .tipos-pagamento > p:hover {
+  cursor: pointer;
+  text-decoration:underline;
+    }
+    .container > p {
+      margin-top: 10px;
+    }
+  
+    .tipos-pagamento {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+  
+    }
+  
+    .tipos-pagamento > hr {
+      height: 18px;
+      margin: 10px;
+    }
+  
+    .infos {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  
+      width: 100%;
+    
+      padding: 55px 100px;
+    }
+    .separa {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .nome-cartao {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 50px;
+    }
+  
+    .nome-cartao > label {
+      font-size: 12px;
+    }
+  
+    .nome-cartao > input {
+      border-radius: 7px;
+      border: 1px solid;
+      width: 45vh;
+      height: 4vh;
+      box-shadow: inset 0 1px 2px rgb(160, 160, 149);
+    }
+  
+    .numero-cartao {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 30px;
+    }
+  
+    .numero-cartao > input {
+      border-radius: 7px;
+      border: 1px solid;
+      width: 45vh;
+      height: 4vh;
+      box-shadow: inset 0 1px 2px rgb(160, 160, 149);
+    }
+  
+    .numero-cartao > label {
+      font-size: 12px;
+    }
+  
+    .validade {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .validade-sub {
+      display: flex;
+      flex-direction: row;
+      height: 10vh;
+      width: 100%;
+    }
+  
+    .validade > label {
+      font-size: 12px;
+      text-align: start;
+    }
+  
+    .validade-sub > input {
+      height: 3.5vh;
+      width: 15vh;
+      font-size: 10px;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: 1px solid;
+      padding: 5px;
+      box-shadow: inset 0 1px 2px rgb(160, 160, 149);
+    }
+  
+    .outrosepara {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .codigo-seguranca {
+      display: flex;
+      flex-direction: column;
+      margin-top: 8px;
+      margin-right: 15px;
+    }
+  
+    .codigo-seguranca > input {
+      margin-top: 3px;
+      height: 3.5vh;
+      width: 8.5vw;
+      border-radius: 5px;
+      border: 1px solid;
+      box-shadow: inset 0 1px 2px rgb(160, 160, 149);
+    }
+  
+    .codigo-seguranca > label {
+      font-weight: 400;
+      font-size: 12px;
+      width: 100px;
+    }
+  
+    .parcelas {
+      display: flex;
+      flex-direction: column;
+      margin-right: 15px;
+    }
+  
+    .parcelas > input {
+      margin-top: 3px;
+      height: 3.5vh;
+      width: 8vw;
+      border-radius: 5px;
+      border: 1px solid;
+      font-size: 10px;
+      padding: 2px;
+      box-shadow: inset 0 1px 2px rgb(160, 160, 149);
+    }
+  
+    .parcelas > label {
+      font-weight: 400;
+      font-size: 12px;
+      width: 100px;
+    }
+  
+    .seguranca-sub {
+      display: flex;
+      flex-direction: row;
+      
+      align-items: flex-end;
+  
+      margin-bottom: 43px;
+    }
+  
+    .total {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+  
+      padding: 0px 40px 15px;
+      width: 100%;
+      > h5 {
+        text-align: end;
+        font-size: 15px;
+      }
+  
+      > button {
+        background-color: #b7a598;
+        border: none;
+      padding: 10px;
+        width: 130px;
+        font-size: 11px;
+        border-radius: 30px;
+  box-shadow: 1px 3px 3px #1e1e1e6c;
+        color: #fff;
+      }
+    }
+    .cartao {
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+    }
+  
+    select {
+      height: 3.5vh;
+      width: 8vh;
+      border-radius: 5px;
+    }
+    .cartao > label {
+      font-size: 12px;
+      width: 100px;
+      margin-bottom: 2px;
+    }
+  
+    .sacola {
+      margin-top: 20px;
+      background: #efe0c9e1;
+      padding: 3px;
+      width: 70vw;
+  
+    }
+  
+    .sacola > h1 {
+      font-size: 15px;
+    }
+  
+    .produtos{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 10px;
+  
+      img{
+        width: 60px;
+      }
+    }
+  
+    .texto-produtos>p{
+      width: 100px;
+      font-size: 13px;
+    }
+  
+    .texto-produtos>button{
+   
+      background-color: #EFE0C9;
+      border: none;
+      box-shadow: 1px 1px 3px 1px  rgba(0, 0, 0, 0.452);
+      font-size: 13px;
+      border-radius: 20px;
+   padding: 8px 15px;
+      font-size: 8px;
+      margin-top: 5px;
+     
+    }
+  }

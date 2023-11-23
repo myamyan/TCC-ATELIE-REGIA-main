@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./index.scss";
+import { Link } from 'react-router-dom';
 
 export default function Cabecalho2() {
   const [menuVisivel, setMenuVisivel] = useState(false);
@@ -7,6 +8,7 @@ export default function Cabecalho2() {
   const [width, setWidth] = useState(0);
   const elementRef = useRef(null);
 
+  
 
   useEffect(() => {
     if (!elementRef.current) 
@@ -49,9 +51,7 @@ export default function Cabecalho2() {
               />
             </div>
             <h2  id="nome">ATELIÊ RÉGIA</h2>
-            <div>
-              <img src="/assets/images/logo.png" alt="" className="logo1" />
-            </div>
+
           </div>
           <div className={`cab1-direita ${inputVisivel ? "move-to-side" : ""}`}>
           <div className={`lupa-escondida ${inputVisivel ? "move-to-side" : ""}`}>
@@ -72,11 +72,16 @@ export default function Cabecalho2() {
             <h3>
               <a href="/login/cliente">LOGIN</a>
             </h3>
-            <img
-              className="img2-cab1"
-              src="/assets/images/redfivediamonds.png"
-              alt=""
-            />
+
+            <div>
+            <Link to="/sacola">
+  <img
+    className="img2-cab1"
+    src="/assets/images/redfivediamonds.png"
+    alt=""
+  />
+</Link>
+            </div>
           </div>
         </div>
       </div>

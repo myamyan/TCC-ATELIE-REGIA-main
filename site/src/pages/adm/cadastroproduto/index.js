@@ -32,6 +32,7 @@ export default function Cadastroproduto() {
   const [imagem, setImagem] = useState(null);
   
   const [idCategoria, setIdCategoria] = useState(null);
+const [idcategoria, setIdcategoria] = useState(null);
   const [produtoid, setProdutoid] = useState(null);
   const [imagemId, setImagemId] = useState(null);
 
@@ -74,26 +75,31 @@ export default function Cadastroproduto() {
 
   async function postarCategoria() {
     try {
+      console.log("Enviando requisição para adicionar categoria:", novaCategoria);
+  
       const r = await axios.post(
         "http://localhost:5036/adm/cadastro/categoria",
         {
           nome: novaCategoria,
         }
       );
-
+  
+      console.log("Resposta do servidor ao adicionar categoria:", r);
+  
       if (r.status === 200) {
         setCategoria(r.data.id_categorias);
-
         buscarCategoria();
+        console.log("Categoria adicionada com sucesso!");
       } else {
         console.error("Falha ao adicionar categoria.");
       }
-
+  
       buscarCategoria();
     } catch (error) {
       console.error("Erro na solicitação:", error);
     }
   }
+  
 
   async function buscarDesigners() {
     try {

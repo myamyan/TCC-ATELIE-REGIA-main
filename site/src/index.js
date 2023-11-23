@@ -16,16 +16,22 @@ import Enderecos from './pages/user/endereco';
 import DadosUsuario from "./pages/user/dadosUsuario";
 import Favoritos from './pages/user/listaDeDesejos';
 import Painel from './pages/adm/paineladm';
-
+import { CarrinhoProvider } from '../../site/src/pages/user/carrinhocontext/CarrinhoContext';
+import Pagamento from './pages/user/pagamento';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <CarrinhoProvider>
   <React.StrictMode>
     <BrowserRouter> 
       <Routes>
       <Route path='/' element={<Homepage/>}/>
         <Route path='/produtos' element={<Produto/>}/>
+       
         <Route path='/sacola' element={<Sacola/>}/>
+      
+        <Route path='/pagamento' element={<Pagamento/>}/>
+      
         <Route path='/loginadm' element={<Loginadm/>}/>
         <Route path='/cadastro/produto' element={<Cadastroproduto/>}/>
         <Route path='/cadastro/cliente' element={<Cadastrocliente/>}/>
@@ -41,5 +47,6 @@ root.render(
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
+  </CarrinhoProvider>
 );
 
