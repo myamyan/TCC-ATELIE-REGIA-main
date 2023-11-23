@@ -3,51 +3,32 @@
     box-sizing: border-box;
 }
 
-
-
 @font-face {
-    font-family: 'montserrat';
-    src: url('../../../public/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf');
-}
-
-@font-face {
-    font-family: 'krohna';
-    src: url('../../../public/assets/fonts/krona-one/KronaOne-Regular.ttf');
-}
-
-@font-face {
+    font-family: 'kronaone';
+    src: url('../../../../public/assets/fonts/krona-one/KronaOne-Regular.ttf');
+  }
+    
+  @font-face {
+    font-family: 'raleway';
+    src: url('../../../../public/assets/fonts/static/Raleway-Regular.ttf');
+  }
+  
+  @font-face {
     font-family: 'imprima';
-    src: url('../../../public/assets/fonts/imprima/Imprima-Regular.ttf');
+    src: url('../../../../public/assets/fonts/imprima/Imprima-Regular.ttf');
+  }
 
-}
-
-@font-face {
-    font-family: 'kodchaasan';
-    src: url('../../../public/assets/fonts/Kodchasan/Kodchasan-Bold.ttf');
-}
-
-@font-face {
-    font-family: 'playfairdisplay';
-    src: url('../../../public/assets/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf');
-}
-
-@font-face {
-    font-family: 'monda-bold';
-    src: url('../../../public/assets/fonts/Monda/IBMPlexMono-Bold.ttf');
-}
-
-
-@font-face {
-    font-family: 'monda-medium';
-    src: url('../../../public/assets/fonts/Monda/IBMPlexMono-Medium.ttf');
-}
-
-
-@font-face {
-    font-family: 'monda-regular';
-    src: url('../../../public/assets/fonts/Monda/IBMPlexMono-Regular.ttf');
-}
-
+  
+  @font-face {
+    font-family: 'kodchasan';
+    src: url('../../../../public/assets/fonts/Kodchasan/Kodchasan-Regular.ttf');
+  }
+  
+  @font-face {
+    font-family: 'montserrat';
+    src: url('../../../../public/assets/fonts/Montserrat/static/Montserrat-Medium.ttf');
+  }
+  
 
 .pag-entrega{
 

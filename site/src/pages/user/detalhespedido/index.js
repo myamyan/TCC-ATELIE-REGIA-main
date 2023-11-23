@@ -1,7 +1,31 @@
 import './index.scss';
+import storage from 'local-storage';
+import React, { useEffect, useState } from "react";
+
 
 export default function Detalhespedido() {
 
+    const [prod, setProd] = useState([]);
+    const [sacola, setSacola] = useState([]);
+    const [total, setTotal] = useState(0);
+  
+    async function Total() {}
+  
+    useEffect(() => {
+      let itensSacola = storage("carrinho");
+      console.log(itensSacola);
+      setSacola(itensSacola);
+      Soma();
+    }, []);
+  
+    async function Soma() {
+      let carrinho = storage("carrinho");
+      let totalCalc = 0;
+      for (let cont = 0; cont < carrinho.length; cont++) {
+        totalCalc = totalCalc + Number(carrinho[cont].vl_preco);
+      }
+      setTotal(totalCalc);
+    }
 
     return (
 
@@ -16,33 +40,32 @@ export default function Detalhespedido() {
                     </div>
 
                     <div className='items-detalhe'>
+
+
                         <h1>ITENS</h1>
 
-                        <div className='detalhe-imagem1'>
-                            <img src="/assets/images/image 49.png" alt="" />
-
-                            <div className='detalhe-components'>
+                        {sacola.map((item) =>
+              <div className='detalhe-imagem1'>
+                <img src={"http://localhost:5036/" + item.imagem}
+                />
+              <div className='detalhe-components'>
                                 <h1> SHORT DE LINHO </h1>
                                 <h2>OFF-WHITE</h2>
                                 <h3>R$100,00</h3>
 
                                 <button>VER PRODUTO</button>
                             </div>
+              </div>
+            )}
+
+                        <div >
+                           
+
+                            
 
                         </div>
 
-                        <div className='detalhe-imagem1'>
-                            <img src="/assets/images/image 389.png" alt="" />
-
-                            <div className="detalhe-components">
-                                <h1> SHORT DE LINHO </h1>
-                                <h2>OFF-WHITE</h2>
-                                <h3>R$100,00</h3>
-
-                                <button>VER PRODUTO</button>
-                            </div>
-                        </div>
-
+        
                     </div>
 
                 </div>

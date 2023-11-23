@@ -19,6 +19,7 @@ import Painel from './pages/adm/paineladm';
 import { CarrinhoProvider } from '../../site/src/pages/user/carrinhocontext/CarrinhoContext';
 import Pagamento from './pages/user/pagamento';
 import Produtos from './pages/user/pag-item';
+import Entrega from './pages/user/entrega';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -42,6 +43,7 @@ root.render(
         <Route path='/user/favoritos' element={<Favoritos/>}/>
         <Route path='/painel' element={<Painel/>}/>
         <Route path='/pagina/item/:id' element={<Produtos/>}/>
+        <Route path='/entrega' element={<Entrega/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

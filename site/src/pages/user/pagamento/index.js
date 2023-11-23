@@ -21,7 +21,7 @@ export default function Pagamento() {
     let itensSacola = storage('carrinho');
     console.log(itensSacola);
     setSacola(itensSacola);
-
+Soma();
   }, [])
 
   // useEffect(() => {
