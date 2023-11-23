@@ -1,10 +1,30 @@
 
+import { useParams } from 'react-router-dom';
 import './index.scss';
+import axios from "axios";
+import { useEffect, useState } from 'react';
+import Cabecalho3 from '../../../components/cabecalho3';
+import Rodape from '../../../components/rodape';
 
-export default function Produto() {
+export default function Produtos() {
+const [prod, setProd]= useState({});
+
+  const idProduto = useParams().id;
+
+  async function produtoAqui() {
+    const r = await axios.get('http://localhost:5036/adm/consulta/produto/' + idProduto);
+    setProd(r.data[0]);
+  }
+
+  useEffect(() => {
+    produtoAqui();
+  }, [])
+
   return (
 
     <div className="pag-item">
+
+      <Cabecalho3/>
     <div className="container">
 
     <div className='temapag'>
@@ -15,19 +35,16 @@ export default function Produto() {
 
       <div className="imagens">
 
-      {/* <div className='seta'>
-          <p> ></p> */}
+    
 
         <div className="imgprincipal">
 
     
-        <img className="short" src="/assets/images/shortlinho.png"/>
+        <img className="bolinha" src={"http://localhost:5036/" + prod.img_link}/>
 
         <div className='esfera-vector' >
-        <img className="bolinha" src="/assets/images/bolinha.svg"/>
-        <img className="bolinha" src="/assets/images/bolinha.svg"/>
-        <img className="bolinha" src="/assets/images/bolinha.svg"/>
-        <img className="bolinha" src="/assets/images/bolinha.svg"/>
+    
+      
         </div>
 
 
@@ -36,10 +53,10 @@ export default function Produto() {
 
       <div className="quadros">
 
-      <img className="shortpeq" src="/assets/images/shortlinho.png"/>
+      <img className="shortpeq" src={"http://localhost:5036/" + prod.img_link}/>
 
-      <div className="quadrado"></div>
-      <div className="quadrado"></div>
+      <div className="quadrado">  <img className="shortpeq" src={"http://localhost:5036/" + prod.img_link}/></div>
+      <div className="quadrado">  <img className="shortpeq" src={"http://localhost:5036/" + prod.img_link}/></div>
     
       </div>
 
@@ -48,13 +65,13 @@ export default function Produto() {
 
       <div className="descricao">
 
-      <h2> SHORT LINHO </h2>
+      <h2> {prod.nm_produto} </h2>
 
-      <p> Short de Linho na cor Off-White com botões em detalhe marrom.</p>
+      <p> Detalhes produtos: {prod.ds_detalhes}</p>
 
-      <p className="bold"> TAMANHOS DISPONÍVEIS: </p>
+      <p className="bold"> TAMANHOS DISPONÍVEIS:{prod.bt_disponivel} </p>
 
-      <h3> POR <span>R$ 100,00</span></h3>
+      <h3> POR <span>{prod.vl_preco}</span></h3>
 
     <div className="botaocompra">
 
@@ -83,7 +100,7 @@ export default function Produto() {
       <div className="texto">
     
       <p className='esq'> Avaliação e Comentários </p>
-      <p className='dir'> Perguntas e Respostas </p>
+  
       
       </div>
 
@@ -104,8 +121,8 @@ export default function Produto() {
       </div>
 
       <div className="quadrocoment">
-        <input type='text'/>
-
+       
+        <p>Produtos muito bons e que não são só bonitos, são sustentáveis.</p>
         <div className='funcao-coment'>
 
 
@@ -117,7 +134,7 @@ export default function Produto() {
 
       </div>
 
-
+      <Rodape/>
     </div>
 
     </div>

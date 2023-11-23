@@ -213,11 +213,13 @@
       top: 0;
       left: 0;
       visibility: hidden;
-      width: 100%
+      width: 100%;
+      text-decoration: none !important;
     }
   
     .produto:hover #fixado {
       visibility: visible;
+      text-decoration: none !important;
     }
   
     .produto > h1 {

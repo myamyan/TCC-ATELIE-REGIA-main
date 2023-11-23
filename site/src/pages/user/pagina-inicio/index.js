@@ -97,13 +97,12 @@ export default function Homepage() {
 
           <div className='container4video-header'>
 
-            <video  src="/assets/videos/video-home-mp4.mp4" alt="" >
+          <video src='/assets/videos/video-homem.mp4' controls> </video>
 
-              <source  controls width="750" type="video/mp4" />
+             
 
-            </video>
 
-            <img src="/assets/images/enquadreflorido.png" />
+
 
 
           </div>

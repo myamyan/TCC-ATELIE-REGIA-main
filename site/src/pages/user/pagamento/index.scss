@@ -36,7 +36,7 @@
    
 
     .container {
-margin-top: 0px;
+     
       width: 100%;
       display: flex;
       justify-content: center;
@@ -46,11 +46,13 @@ margin-top: 0px;
   
   
     .pagamento-titulo{
-margin-top: 100px;
+
+margin-top: 150px;
   padding: 0px 120px;
   margin-bottom: 30px;
     }
     .container-preencher {
+   
       border: 1px solid black;
       border-radius: 15px;
       width: 90vw;
@@ -263,7 +265,7 @@ margin-top: 100px;
       background: #efe0c9e1;
       padding: 3px;
       width: 70vw;
-  
+  margin-bottom: 30px;
     }
   
     .sacola > h1 {

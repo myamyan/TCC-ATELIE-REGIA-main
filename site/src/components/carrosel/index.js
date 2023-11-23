@@ -24,7 +24,7 @@ const CarrosselDeImagens = ({ imagens }) => {
   return (
     <div className="carrossel-de-imagens">
       <div className="cabecalho-sobreposto">
-      
+      <Cabecalho2/>
       </div>
       <div className="slide">
         <div className="botao-navegacao botao-esquerda" onClick={retrocederNaClicada}>

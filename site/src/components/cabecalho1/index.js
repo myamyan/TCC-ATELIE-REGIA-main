@@ -85,16 +85,25 @@ export default function Cabecalho1() {
           <div ref={elementRef} className="menu-container">
             <img src="/assets/images/logo.png" />
             <div className="menu">
-              <a>Novidades</a>
-              <a>Feminino</a>
-              <a>Masculino</a>
-              <a>Acessórios</a>
-              <a>Sale</a>
+              <Link to={'/produtos'}>
+              <a>Produtos</a>
+              </Link>
+              <Link to={'/sacola'}>
+              <a>Sacola</a>
+              </Link>
+              
+            
             </div>
 
             <div className="log">
+
+
               <img src="" alt="" className="" />
-              <p>Login</p>
+              
+              <Link>
+              <a>Login</a>
+              </Link>
+              
             </div>
           </div>
         </div>

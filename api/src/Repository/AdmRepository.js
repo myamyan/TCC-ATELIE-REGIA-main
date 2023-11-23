@@ -154,6 +154,24 @@ export async function ConsultaGeralProdutosAdm() {
   return linhas;
 }
 
+export async function ConsultaGeralProdutos(id) {
+  const comando = `
+
+        select * 
+          from tb_produto    
+     left join tb_p_categorias on tb_produto.id_produto = tb_p_categorias.id_produto
+     left join tb_categorias on tb_p_categorias.id_categorias = tb_categorias.id_categorias
+     left join tb_p_imagem on tb_produto.id_produto = tb_p_imagem.id_produto
+     left join tb_produto_imagem on tb_p_imagem.id_imagem = tb_produto_imagem.id_imagem
+     where tb_produto.id_produto = ?
+    `;
+
+  const [linhas] = await con.query(comando, [id]);
+
+  return linhas;
+}
+
+
 export async function AlterarProduto(id, produto) {
   const comando = `
     update  tb_produto

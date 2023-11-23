@@ -10,7 +10,8 @@ import { ConsultarProdutos } from "../../../api/user/consultaprodutos";
 import { ConsultarImagens, construirUrl } from "../../../api/chamadaimagem";
 import Rodape from "../../../components/rodape";
 import { useCarrinho } from '../carrinhocontext/CarrinhoContext.js';
-import Cabecalho2 from "../../../components/cabecalho2/index.js";
+import { get, set } from "local-storage";
+
 
 export default function Produto() {
  const [carrinho, setCarrinho] = useState([]);
@@ -60,13 +61,15 @@ export default function Produto() {
   
   useEffect(() => {
     buscar();
+  
   }, []);
   
 
 // ........................................FILTROS..............................
 
 function adicionarAoCarrinho(produto) {
-  setCarrinho([...carrinho, produto]);
+
+
   alert(`Produto ${produto.nm_produto} adicionado ao carrinho!`);
  
   navigate('/sacola');
@@ -132,20 +135,27 @@ async function adicionarAoCarrinho(produto) {
 
 const adicionarAoCarrinhoENavegar = async (produto) => {
   try {
-    
-    setCarrinho([...carrinho, produto]);
-    alert(`Produto ${produto.nm_produto} adicionado ao carrinho!`);
+    let carrinho = get('carrinho');
 
+    carrinho = carrinho ? carrinho : [];
+
+    carrinho.push(produto);
+  
+    set('carrinho', carrinho);
+
+    alert(`Produto ${produto.nm_produto} adicionado ao carrinho!`);
  
     navigate('/sacola');
   } catch (error) {
     console.error('Erro ao adicionar ao carrinho:', error);
   }
 };
+
+
   return (
     <div className="container-produtos">
 
-        <Cabecalho2/>
+     
 
       <CarrosselDeImagens imagens={images} />
 
@@ -285,12 +295,12 @@ const adicionarAoCarrinhoENavegar = async (produto) => {
               {produtos
   .filter((produto) => !categoriaSelecionada || produto.nm_categoria === categoriaSelecionada)
   .map((produto) => (
-    <div class="produto" key={produto.id_produto}>
-      <img src={chamarImagem(produto.imagem)} />
-      <Link to="/sacola">
-        <h3 id="fixado" onClick={() => adicionarAoCarrinhoENavegar(produto)}>
+    <div class="produto" key={produto.id_produto} >
+      <img src={chamarImagem(produto.imagem)} onClick={() => navigate('/pagina/item/' + produto.id_produto)} />
+      <Link id="fixado" to="/sacola">
+        <a onClick={() => adicionarAoCarrinhoENavegar(produto)}>
           COMPRAR
-        </h3>
+        </a>
       </Link>
       <h1 id="nome-produto" className="nome-produto">
         {produto.nm_produto}
@@ -301,35 +311,13 @@ const adicionarAoCarrinhoENavegar = async (produto) => {
     </div>
 ))}
 
-                
-                {/* {produtos.map((produto) => {
-
-if (produto.nm_categoria === categoriaSelecionada) {
-  return (
-    <div class="produto" key={produto.id_produto}>
-      {produto.imagem ? (
-        <img src={chamarImagem(produto.imagem)} alt="Produto" />
-      ) : (
-        <p>Imagem não disponível</p>
-      )}
-      <h3 id="fixado">COMPRAR</h3>
-      <h1 id="nome-produto" className="nome-produto">
-        {produto.nm_produto}
-      </h1>
-      <p>
-        POR <strong>{produto.vl_preco}</strong>
-      </p>
-    </div>
-  );
-}
-return null; 
-})} */}
             </div>
           </div>
         </div>
       </div>
+      <Rodape/>
       </div>
-
+      
     </div>
   );
 }

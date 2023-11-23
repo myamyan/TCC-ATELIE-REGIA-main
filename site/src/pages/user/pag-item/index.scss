@@ -6,10 +6,13 @@
   overflow-x: hidden;
 
   .container {
+   
       display: flex;
       flex-direction: column;
 
       .temapag {
+        
+        padding: 30px;
         > p {
           width: 211px;
           height: 26px;
@@ -38,7 +41,7 @@
       justify-content: space-between;
       width: 1200px;
       height: 700px;
-      
+      padding: 0px 40px ;
       
      
       
@@ -264,7 +267,7 @@
       }
 
       .faixa2 {
-
+margin-bottom: 30px;
         .avaliacao {
           display: flex;
           flex-direction: column;
@@ -345,10 +348,13 @@
             .quadrocoment {
             
               margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             
-            
-            > input {
-             
+            > p{
+              padding: 20px 40px;
+           font-family: 'Courier New', Courier, monospace;
               border: none;
               width: 400px;
               height: 100px;

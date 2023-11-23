@@ -1,5 +1,6 @@
 import "./index.scss";
 import axios from "axios";
+import { set } from "local-storage";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +22,8 @@ export default function LoginCliente() {
         email: email,
         senha: senha,
       });
+
+      set('carrinho', []);
 
       navigate('/');
     } catch (err) {
