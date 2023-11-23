@@ -9,23 +9,14 @@
 //   const [email, setEmail] = useState("");
 //   const [senha, setSenha] = useState("");
 
-<<<<<<< HEAD
 //     const navigate = useNavigate();
-=======
-
-    const navigate = useNavigate();
->>>>>>> 6d60b910a631126017169ac52a7f6fa6af2745cb
 
 
 //     async function entrarClick() {
 
 //         try {
 
-<<<<<<< HEAD
 //             const r = await axios.post('http:// localhost:5036/login/cliente', {
-=======
-            const r = await axios.post('http://localhost:5036/user/login/cliente', {
->>>>>>> 6d60b910a631126017169ac52a7f6fa6af2745cb
 
 //                 email: email,
 //                 senha: senha
@@ -35,16 +26,7 @@
 //                 if(!email || ! senha || email === undefined || senha === undefined)
 //                     throw new Error('Há algo e errado com suas informações! Para prosseguir, certifique-se de que suas informações de login estão corretas.')
 
-<<<<<<< HEAD
 //                 navigate('/');
-=======
-
-                    else
-                    
-                    storage("usuario-login", r.data)
-
-                navigate('/');
->>>>>>> 6d60b910a631126017169ac52a7f6fa6af2745cb
 
 
 
@@ -56,13 +38,8 @@
 
 
 
-<<<<<<< HEAD
 //     }
 //   }
-=======
-    }
-  
->>>>>>> 6d60b910a631126017169ac52a7f6fa6af2745cb
 
 //   return (
 //     <div className="pagina-logincliente">
