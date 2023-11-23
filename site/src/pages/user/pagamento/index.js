@@ -28,7 +28,7 @@ export default function Pagamento() {
   //   const itensvisualizar = storage('');
   //   setSacola(itensSacola);
 
-  // }, [])
+  // }, []
 
 
   async function Soma() {
