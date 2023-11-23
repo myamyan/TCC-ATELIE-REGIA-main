@@ -10,6 +10,7 @@ import { ConsultarProdutos } from "../../../api/user/consultaprodutos";
 import { ConsultarImagens, construirUrl } from "../../../api/chamadaimagem";
 import Rodape from "../../../components/rodape";
 import { useCarrinho } from '../carrinhocontext/CarrinhoContext.js';
+import Cabecalho2 from "../../../components/cabecalho2/index.js";
 
 export default function Produto() {
  const [carrinho, setCarrinho] = useState([]);
@@ -144,7 +145,7 @@ const adicionarAoCarrinhoENavegar = async (produto) => {
   return (
     <div className="container-produtos">
 
-        <Cabecalho1/>
+        <Cabecalho2/>
 
       <CarrosselDeImagens imagens={images} />
 

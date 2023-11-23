@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./index.scss";
 import { Link } from 'react-router-dom';
 
-export default function Cabecalho1() {
+export default function Cabecalho3() {
   const [menuVisivel, setMenuVisivel] = useState(false);
   const [width, setWidth] = useState(0);
   const [inputVisivel, setInputVisivel] = useState(false);
@@ -35,7 +35,7 @@ export default function Cabecalho1() {
     <div className="page">
 
       <div className={`cabecalho ${menuVisivel ? "aberto" : ""}`} style={{ maxWidth: menuVisivel && `calc(100% - ${width}px)`, transform: menuVisivel && `translateX(${width}px)`}}>
-        <div className="cabecalho1">
+        <div className="cabecalho3">
           <div className="cab1-esquerda">
             <div className="menu-img">
               <img
@@ -105,47 +105,3 @@ export default function Cabecalho1() {
 }
 
 
-
-
-
-// import './index.scss';
-
-// export default function Cabecalho1() {
-//   return (
-
-//       <div className="cabecalho1">
-
-
-//         <div className='cab1-esquerda'>
-
-
-//           <div>
-//             <img src="/assets/images/zabugaaa.png" alt="" className="menu1" />
-
-//           </div>
-
-//           <h2>ATELIÊ RÉGIA</h2>
-
-//           <div>
-//             <img src="/assets/images/logo.png" alt="" className="logo1" />
-
-//           </div>
-
-//         </div>
-
-
-//         <div className='cab1-direita'>
-
-
-//           <img className="img1-cab1" src="/assets/images/lupis.png" alt="" />
-
-//           <h3><a href="/login/cliente">LOGIN</a></h3>
-
-//           <img className="img2-cab1" src="/assets/images/redfivediamonds.png" alt="" />
-
-//         </div>
-
-//       </div>
-
-//   );
-// }

@@ -1,10 +1,12 @@
-import Cabecalho1 from "../../../components/cabecalho1";
+import Cabecalho3 from "../../../components/cabecalho3";
 import "./index.scss";
+
+import { Link } from 'react-router-dom';
 
 export default function Pagamento() {
   return (
     <div className="pagamento">
-    <Cabecalho1/>
+    <Cabecalho3/>
 
 <div class="separa">
 <h2 className="pagamento-titulo">PAGAMENTO</h2>
@@ -80,8 +82,11 @@ export default function Pagamento() {
           </div>
           <div className="total">
             <h5> TOTAL: R$280,90 </h5>
+<Link to={'/entrega'}>
+<a>IR PARA ENTREGA</a>
 
-            <button>IR PARA ENTREGA</button>
+</Link>
+            
           </div>
         </div>
 
