@@ -95,8 +95,6 @@ const navigate = useNavigate();
 
       <h2> {prod.nm_produto} </h2>
 
-      <p> Detalhes produtos: {prod.ds_detalhes}</p>
-
       <p className="bold"> TAMANHOS DISPONÍVEIS:{prod.bt_disponivel} </p>
 
       <h3> POR <span>{prod.vl_preco}</span></h3>
