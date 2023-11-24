@@ -4,8 +4,14 @@ import "./index.scss";
 import storage from "local-storage";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import Cabecalho3 from "../../../components/cabecalho3";
+import axios from "axios";
+
 
 function Entrega() {
+  const [produtoId, setProdutoId]= useState();
+  const [numeroitens, set]= useState();
+
   // const [endereco, setEndereco] = useState('');
 
   // async function salvar() {
@@ -32,11 +38,14 @@ function Entrega() {
   // }
 
 
+ 
+  
+
+
 
   return (
     <div className="pag-entrega">
-      <Cabecalho1></Cabecalho1>
-
+ <Cabecalho3/>
       <div className="container">
         <div className="rota-pag">
           <p>

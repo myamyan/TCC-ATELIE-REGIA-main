@@ -85,13 +85,12 @@ export default function Cabecalho1() {
           <div ref={elementRef} className="menu-container">
             <img src="/assets/images/logo.png" />
             <div className="menu">
-              <Link to={'/produtos'}>
-              <a>Produtos</a>
-              </Link>
-              <Link to={'/sacola'}>
-              <a>Sacola</a>
-              </Link>
-              
+             
+              <a to={'/produtos'}>Produtos</a>
+          
+            
+              <a to={'/sacola'}>Sacola</a>
+           
             
             </div>
 
@@ -100,9 +99,9 @@ export default function Cabecalho1() {
 
               <img src="" alt="" className="" />
               
-              <Link>
-              <a>Login</a>
-              </Link>
+         
+              <a to={'/login'}>Login</a>
+       
               
             </div>
           </div>

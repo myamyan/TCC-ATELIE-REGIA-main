@@ -292,16 +292,16 @@ const adicionarAoCarrinhoENavegar = async (produto) => {
           <div id="secao-produto" className="secao-produto">
             <div id="produtos" className="produtos">
               <div class="produto-pair">
-              {produtos
+              {produtos && Array.isArray(produtos) && produtos.length > 0 && produtos
   .filter((produto) => !categoriaSelecionada || produto.nm_categoria === categoriaSelecionada)
   .map((produto) => (
     <div class="produto" key={produto.id_produto} >
       <img src={chamarImagem(produto.imagem)} onClick={() => navigate('/pagina/item/' + produto.id_produto)} />
-      <Link id="fixado" to="/sacola">
+   
         <a onClick={() => adicionarAoCarrinhoENavegar(produto)}>
           COMPRAR
         </a>
-      </Link>
+    
       <h1 id="nome-produto" className="nome-produto">
         {produto.nm_produto}
       </h1>
@@ -309,7 +309,8 @@ const adicionarAoCarrinhoENavegar = async (produto) => {
         POR <strong>{produto.vl_preco}</strong>
       </p>
     </div>
-))}
+  ))}
+
 
             </div>
           </div>

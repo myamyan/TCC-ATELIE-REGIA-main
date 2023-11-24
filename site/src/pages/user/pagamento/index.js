@@ -11,11 +11,8 @@ import storage from 'local-storage';
 export default function Pagamento() {
   const [prod, setProd] = useState([]);
   const [sacola, setSacola] = useState([]);
-  const [total, setTotal] = useState(0);
-
-  async function Total() {
-
-  }
+ 
+const [total, setTotal]= useState(0);
 
   useEffect(() => {
     let itensSacola = storage('carrinho');

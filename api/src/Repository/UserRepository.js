@@ -68,7 +68,15 @@ export async function CadastroPedido(pedido) {
 
   `
 
-  const [resposta] = await con.query(comando, [pedido.idcliente, pedido.numeroitens, pedido.vltotal, pedido.situacao, pedido.tppagamento, pedido.nomecartao, pedido.nrcartao, pedido.dtvalidade, pedido.nrcodseguranca, pedido.parcelas, pedido.entrega]);
+  const [resposta] = await con.query(comando, [pedido.idcliente,
+     pedido.numeroitens,
+      pedido.vltotal, 
+      pedido.situacao,
+       pedido.tppagamento, pedido.nomecartao, 
+       pedido.nrcartao, pedido.dtvalidade,
+        pedido.nrcodseguranca, 
+        pedido.parcelas,
+         pedido.entrega]);
 
   pedido.id = resposta.insertId;
 
