@@ -127,7 +127,7 @@ const [total, setTotal]= useState(0);
 
     <h1>PEDIDO Nº:  2942</h1>
 
-    <h2>PEDIDO REALIZADO EM:  07/09/2023</h2>
+    <h2>PEDIDO REALIZADO EM:  24/11/2023</h2>
 
 
         <h3>LOCAL DE ENTREGA:  Rua xxxxxx, xx - xxxxxx, São Paulo - SP, 04849-160</h3>
@@ -139,7 +139,7 @@ const [total, setTotal]= useState(0);
 <div className='direita-detanhes'>
 
 
-    <h1>PREVISÃO DE ENTREGA:   X DIAS ÚTEIS - QUINTA-FEIRA,  14 / 08 / 2023</h1>
+    <h1>PREVISÃO DE ENTREGA:   X DIAS ÚTEIS - QUINTA-FEIRA,  30 / 11 / 2023</h1>
 
     <h2>TOTAL:{total + 9.9}</h2>
 

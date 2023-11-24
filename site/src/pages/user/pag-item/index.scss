@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'montserat';
+  src: url('../../../../public/assets/fonts/Montserrat/static/Montserrat-Medium.ttf');
+}
+
+
+
 .pag-item {
 
   background-color: #ffff;
@@ -187,21 +194,29 @@
       .compras {
         width: 500px;
         text-align: center;
+
         .comprar {
           border-radius: 18px;
           border: none;
           background-color:#B7A598;
           width: 170px;
           height: 52px;
+          font-family: 'montserat';
+          color: white;
+          font-weight: 600;
+          
          
+          button {
+              border-radius: 15px;
+          }
         
-        > p {
+         p {
           display: flex;
           justify-content: center;
           font-size: 17px;
           letter-spacing: 4px;
           color: white;
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'montserat';
           font-weight: 700;
         }
         

@@ -303,9 +303,11 @@ const [idcategoria, setIdcategoria] = useState(null);
     }
   }
   
-  async function Deletar(id) {
+  async function Deletar(id, idImagem, idCategoria) {
     try {
       if (id) {
+        if(idImagem) await axios.delete('http://localhost:5036/adm/deletar/imagem/' + idImagem);
+        if(idCategoria) await axios.delete('http://localhost:5036/adm/desassociacao/categoria-produto/' + idCategoria);
         const resposta = await axios.delete(`http://localhost:5036/adm/produto/deletar/${id}` );
 
         // if (resposta.status === 200) {
@@ -829,7 +831,7 @@ const [idcategoria, setIdcategoria] = useState(null);
                   <td> {item.bt_disponivel ? 'Sim' : 'Não'} </td>
                   <td> {item.bt_destaque ? 'Sim' : 'Não'} </td>
                   <td> {item.bt_disponivel ? 'Sim' : 'Não'} </td>
-                  <td> <button onClick={() => Deletar(item.id_produto)} > DELETAR </button>
+                  <td> <button onClick={() => Deletar(item.id_produto, item.id_imagem, item.id_produto)} > DELETAR </button>
                   </td>
                   <td> <button> ALTERAR </button></td>
 

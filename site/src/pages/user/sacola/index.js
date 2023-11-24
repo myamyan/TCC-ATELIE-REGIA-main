@@ -17,6 +17,9 @@ export default function Sacola() {
 
     useEffect(() => {
         setProd(carrinho);
+    }, []);
+
+    useEffect(() => {
         Soma();
     }, [carrinho]);
 
@@ -29,6 +32,7 @@ export default function Sacola() {
         carrinho = [...inicio, ...final];
 
         set('carrinho', carrinho);
+        setProd(carrinho);
     }
 
 
@@ -55,8 +59,8 @@ async function Soma() {
                     <h1> SACOLA</h1>
                     <div className="sacola-produtos">
                         {prod.map((produto, index) => (
-                            <div className="produtos-sacola" key={produto.id_produto}>
-                                <img className="images" src={"http://localhost:5036/" + produto.imagem} alt={produto.nm_produto} />
+                            <div className="produtos-sacola">
+                                <img className="images" src={"http://localhost:5036/" + (produto.imagem ? produto.imagem : produto.img_link)} alt={produto.nm_produto} />
                                 <div className="produtosacola">
                                     <p>{produto.nm_produto}</p>
                                     <p>

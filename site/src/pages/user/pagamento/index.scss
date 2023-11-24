@@ -263,10 +263,14 @@ margin-top: 150px;
     }
   
     .sacola {
+      display: flex;
+      flex-direction: row;
       margin-top: 20px;
       background: #efe0c9e1;
       padding: 3px;
       width: 70vw;
+  
+      
   margin-bottom: 30px;
     }
   
@@ -280,8 +284,11 @@ margin-top: 150px;
       align-items: center;
       padding: 5px 10px;
       flex-direction: row;
+      padding-top: 40px;
+      padding-left: 45px;
       img{
         width: 60px;
+
       }
     }
   

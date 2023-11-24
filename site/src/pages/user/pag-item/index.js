@@ -104,7 +104,7 @@ const navigate = useNavigate();
     <div className="botaocompra">
 
     <div className="compras">
-    <button className="comprar" onClick={adicionarAoCarrinhoENavegar}></button>
+    <button className="comprar" onClick={adicionarAoCarrinhoENavegar}>COMPRAR</button>
    
     </div>
 
