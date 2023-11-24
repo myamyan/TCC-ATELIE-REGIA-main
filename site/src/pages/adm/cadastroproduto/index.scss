@@ -63,9 +63,9 @@ text-align: center;
     .custom-file-input-wrapper {
         position: relative;
         overflow: hidden;
-        display: inline-block;
+  
 
-
+ margin-right: 30px;
         
       }
       
@@ -80,6 +80,7 @@ text-align: center;
       }
       
       .input-file {
+       
         position: absolute;
         top: 0;
         left: 0;

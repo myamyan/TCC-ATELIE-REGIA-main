@@ -77,14 +77,7 @@ async function Soma() {
 
                 <div className="sacola-confirmacao">
 
-                    <div className="cupom">
-                        <label>CUPOM</label>
-                        <div className='adicionar'>
-                            <input type="text" placeholder='CÓDIGO' />
-                            <button>ADICIONAR</button>
-                        </div>
-
-                    </div>
+                  
                     <hr />
                     <div className="sub">
                         <div className="subtotal">
@@ -102,8 +95,8 @@ async function Soma() {
                         <p>R$ {total+9.9}</p>
                     </div>
                     <div className='botoes'>
-                        <button className="claro">
-                            <strong>CONFIRMAR PEDIDO</strong></button>
+                        {/* <button className="claro">
+                           <strong>CONFIRMAR PEDIDO</strong></button>  */}
                         <Link to={'/pagamento'}>
                             <button id='escuro' className="escuro">
                                 CONTINUAR COMPRANDO

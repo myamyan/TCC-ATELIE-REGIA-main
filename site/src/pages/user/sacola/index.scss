@@ -147,6 +147,9 @@
         margin-bottom: 20px;
     }
 
+    a{
+        text-decoration: none;
+    }
     .escuro {
         display: flex;
         justify-content: center;
@@ -163,7 +166,7 @@
         font-size: 10px;
         box-shadow: 1px 3px 8px 2px rgba(0, 0, 0, 0.2);
         text-decoration-line:none ;
-       
+       cursor: pointer;
     }
 
     #escuro{

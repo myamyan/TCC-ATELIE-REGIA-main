@@ -117,7 +117,7 @@ function Entrega() {
             <div className="dir-lad">
               <span className="dados">
                 <span>
-                  <img src="/assets/images/seta-local.png" />
+                  <img src="/assets/images/seta.png" />
                 </span>
 
                 <div className="info">

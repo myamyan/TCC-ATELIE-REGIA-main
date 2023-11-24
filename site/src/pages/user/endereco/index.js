@@ -1,6 +1,6 @@
 
 import { addEndereco, AssociarEndereco, verEndereco }  from '../../../api/user/enderecoUsuario/endereco.js';
-import Cabecalho2 from "../../../components/cabecalho2/index.js";
+import Cabecalho3 from "../../../components/cabecalho2/index.js";
 import Rodape from "../../../components/rodape/index.js";
 import "./index.scss";
 import React, { useState, useEffect } from "react";
@@ -65,7 +65,7 @@ function Enderecos() {
 
   return (
     <div className="pag-conta-endereco">
-      <Cabecalho2/>
+      <Cabecalho3/>
 
       <div className="container">
         <div className="rota-pag">

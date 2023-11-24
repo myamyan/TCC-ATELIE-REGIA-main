@@ -1,6 +1,6 @@
 
 
-import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto, DesassociarCategoriaProduto, ExcluirImagem, DesassociarTamanhoProduto, DesassociarCoresProduto, DesassociarTecidosProduto, ConsultarImagem, ExcluirPedido, AssociarImagemProduto, SelectCategorias, SelectTecidos, SelectDesigner, SelectCores, buscarCategorias, buscarDesigner, buscarCores, buscartecido, buscartamanho, alterarImagem, buscarProdutosPorCategoria, ConsultaGeralProdutos } from '../Repository/AdmRepository.js';
+import { inserirLoginadm, verificarEmailExistente, CadastrarProduto, AlterarProduto, DeletarProduto, cadastrarImagem, BuscarTodosPedidos, BuscarPedidosConcluidos, BuscarPedidosAndamento, FiltroPorMaisCaro, FiltroPorMaisBarato, ConsultaGeralProdutosAdm, ConsultaPorNomeAdm, FiltroPorCategoriaAdm, FiltroPorTecidoAdm, FiltroPorDesignerAdm, FiltroPorCorAdm, FiltroPorTamanhoAdm, FiltroPorValorAdm, FiltroPorPromocaoAdm, FiltroPorDestaqueAdm, FiltroPorDisponivelAdm, inserircategorias, inserirtecidos, inserirdesigner, inserircores, inserirtamanho, AssociarCategoriaProduto, AssociarTamanhoProduto, AssociarCorProduto, AssociarTecidosProduto, DesassociarCategoriaProduto, ExcluirImagem, DesassociarTamanhoProduto, DesassociarCoresProduto, DesassociarTecidosProduto, ConsultarImagem, ExcluirPedido, AssociarImagemProduto, SelectCategorias, SelectTecidos, SelectDesigner, SelectCores, buscarCategorias, buscarDesigner, buscarCores, buscartecido, buscartamanho, alterarImagem, buscarProdutosPorCategoria, ConsultaGeralProdutos, DeletarProdutoImagem } from '../Repository/AdmRepository.js';
 
 import multer from 'multer';
 import { Router } from "express"
@@ -230,7 +230,8 @@ server.put('/adm/produto/imagem/alterar/:id', async (req, resp) => {
 
 server.delete('/adm/produto/deletar/:id', async (req, resp) => {
     try {
-        const { id } = req.params;
+        const  id  = Number(req.params.id);
+        await DeletarProdutoImagem(id);
         await DeletarProduto(id);
 
         resp.status(204).send({ mensagem: 'Produto excluído com sucesso' });

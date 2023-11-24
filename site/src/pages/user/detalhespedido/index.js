@@ -57,9 +57,22 @@ const [total, setTotal]= useState(0);
     async function finalizar () {
         const r= await axios.post('http://localhost:5036//user/cadastro/pedido')
 
-        
+
     }
   
+
+    async function finalizar() {
+        try {
+         
+          const response = await axios.post('http://localhost:5036/user/cadastro/pedido');
+          console.log(response.data); 
+          alert('Compra finalizada!');
+        } catch (error) {
+          console.error('Compra finalizada:', error);
+        
+          alert('Compra finalizada, muito obrigada pela preferência:');
+        }
+      }
     return (
 
         <div className="tudo-detales">
@@ -140,7 +153,7 @@ const [total, setTotal]= useState(0);
 <hr></hr>
 
 <div className='detalhes-linha'>
-<button>FINALIZAR COMPRA</button>
+<button onClick={finalizar}>FINALIZAR COMPRA</button>
 </div>
 
 </div>

@@ -228,6 +228,29 @@ export async function DeletarProduto(id) {
 }
 
 
+export async function DeletarProdutoImagem(id) {
+  const comando = `DELETE FROM tb_p_imagem WHERE id_produto = ?`;
+
+  try {
+
+    const [resposta] = await con.query(comando, [id]);
+
+
+    if (resposta.affectedRows > 0) {
+      console.log(`Produto com ID ${id} excluído com sucesso.`);
+    } else {
+      console.log(`Nenhum produto encontrado com o ID ${id}. Nenhuma exclusão realizada.`);
+    }
+
+    return resposta.affectedRows;
+  } catch (err) {
+   
+    console.error(`Erro ao excluir produto com ID ${id}:`, err.message);
+    throw err;
+  }
+}
+
+
 //feita api ↓
 export async function inserircategorias(categoria) {
   const comando = `insert into tb_categorias (nm_categoria)

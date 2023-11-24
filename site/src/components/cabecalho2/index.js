@@ -88,22 +88,24 @@ export default function Cabecalho2() {
 
       {menuVisivel && (
         <div className="menu-overlay">
-          <div ref={elementRef} className="menu-container">
-            <img src="/assets/images/logo.png" />
-            <div className="menu">
-              <a>Novidades</a>
-              <a>Feminino</a>
-              <a>Masculino</a>
-              <a>Acessórios</a>
-              <a>Sale</a>
-            </div>
-
-            <div className="log">
-              <img src="" alt="" className="" />
-              <p>Login</p>
-            </div>
+        <div ref={elementRef} className="menu-container">
+          <img src="/assets/images/logo.png" />
+          <div className="menu">
+            <Link to={"/produtos"}>
+              <button>Produtos</button>
+            </Link>
+            <Link to={"/sacola"}>
+              <button>Sacola</button>
+            </Link>
+          </div>
+          <div className="log">
+            <img src="" alt="" className="" />
+            <Link>
+              <button to={"/login"}>Login</button>
+            </Link>
           </div>
         </div>
+      </div>
       )}
     </div>
   );

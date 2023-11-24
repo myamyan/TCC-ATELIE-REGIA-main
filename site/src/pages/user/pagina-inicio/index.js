@@ -123,8 +123,8 @@ export default function Homepage() {
 
                   <p> LINHO </p>
 
-
-                  <a href=""> VER PRODUTOS </a>
+{/* 
+                  <a href=""> VER PRODUTOS </a> */}
 
                 </div>
 
@@ -134,8 +134,8 @@ export default function Homepage() {
 
                   <p> LIOCEL </p>
 
-
-                  <a href=""> VER PRODUTOS </a>
+{/* 
+                  <a href=""> VER PRODUTOS </a> */}
 
                 </div>
 
@@ -156,7 +156,7 @@ export default function Homepage() {
                   <p> ALGODÃO ORGÂNICO </p>
 
 
-                  <a href="" className=" putz1"> VER PRODUTOS </a>
+                  {/* <a href="" className=" putz1"> VER PRODUTOS </a> */}
 
                 </div>
 
@@ -169,7 +169,7 @@ export default function Homepage() {
                   <p> FIBRA DE SOJA </p>
 
 
-                  <a href="" className=" putz2"> VER PRODUTOS </a>
+                  {/* <a href="" className=" putz2"> VER PRODUTOS </a> */}
 
                 </div>
 
@@ -192,7 +192,7 @@ export default function Homepage() {
                   <p> SEDA </p>
 
 
-                  <a href=""> VER PRODUTOS </a>
+                  {/* <a href=""> VER PRODUTOS </a> */}
 
                 </div>
 
@@ -207,7 +207,7 @@ export default function Homepage() {
                   <p> MODAL </p>
 
 
-                  <a href=""> VER PRODUTOS </a>
+                  {/* <a href=""> VER PRODUTOS </a> */}
 
                 </div>
 

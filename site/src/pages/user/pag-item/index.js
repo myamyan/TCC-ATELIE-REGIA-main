@@ -5,11 +5,17 @@ import axios from "axios";
 import { useEffect, useState } from 'react';
 import Cabecalho3 from '../../../components/cabecalho3';
 import Rodape from '../../../components/rodape';
+import { useNavigate } from 'react-router-dom';
+import { get, set } from "local-storage";
+
 
 export default function Produtos() {
 const [prod, setProd]= useState({});
-
+const [carrinho, setCarrinho] = useState([]);
+const navigate = useNavigate();
   const idProduto = useParams().id;
+
+  
 
   async function produtoAqui() {
     const r = await axios.get('http://localhost:5036/adm/consulta/produto/' + idProduto);
@@ -20,6 +26,28 @@ const [prod, setProd]= useState({});
     produtoAqui();
   }, [])
 
+
+  
+  
+
+  const adicionarAoCarrinhoENavegar = async () => {
+    try {
+      let carrinho = get('carrinho');
+  
+      carrinho = carrinho ? carrinho : [];
+  
+      carrinho.push(prod);
+    
+      set('carrinho', carrinho);
+  
+      alert(`Produto ${prod.nm_produto} adicionado ao carrinho!`);
+   
+      navigate('/sacola');
+    } catch (error) {
+      console.error('Erro ao adicionar ao carrinho:', error);
+    }
+  };
+  
   return (
 
     <div className="pag-item">
@@ -76,15 +104,11 @@ const [prod, setProd]= useState({});
     <div className="botaocompra">
 
     <div className="compras">
-    <button className="comprar"> <p>COMPRAR</p> </button>
-    <button className="quant"> <p> + 1 - </p></button>
+    <button className="comprar" onClick={adicionarAoCarrinhoENavegar}></button>
+   
     </div>
 
-    <div className="favsacola">
-    <button className="sacola"> <img src="/assets/images/sacolinha.png"/> </button>
-    <button className="favorito"> <img src="/assets/images/coracao.svg"/> </button>
-    </div>
-
+   
 
     </div>
 
@@ -114,7 +138,7 @@ const [prod, setProd]= useState({});
       <div className="comentario">
 
       <div className="user">
-      <img className='icon-user' src="icon-usuario.png"/>
+      <img className='icon-user' src="/assets/images/anonimo.png"/>
 
       <p> Anônimo </p>
 
