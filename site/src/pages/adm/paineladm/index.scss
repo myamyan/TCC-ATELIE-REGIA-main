@@ -37,7 +37,9 @@
 
 
 .painel-adm {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
 
   .cabecalho-painel.direita {
     transform: translateX(200px);
@@ -202,7 +204,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-left: 70px;
     width: 100%;
+    // margin-left: 100px;
   }
 
   .claro {
@@ -253,6 +257,7 @@
   }
 
   .grafico {
+    display: flex;
    
     align-items: center;
     height: 40vh;
@@ -260,7 +265,8 @@
     display: flex;
     margin-top: 20px;
     background-color: #dfcece6c;
-    
+    justify-content: center;
+    margin-left: 120px;
     box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.2);
   }
 
@@ -270,13 +276,19 @@
   }
 
   .graficos {
+    display: flex;
     width: 100%;
     min-width: 30%;
-    display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     margin-top: 30px;
+    width: 927px;
+    background-color: #d5cec6;
+    padding: 10px 10px 10px 10px;
+    margin-left: 120px;
+    margin-bottom: 30px;
+    box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.2);
   }
 
   .redondo {

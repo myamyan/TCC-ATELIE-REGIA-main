@@ -236,6 +236,7 @@ text-align: center;
         display: flex;
         flex-direction: row;
         gap: 16px;
+        margin-top: 13px;
         justify-content: space-between;
 
     }
@@ -451,6 +452,7 @@ text-align: center;
     display: flex;
     flex-direction: row;
     gap: 16px;
+    margin-top: -4px;
 
     .valor-produto {
         font-size: 12px;
@@ -535,6 +537,8 @@ text-align: center;
 
 margin-top: 35px;
 margin-bottom: 39px;
+padding-left: 23px;
+padding-right: 18px;
 
 
 thead {
@@ -550,15 +554,18 @@ thead {
     // margin-left: 144px;
 
 
+
     > tr {
         width: 100%;
         // height: auto;
         margin-bottom: 6px;
-        justify-content: space-around;
-          margin-left: 28px;
+        // justify-content: space-around;
+        //   margin-left: 28px;
+
 
         th {
             font-size: 10px;
+            background-color: #e6e6e6;
         }
 
  }
@@ -573,7 +580,10 @@ thead {
 
     box-shadow: inset 0px 0px 14px -6px  rgb(223, 223, 222);
     overflow-x: scroll;
+    overflow-y: scroll;
     text-align: center;
+    background-color: #fcfbfb;
+    border-radius: 17px;
 
     tbody {
       

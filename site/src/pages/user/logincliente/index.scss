@@ -1,3 +1,9 @@
+
+* { 
+margin: 0px;
+box-sizing: border-box;
+}
+
 @font-face {
     font-family: 'playfairdisplay';
     src: url('../../../../public/assets/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf');
@@ -11,11 +17,9 @@
 
 
 .pagina-logincliente {
+   
 
-
-    margin: 0px;
-    box-sizing: border-box;
-
+    height: auto;
     width: 100%;
 
 
@@ -25,7 +29,7 @@
         display: flex;
         flex-direction: row;
 
-
+        
         max-width: 100%;
         max-height: 100%;
 
@@ -37,8 +41,8 @@
 
             >img {
 
-
-
+                width: auto;
+                max-width: 100%;
                 display: none;
 
             }
@@ -60,8 +64,8 @@
             padding-top: 0px;
             padding-left: 75px;
             padding-right: 92px;
-
-            max-width: 50%;
+            width: 700px;
+            max-width: 70%;
 
             background-color: #B7A598;
 
@@ -76,7 +80,7 @@
                 width: 250px;
 
                 padding-bottom: 2.5%;
-                padding-top: 20%;
+                padding-top: 10%;
                 padding-left: 20px;
 
 
@@ -233,7 +237,7 @@
 
             padding-top: 10px;
 
-            margin-bottom: 100px;
+            margin-bottom: 90px;
 
 
 

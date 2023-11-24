@@ -109,13 +109,15 @@
 
                     display: flex;
                     flex-direction: row;
-
+                    // width: 600px;
+                    justify-content: space-between;
                     padding-left: 100px;
 
                     >img {
 
                         height: 400px;
                         width: 400px;
+                        margin-right: 100px;
 
                     }
 

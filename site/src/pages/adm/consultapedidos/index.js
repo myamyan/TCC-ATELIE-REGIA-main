@@ -115,7 +115,7 @@ export default function ConsultaProdutos() {
 
                                 </div>
 
-                                <div className="result2">
+                                <div className="result1">
 
                                     <p>29 Jul, 2023</p>
 
@@ -143,7 +143,7 @@ export default function ConsultaProdutos() {
 
                                 </div>
 
-                                <div className="result2">
+                                <div className="result1">
 
                                     <p>29 Jul, 2023</p>
 
@@ -172,7 +172,7 @@ export default function ConsultaProdutos() {
                                 
 
 
-                                <div className="result2">
+                                <div className="result1">
 
                                     <p>29 Jul, 2023</p>
 
